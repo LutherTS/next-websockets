@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "node server.js",
     "build": "next build --turbopack",
-    "start": "NODE_ENV=production node server.js",
-    "lint": "eslint"
+    "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
     "next": "15.5.0",
