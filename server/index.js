@@ -3,10 +3,12 @@ import { createServer } from "http";
 
 import next from "next";
 
-import { wss } from "./constants/bases.js";
-import { webSocketClients } from "./constants/websocket-clients.js";
+import { WebSocketServer } from "ws";
 
-import { broadcastFlow } from "./utilities/flows.js";
+import { webSocketClients } from "./constants/websocket-clients.js";
+import { webSocketEndpoint } from "./constants/agnostic/bases.js";
+
+// import { broadcastFlow } from "./utilities/flows/broadcast.js";
 
 const nextWrapperServer = next({ dev: process.env.NODE_ENV !== "production" });
 const handleRequest = nextWrapperServer.getRequestHandler();
@@ -17,15 +19,16 @@ const server = createServer((req, res) => {
   handleRequest(req, res, parse(req.url || "", true));
 });
 
+const wss = new WebSocketServer({ noServer: true });
+
 wss.on("connection", (ws) => {
   webSocketClients.add(ws);
   console.log("New client connected.");
 
-  ws.on("message", (message) => {
-    console.log(`Message received: ${message}`);
-    broadcastFlow(message.toString());
-    console.log(`Message broadcasted: ${message}`);
-  });
+  // !! Now handled via server actions.
+  // ws.on("message", (message) => {
+  //   broadcastFlow(message.toString());
+  // });
 
   ws.on("close", () => {
     webSocketClients.delete(ws);
@@ -41,7 +44,7 @@ server.on("upgrade", (req, socket, head) => {
     handleUpgrade(req, socket, head);
   }
 
-  if (pathname === "/api/ws") {
+  if (pathname === webSocketEndpoint) {
     wss.handleUpgrade(req, socket, head, (ws) => {
       wss.emit("connection", ws, req);
     });

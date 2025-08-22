@@ -1,15 +1,15 @@
 {
   "jsDoc": {
     "consts": {
-      "wss": {
-        "value": "The WebSocket server to be accessed across the codebase.",
-        "key": "JSDOC#CONSTS#WSS",
-        "placeholder": "$COMMENT#JSDOC#CONSTS#WSS"
-      },
       "webSocketClients": {
-        "value": "The list of all WebSocket clients created in order to broadcast the new messages to all of them.",
+        "value": "The list of all WebSocket clients created in order to broadcast the new messages to all of them from the server.",
         "key": "JSDOC#CONSTS#WEBSOCKETCLIENTS",
         "placeholder": "$COMMENT#JSDOC#CONSTS#WEBSOCKETCLIENTS"
+      },
+      "webSocketEndpoint": {
+        "value": "The WebSocket API endpoint shared between the server (via the WebSocket server) and the client (via the WebSocket client instances).",
+        "key": "JSDOC#CONSTS#WEBSOCKETENDPOINT",
+        "placeholder": "$COMMENT#JSDOC#CONSTS#WEBSOCKETENDPOINT"
       }
     },
     "utils": {

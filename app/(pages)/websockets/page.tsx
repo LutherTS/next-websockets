@@ -2,13 +2,13 @@
 
 import { useEffect, useRef, useState, useTransition } from "react";
 
-import { broadcastAction } from "@/app/actions/server";
+import { webSocketEndpoint } from "@/server/constants/agnostic/bases.js";
 
-broadcastAction;
+import { broadcastAction } from "@/app/actions/server/broadcast";
 
-export default function Home() {
+export default function WebSockets() {
   const [messages, setMessages] = useState<string[]>([]);
-  const [newMessage, setNewMessage] = useState("");
+  const [newMessage, setNewMessage] = useState(""); // next is FormData instead
   const [connectionStatus, setConnectionStatus] = useState<
     "connected" | "disconnected" | "connecting"
   >("connecting");
@@ -17,16 +17,14 @@ export default function Home() {
 
   useEffect(() => {
     const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-    const ws = new WebSocket(`${protocol}//${window.location.host}/api/ws`);
+    const ws = new WebSocket(
+      `${protocol}//${window.location.host}${webSocketEndpoint}`,
+    );
     wsRef.current = ws;
 
-    ws.onopen = () => {
-      setConnectionStatus("connected");
-    };
+    ws.onopen = () => setConnectionStatus("connected");
 
-    ws.onclose = () => {
-      setConnectionStatus("disconnected");
-    };
+    ws.onclose = () => setConnectionStatus("disconnected");
 
     ws.onmessage = (event) => {
       setMessages((prevMessages) => [...prevMessages, event.data]);
@@ -48,79 +46,87 @@ export default function Home() {
 
   const [isBroadcastPending, startBroadcastTransition] = useTransition();
 
-  const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
+  const broadcast = (e: React.FormEvent<HTMLFormElement>) => {
     startBroadcastTransition(async () => {
       e.preventDefault();
       if (!newMessage.trim()) return;
 
-      // OPEN needed because without OPEN the message can't be received
+      // // the WebSocket way
+      // // Needs OPEN because the WebSocket can't send a message if it isn't still open and operational.
+      // if (wsRef.current?.readyState === WebSocket.OPEN) {
+      //   wsRef.current.send(newMessage);
+      // }
+
+      // the Server Function way
+      // OPEN needed because without OPEN the message can't be received... on the client. But even without OPEN the message could be sent. However, since the ID of the connection will probably need to be sent in production, it is best to acknowledge that only connected WebSockets should be able to send messages and effectively trigger new messages.
       if (wsRef.current?.readyState === WebSocket.OPEN) {
-        // wsRef.current.send(newMessage);
-
+        // binds the newMessage to the server action to be handled on the server, though this will be done with FormData instead
         const broadcastActionBound = broadcastAction.bind(null, newMessage);
+        // triggers the server action directly on the server with the bound data
         await broadcastActionBound();
-
-        setNewMessage("");
       }
+
+      // Will be replaced by checks on whether the operation has been successful, in which case the form will simply be reset, and the message sent via FormData.
+      setNewMessage("");
     });
   };
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-gradient-to-b from-gray-50 to-gray-100">
-      <div className="w-full max-w-2xl mx-4 bg-white rounded-xl shadow-lg flex flex-col h-[80vh] border border-gray-200">
+      <div className="mx-4 flex h-[80vh] w-full max-w-2xl flex-col rounded-xl border border-gray-200 bg-white shadow-lg">
         <div
-          className={`px-6 py-3 text-sm font-medium rounded-t-xl ${
+          className={`rounded-t-xl px-6 py-3 text-sm font-medium ${
             connectionStatus === "connected"
-              ? "bg-green-50 text-green-700 border-b border-green-100"
+              ? "border-b border-green-100 bg-green-50 text-green-700"
               : connectionStatus === "disconnected"
-              ? "bg-red-50 text-red-700 border-b border-red-100"
-              : "bg-yellow-50 text-yellow-700 border-b border-yellow-100"
+                ? "border-b border-red-100 bg-red-50 text-red-700"
+                : "border-b border-yellow-100 bg-yellow-50 text-yellow-700"
           }`}
         >
           <div className="flex items-center gap-2">
             <div
-              className={`w-2 h-2 rounded-full ${
+              className={`h-2 w-2 rounded-full ${
                 connectionStatus === "connected"
                   ? "bg-green-500"
                   : connectionStatus === "disconnected"
-                  ? "bg-red-500"
-                  : "bg-yellow-500"
+                    ? "bg-red-500"
+                    : "bg-yellow-500"
               }`}
             ></div>
             Status: {connectionStatus}
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50">
+        <div className="flex-1 space-y-4 overflow-y-auto bg-gray-50 p-6">
           {messages.map((message, index) => (
             <div
               key={index}
-              className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 transition-all hover:shadow-md"
+              className="rounded-lg border border-gray-100 bg-white p-4 shadow-sm transition-all hover:shadow-md"
             >
-              <p className="text-gray-800 font-medium">{message}</p>
+              <p className="font-medium text-gray-800">{message}</p>
             </div>
           ))}
         </div>
 
         <form
-          onSubmit={sendMessage}
-          className="border-t border-gray-100 p-6 bg-white rounded-b-xl"
+          onSubmit={broadcast}
+          className="rounded-b-xl border-t border-gray-100 bg-white p-6"
         >
           <div className="flex gap-3">
             <input
               type="text"
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
-              className="flex-1 rounded-lg border border-gray-200 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="flex-1 rounded-lg border border-gray-200 px-4 py-3 transition-all focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none"
               placeholder="Type your message..."
             />
             <button
               type="submit"
-              disabled={connectionStatus !== "connected"}
-              className={`px-6 py-3 rounded-lg font-medium transition-all ${
+              disabled={connectionStatus !== "connected" || isBroadcastPending}
+              className={`rounded-lg px-6 py-3 font-medium transition-all ${
                 connectionStatus === "connected"
-                  ? "bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-700 shadow-sm hover:shadow"
-                  : "bg-gray-200 text-gray-400 cursor-not-allowed"
+                  ? "bg-blue-500 text-white shadow-sm hover:bg-blue-600 hover:shadow active:bg-blue-700"
+                  : "cursor-not-allowed bg-gray-200 text-gray-400"
               }`}
             >
               Send
