@@ -8,6 +8,7 @@ export default function Home() {
   const [connectionStatus, setConnectionStatus] = useState<
     "connected" | "disconnected" | "connecting"
   >("connecting");
+
   const wsRef = useRef<WebSocket | null>(null);
 
   useEffect(() => {
@@ -27,14 +28,14 @@ export default function Home() {
       setMessages((prevMessages) => [...prevMessages, event.data]);
     };
 
-    const pingInterval = setInterval(() => {
-      if (ws.readyState === WebSocket.OPEN) {
-        ws.send(`{"event":"ping"}`);
-      }
-    }, 29000);
+    // const pingInterval = setInterval(() => {
+    //   if (ws.readyState === WebSocket.OPEN) {
+    //     ws.send(`{"event":"ping"}`);
+    //   }
+    // }, 29000);
 
     return () => {
-      clearInterval(pingInterval);
+      // clearInterval(pingInterval);
       if (wsRef.current) {
         wsRef.current.close();
       }

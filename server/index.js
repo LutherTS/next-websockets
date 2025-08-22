@@ -3,13 +3,11 @@ import { createServer } from "http";
 
 import next from "next";
 
-import { WebSocket, WebSocketServer } from "ws";
+import { wss, webSocketClients } from "./constants/bases.js";
+import { broadcast } from "./utilities/helpers.js";
 
 const nextWrapperServer = next({ dev: process.env.NODE_ENV !== "production" });
 const handleRequest = nextWrapperServer.getRequestHandler();
-
-/** @type {Set<WebSocket>} */
-const clients = new Set();
 
 await nextWrapperServer.prepare();
 
@@ -17,26 +15,18 @@ const server = createServer((req, res) => {
   handleRequest(req, res, parse(req.url || "", true));
 });
 
-const wss = new WebSocketServer({ noServer: true });
-
 wss.on("connection", (ws) => {
-  clients.add(ws);
+  webSocketClients.add(ws);
   console.log("New client connected.");
 
   ws.on("message", (message, isBinary) => {
     console.log(`Message received: ${message}`);
-    clients.forEach((client) => {
-      if (
-        client.readyState === WebSocket.OPEN &&
-        message.toString() !== `{"event":"ping"}`
-      ) {
-        client.send(message, { binary: isBinary });
-      }
-    });
+    broadcast(message.toString(), isBinary);
+    console.log(`Message broadcasted: ${message}`);
   });
 
   ws.on("close", () => {
-    clients.delete(ws);
+    webSocketClients.delete(ws);
     console.log("Client disconnected.");
   });
 });
@@ -57,4 +47,4 @@ server.on("upgrade", (req, socket, head) => {
 });
 
 server.listen(3000);
-console.log("Server listening on port 3000");
+console.log("Server listening on port 3000.");
