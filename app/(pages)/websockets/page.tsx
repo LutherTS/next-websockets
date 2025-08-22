@@ -1,6 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
+
+import { broadcastAction } from "@/app/actions/server";
+
+broadcastAction;
 
 export default function Home() {
   const [messages, setMessages] = useState<string[]>([]);
@@ -42,14 +46,23 @@ export default function Home() {
     };
   }, []);
 
-  const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!newMessage.trim()) return;
+  const [isBroadcastPending, startBroadcastTransition] = useTransition();
 
-    if (wsRef.current?.readyState === WebSocket.OPEN) {
-      wsRef.current.send(newMessage);
-      setNewMessage("");
-    }
+  const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
+    startBroadcastTransition(async () => {
+      e.preventDefault();
+      if (!newMessage.trim()) return;
+
+      // OPEN needed because without OPEN the message can't be received
+      if (wsRef.current?.readyState === WebSocket.OPEN) {
+        // wsRef.current.send(newMessage);
+
+        const broadcastActionBound = broadcastAction.bind(null, newMessage);
+        await broadcastActionBound();
+
+        setNewMessage("");
+      }
+    });
   };
 
   return (
