@@ -1,4 +1,4 @@
-import { webSocketClients } from "../constants/bases.js";
+import { webSocketClients } from "../constants/websocket-clients.js";
 
 /**
  * $COMMENT#JSDOC#UTILS#DEFS#BROADCASTFLOW
@@ -6,6 +6,8 @@ import { webSocketClients } from "../constants/bases.js";
  * @returns
  */
 export const broadcastFlow = (message) => {
+  // console.log("webSocketClients are:", webSocketClients);
+  console.log("globalThis is:", globalThis);
   webSocketClients.forEach((client) => {
     if (
       client.readyState === WebSocket.OPEN

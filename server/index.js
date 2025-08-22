@@ -3,7 +3,9 @@ import { createServer } from "http";
 
 import next from "next";
 
-import { wss, webSocketClients } from "./constants/bases.js";
+import { wss } from "./constants/bases.js";
+import { webSocketClients } from "./constants/websocket-clients.js";
+
 import { broadcastFlow } from "./utilities/flows.js";
 
 const nextWrapperServer = next({ dev: process.env.NODE_ENV !== "production" });
