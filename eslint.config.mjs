@@ -1,16 +1,24 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
+// import { dirname } from "path";
+// import { fileURLToPath } from "url";
+// import { FlatCompat } from "@eslint/eslintrc";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import { defineConfig, globalIgnores } from "eslint/config";
 
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
+import useAgnostic, {
+  useAgnosticPluginName,
+  agnostic20ConfigName,
+  // enforceEffectiveDirectivesRuleName
+} from "eslint-plugin-use-agnostic";
 
-const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = dirname(__filename);
+
+// const compat = new FlatCompat({
+//   baseDirectory: __dirname,
+// });
+
+const eslintConfig = defineConfig([
+  // ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     ignores: [
       "node_modules/**",
@@ -20,6 +28,21 @@ const eslintConfig = [
       "next-env.d.ts",
     ],
   },
-];
+  globalIgnores([".next", ".react-router", "node_modules"]),
+  {
+    files: [
+      "**/*.tsx",
+      "**/*.ts",
+      "**/*.jsx",
+      "**/*.js",
+      "**/*.mjs",
+      "**/*.cjs",
+    ],
+    plugins: {
+      [useAgnosticPluginName]: useAgnostic,
+    },
+    extends: [`${useAgnosticPluginName}/${agnostic20ConfigName}`],
+  },
+]);
 
 export default eslintConfig;
