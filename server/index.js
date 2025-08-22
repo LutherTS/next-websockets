@@ -4,7 +4,7 @@ import { createServer } from "http";
 import next from "next";
 
 import { wss, webSocketClients } from "./constants/bases.js";
-import { broadcast } from "./utilities/helpers.js";
+import { broadcastFlow } from "./utilities/flows.js";
 
 const nextWrapperServer = next({ dev: process.env.NODE_ENV !== "production" });
 const handleRequest = nextWrapperServer.getRequestHandler();
@@ -19,9 +19,9 @@ wss.on("connection", (ws) => {
   webSocketClients.add(ws);
   console.log("New client connected.");
 
-  ws.on("message", (message, isBinary) => {
+  ws.on("message", (message) => {
     console.log(`Message received: ${message}`);
-    broadcast(message.toString(), isBinary);
+    broadcastFlow(message.toString());
     console.log(`Message broadcasted: ${message}`);
   });
 

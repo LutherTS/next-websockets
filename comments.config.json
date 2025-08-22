@@ -1,0 +1,33 @@
+{
+  "jsDoc": {
+    "consts": {
+      "wss": {
+        "value": "The WebSocket server to be accessed across the codebase.",
+        "key": "JSDOC#CONSTS#WSS",
+        "placeholder": "$COMMENT#JSDOC#CONSTS#WSS"
+      },
+      "webSocketClients": {
+        "value": "The list of all WebSocket clients created in order to broadcast the new messages to all of them.",
+        "key": "JSDOC#CONSTS#WEBSOCKETCLIENTS",
+        "placeholder": "$COMMENT#JSDOC#CONSTS#WEBSOCKETCLIENTS"
+      }
+    },
+    "utils": {
+      "defs": {
+        "broadcastFlow": {
+          "value": "The flow that broadcasts the new messages to all WebSocket clients.",
+          "key": "JSDOC#UTILS#DEFS#BROADCASTFLOW",
+          "placeholder": "$COMMENT#JSDOC#UTILS#DEFS#BROADCASTFLOW"
+        }
+      },
+      "params": {
+        "message": {
+          "value": "For now, the current latest message.",
+          "key": "JSDOC#UTILS#PARAMS#MESSAGE",
+          "placeholder": "$COMMENT#JSDOC#UTILS#PARAMS#MESSAGE"
+        }
+      },
+      "returns": {}
+    }
+  }
+}
