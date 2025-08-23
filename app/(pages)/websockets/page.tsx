@@ -6,6 +6,7 @@ import WebSocketsClientPage from "./client";
 export default async function WebSocketsServerPage() {
   // gets the latest messages from the database
   const initialMessages = await findLatestMessages();
+  console.log("initialMessages are:", initialMessages);
 
   return <WebSocketsClientPage initialMessages={initialMessages} />;
 }
