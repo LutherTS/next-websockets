@@ -3,7 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  // output   = "../generated/prisma"
 }
 
 datasource db {
@@ -19,3 +19,6 @@ model Message {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt @default(now())
 }
+
+// rm ./prisma/dev.db
+// pnpm prisma db push
