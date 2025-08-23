@@ -21,9 +21,10 @@ const server = createServer((req, res) => {
 
 const wss = new WebSocketServer({ noServer: true });
 
-wss.on("connection", (ws) => {
+wss.on("connection", (ws, req) => {
   webSocketClients.add(ws);
   console.log("New client connected.");
+  console.log("New client connected from:", req.headers["fly-client-ip"]);
   console.log("webSocketClients are:", webSocketClients.size);
 
   // !! Now handled via server actions.
