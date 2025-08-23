@@ -18,12 +18,12 @@ primary_region = 'cdg'
 [http_service]
   internal_port = 3000
   force_https = true
-  auto_stop_machines = false  # ❌ Disable auto-stop
+  auto_stop_machines = 'stop'
   auto_start_machines = true
-  min_machines_running = 1    # ✅ Always keep 1 machine running
-  max_machines_running = 1    # ✅ Never allow more than 1 machine
+  min_machines_running = 0
   processes = ['app']
 
 [[vm]]
   memory = '1gb'
-  cpu_kind = 
+  cpu_kind = 'shared'
+  cpus = 1
