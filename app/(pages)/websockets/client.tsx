@@ -8,9 +8,13 @@ import { broadcastAction } from "@/app/actions/server/broadcast";
 
 const MESSAGE = "message";
 
-export default function WebSocketsClientPage() {
-  // the messages as they will be received from the database, on both loading the page via a Server Component and receiving broadcasts from the WebSocket server
-  const [messages, setMessages] = useState<string[]>([]);
+export default function WebSocketsClientPage({
+  initialMessages,
+}: {
+  initialMessages: string[];
+}) {
+  // the messages received from the database, on both loading the page via a Server Component and receiving broadcasts from the WebSocket server
+  const [messages, setMessages] = useState<string[]>(initialMessages || []);
   // the connection status obtained from listening on WebSocket events
   const [connectionStatus, setConnectionStatus] = useState<
     "connected" | "disconnected" | "connecting"
@@ -31,8 +35,7 @@ export default function WebSocketsClientPage() {
     ws.onclose = () => setConnectionStatus("disconnected");
 
     ws.onmessage = (event) => {
-      setMessages((prevMessages) => [...prevMessages, event.data]);
-      // setMessages(event.data); // Eventually all messages will be sent from a database ... which I could implement today.
+      setMessages(JSON.parse(event.data)); // Now sent directly from the database.
     };
 
     // const pingInterval = setInterval(() => {
