@@ -1,3 +1,4 @@
+import { prisma } from "../../../prisma/db.js";
 import { webSocketClients } from "../../constants/websocket-clients.js";
 
 /**
@@ -5,7 +6,7 @@ import { webSocketClients } from "../../constants/websocket-clients.js";
  * @param {string} message $COMMENT#JSDOC#UTILS#PARAMS#MESSAGE
  * @returns
  */
-export const broadcastFlow = (message) => {
+export const broadcastFlow = async (message) => {
   console.log(`Message received: ${message}`);
 
   webSocketClients.forEach((client) => {

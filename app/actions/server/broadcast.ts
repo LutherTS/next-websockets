@@ -3,5 +3,5 @@
 import { broadcastFlow } from "@/server/utilities/flows/broadcast.js";
 
 export async function broadcastAction(message: string) {
-  broadcastFlow(message);
+  await broadcastFlow(message);
 }
