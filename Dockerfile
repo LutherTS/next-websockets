@@ -36,8 +36,7 @@ RUN npx prisma generate
 COPY . .
 
 # Build application
-# RUN npx next build --experimental-build-mode compile
-RUN npx next build
+RUN npx next build --experimental-build-mode compile
 
 # Remove development dependencies
 RUN pnpm prune --prod
