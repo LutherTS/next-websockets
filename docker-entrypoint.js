@@ -27,7 +27,7 @@ if (process.argv.slice(-3).join(" ") === "pnpm run start") {
 
   // prepare database
   await exec("npx prisma migrate deploy");
-  await exec("npx next build --experimental-build-mode generate");
+  // await exec("npx next build --experimental-build-mode generate");
 }
 
 // launch application
