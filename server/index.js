@@ -24,7 +24,7 @@ const wss = new WebSocketServer({ noServer: true });
 wss.on("connection", (ws) => {
   webSocketClients.add(ws);
   console.log("New client connected.");
-  console.log("webSocketClients are:", webSocketClients);
+  console.log("webSocketClients are:", webSocketClients.size);
 
   // !! Now handled via server actions.
   // ws.on("message", (message) => {
@@ -34,7 +34,7 @@ wss.on("connection", (ws) => {
   ws.on("close", () => {
     webSocketClients.delete(ws);
     console.log("Client disconnected.");
-    console.log("webSocketClients are:", webSocketClients);
+    console.log("webSocketClients are:", webSocketClients.size);
   });
 });
 
