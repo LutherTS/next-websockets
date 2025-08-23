@@ -11,7 +11,7 @@ if (process.argv.slice(-3).join(" ") === "pnpm run start") {
   const target = url.protocol === "file:" && url.pathname;
 
   // restore database if not present and replica exists
-  // const newDb = target && !fs.existsSync(target)
+  const newDb = target && !fs.existsSync(target);
   // if (newDb && process.env.BUCKET_NAME) {
   //   await exec(`litestream restore -config litestream.yml -if-replica-exists ${target}`)
   // }
