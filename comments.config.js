@@ -17,6 +17,36 @@ const data = Object.freeze({
       }),
       returns: Object.freeze({}),
     }),
+    writes: Object.freeze({
+      defs: Object.freeze({
+        createNewMessage:
+          "Creates a new message in the Prisma database." /* $COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGE */,
+      }),
+    }),
+    reads: Object.freeze({
+      defs: Object.freeze({
+        findLatestMessages:
+          "Finds the latest messages from the Prisma database. At this time, transforms them directly in an array of usable strings." /* $COMMENT#JSDOC#READS#DEFS#FINDLATESTMESSAGES */,
+      }),
+    }),
+    actions: Object.freeze({
+      defs: Object.freeze({
+        broadcastAction:
+          "The Server Function that triggers broadcasts directly from the client, by passing the new message to the server." /* $COMMENT#JSDOC#ACTIONS#DEFS#BROADCASTACTION */,
+      }),
+    }),
+    pages: Object.freeze({
+      WebSockets: Object.freeze({
+        defs: Object.freeze({
+          ServerPage:
+            'The "outer", Server part of the page. A Server Component, it accesses the server directly to retrieve the latest messages, instantiating any load of the page with the freshest data directly from the server, before it renders the page.' /* $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#SERVERPAGE */,
+          ClientPage:
+            'The "inner", Client part of the page. A Client Component, it retrieves the initial messages from its parent Server Component, before storing them in React state. It then create a WebSocket to listen to fresh new data broadcasted from the server, in real-time on the client.' /* $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#CLIENTPAGE */,
+          broadcast:
+            "The handler that triggers the broadcast. This is where the magic happens. This handler operates both on the client and on the server. Via the `broadcastAction` server action (Server Function), it sends the new message from the client to the server, where `broadcastAction` triggers the broadcast for all WebSocket clients directly from the server, in real-time." /* $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#BROADCAST */,
+        }),
+      }),
+    }),
   }),
 });
 
