@@ -21,7 +21,7 @@ if (process.argv.slice(-3).join(" ") === "pnpm run start") {
         `litestream restore -config litestream.yml -if-replica-exists ${target}`,
       );
     } else {
-      console.log("Skipping Litestream restore: config file not found");
+      console.log("Skipping Litestream restore: config file not found.");
     }
   }
 

@@ -21,11 +21,9 @@ const server = createServer((req, res) => {
 
 const wss = new WebSocketServer({ noServer: true });
 
-wss.on("connection", (ws, req) => {
+wss.on("connection", (ws) => {
   webSocketClients.add(ws);
   console.log("New client connected.");
-  console.log("New client connected from:", req.headers["fly-client-ip"]);
-  console.log("webSocketClients are:", webSocketClients.size);
 
   // !! Now handled via server actions.
   // ws.on("message", (message) => {
@@ -35,7 +33,6 @@ wss.on("connection", (ws, req) => {
   ws.on("close", () => {
     webSocketClients.delete(ws);
     console.log("Client disconnected.");
-    console.log("webSocketClients are:", webSocketClients.size);
   });
 });
 
@@ -53,9 +50,6 @@ server.on("upgrade", (req, socket, head) => {
     });
   }
 });
-
-// server.listen(3000);
-// console.log("Server listening on port 3000.");
 
 server.listen(3000, "0.0.0.0", () => {
   console.log("Server listening on port 3000.");
