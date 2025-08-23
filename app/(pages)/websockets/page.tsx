@@ -1,19 +1,10 @@
-import { prisma } from "../../../prisma/db.js";
+import { findLatestMessages } from "@/app/reads/messages";
 
 import WebSocketsClientPage from "./client";
 
 export default async function WebSocketsServerPage() {
-  // gets the latests messages from the database
-  const initialMessages = (
-    await prisma.message.findMany({
-      orderBy: {
-        createdAt: "desc",
-      },
-      take: 5,
-    })
-  )
-    .map((e) => e.value)
-    .reverse(); // for now
+  // gets the latest messages from the database
+  const initialMessages = await findLatestMessages();
 
   return <WebSocketsClientPage initialMessages={initialMessages} />;
 }
