@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import { spawn } from "node:child_process";
-import fs from "node:fs";
+import { spawn } from "child_process";
+import fs from "fs";
 
 const env = { ...process.env };
 

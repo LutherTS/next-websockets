@@ -18,6 +18,7 @@ export const broadcastFlow = async (message: string) => {
   // gets the latest messages from the database
   const messages = await findLatestMessages();
 
+  console.log("webSocketClients are:", webSocketClients);
   webSocketClients.forEach((client) => {
     if (
       client.readyState === WebSocket.OPEN
