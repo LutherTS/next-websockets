@@ -1,6 +1,6 @@
 import { prisma } from "@/prisma/db";
 
-/** $COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGE */
+/** Creates a new message in the Prisma database. */
 export async function createNewMessage(message: string) {
   await prisma.message.create({
     data: {
@@ -9,7 +9,7 @@ export async function createNewMessage(message: string) {
   });
 }
 
-/** $COMMENT#JSDOC#WRITES#DEFS#DELETEEXTRAMESSAGES */
+/** Deletes older messages from the database to cap the amount of messages it can effectively store. */
 export async function deleteExtraMessages() {
   await prisma.$executeRaw`
   DELETE FROM "Message" 
