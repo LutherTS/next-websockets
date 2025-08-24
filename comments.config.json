@@ -22,7 +22,7 @@
       },
       "params": {
         "message": {
-          "value": "For now, the current latest message.",
+          "value": "The current latest message sent from the client.",
           "key": "JSDOC#UTILS#PARAMS#MESSAGE",
           "placeholder": "$COMMENT#JSDOC#UTILS#PARAMS#MESSAGE"
         }

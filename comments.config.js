@@ -13,7 +13,7 @@ const data = Object.freeze({
       }),
       params: Object.freeze({
         message:
-          "For now, the current latest message." /* $COMMENT#JSDOC#UTILS#PARAMS#MESSAGE */,
+          "The current latest message sent from the client." /* $COMMENT#JSDOC#UTILS#PARAMS#MESSAGE */,
       }),
       returns: Object.freeze({}),
     }),
