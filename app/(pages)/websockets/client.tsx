@@ -1,4 +1,4 @@
-"use client"; // required, among other reasons, to inform React that if this module is to imported on the server (as it does for WebSocketsServerPage), it needs to be imported as reference
+"use client"; // $COMMENT#NOTES#USESERVER
 
 import { useEffect, useRef, useState, useTransition } from "react";
 
