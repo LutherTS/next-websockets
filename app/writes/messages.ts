@@ -1,6 +1,9 @@
 import { prisma } from "~/prisma/db";
 
-/** $COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGE */
+/**
+ * $COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGE
+ * @param message $COMMENT#JSDOC#UTILS#PARAMS#MESSAGE
+ */
 export async function createNewMessage(message: string) {
   await prisma.message.create({
     data: {
