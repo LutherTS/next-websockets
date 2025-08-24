@@ -5,8 +5,8 @@ import next from "next";
 
 import { WebSocketServer } from "ws";
 
-import { webSocketClients } from "./constants/websocket-clients.js";
 import { webSocketEndpoint } from "./constants/agnostic/bases.js";
+import { webSocketClients } from "./constants/websocket-clients.js";
 
 const nextWrapperServer = next({ dev: process.env.NODE_ENV !== "production" });
 const handleRequest = nextWrapperServer.getRequestHandler();

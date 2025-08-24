@@ -15,7 +15,7 @@
     "utils": {
       "defs": {
         "broadcastFlow": {
-          "value": "The flow that broadcasts the new messages to all WebSocket clients.",
+          "value": "The flow that broadcasts the new messages to all WebSocket clients. (Saved as a flow so that it can be used across Server Functions at will, be them standalone in their own files or inline within Server Components.)",
           "key": "JSDOC#UTILS#DEFS#BROADCASTFLOW",
           "placeholder": "$COMMENT#JSDOC#UTILS#DEFS#BROADCASTFLOW"
         }

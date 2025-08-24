@@ -2,20 +2,20 @@
 
 import { useEffect, useRef, useState, useTransition } from "react";
 
-import { webSocketEndpoint } from "@/server/constants/agnostic/bases.js";
+import { webSocketEndpoint } from "~/server/constants/agnostic/bases.js";
 
-import { broadcastAction } from "@/app/actions/server/broadcast";
+import { broadcastAction } from "@/actions/server/broadcast";
 
 const MESSAGE = "message";
 
-/** The "inner", Client part of the page. A Client Component, it retrieves the initial messages from its parent Server Component, before storing them in React state. It then create a WebSocket to listen to fresh new data broadcasted from the server, in real-time on the client. */
+/** $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#CLIENTPAGE */
 export default function WebSocketsClientPage({
   initialMessages,
 }: {
   initialMessages: string[];
 }) {
   // the messages received from the database, on both loading the page via a Server Component and receiving broadcasts from the WebSocket server
-  const [messages, setMessages] = useState<string[]>(initialMessages || []);
+  const [messages, setMessages] = useState(initialMessages || []);
   // the connection status obtained from listening on WebSocket events
   const [connectionStatus, setConnectionStatus] = useState<
     "connected" | "disconnected" | "connecting"
@@ -48,7 +48,7 @@ export default function WebSocketsClientPage({
 
   const [isBroadcastPending, startBroadcastTransition] = useTransition();
 
-  /** The handler that triggers the broadcast. This is where the magic happens. This handler operates both on the client and on the server. Via the `broadcastAction` server action (Server Function), it sends the new message from the client to the server, where `broadcastAction` triggers the broadcast for all WebSocket clients directly from the server, in real-time. */
+  /** $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#BROADCAST */
   const broadcast = (e: React.FormEvent<HTMLFormElement>) => {
     startBroadcastTransition(async () => {
       e.preventDefault();

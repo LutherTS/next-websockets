@@ -1,12 +1,12 @@
-import { webSocketClients } from "../../constants/websocket-clients.js";
+import { webSocketClients } from "~/server/constants/websocket-clients.js";
 
-import { createNewMessage, deleteExtraMessages } from "@/app/writes/messages";
+import { createNewMessage, deleteExtraMessages } from "@/writes/messages";
 
-import { countAllMessages, findLatestMessages } from "@/app/reads/messages";
+import { countAllMessages, findLatestMessages } from "@/reads/messages";
 
 /**
- * The flow that broadcasts the new messages to all WebSocket clients.
- * @param message The current latest message sent from the client.
+ * $COMMENT#JSDOC#UTILS#DEFS#BROADCASTFLOW
+ * @param message $COMMENT#JSDOC#UTILS#PARAMS#MESSAGE
  * @returns
  */
 export const broadcastFlow = async (message: string) => {

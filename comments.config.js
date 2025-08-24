@@ -9,7 +9,7 @@ const data = Object.freeze({
     utils: Object.freeze({
       defs: Object.freeze({
         broadcastFlow:
-          "The flow that broadcasts the new messages to all WebSocket clients." /* $COMMENT#JSDOC#UTILS#DEFS#BROADCASTFLOW */,
+          "The flow that broadcasts the new messages to all WebSocket clients. (Saved as a flow so that it can be used across Server Functions at will, be them standalone in their own files or inline within Server Components.)" /* $COMMENT#JSDOC#UTILS#DEFS#BROADCASTFLOW */,
       }),
       params: Object.freeze({
         message:

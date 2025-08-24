@@ -1,8 +1,11 @@
 "use server";
 
-import { broadcastFlow } from "@/server/utilities/flows/broadcast";
+import { broadcastFlow } from "@/actions/server/flows/broadcast";
 
-/** The Server Function that triggers broadcasts directly from the client, by passing the new message to the server. */
+/**
+ * $COMMENT#JSDOC#ACTIONS#DEFS#BROADCASTACTION
+ * @param message $COMMENT#JSDOC#UTILS#PARAMS#MESSAGE
+ */
 export async function broadcastAction(message: string) {
   await broadcastFlow(message);
 }
