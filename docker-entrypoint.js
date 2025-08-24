@@ -3,7 +3,7 @@
 import { spawn } from "child_process";
 
 // runs database migrations
-await exec("npx prisma migrate deploy");
+await exec("prisma migrate deploy");
 // starts the application
 await exec(process.argv.slice(2).join(" "));
 
