@@ -33,8 +33,5 @@
     "tailwindcss": "^4",
     "typescript": "^5"
   },
-  "type": "module",
-  "dockerfile": {
-    "litestream": true
-  }
+  "type": "module"
 }
