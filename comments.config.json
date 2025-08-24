@@ -88,16 +88,16 @@
       }
     }
   },
-  "notes": {
+  "remarks": {
     "useClient": {
       "value": "required, among other reasons, to inform React that if this module is to imported on the client (as it does for WebSocketsClientPage), it needs to be imported as reference",
-      "key": "NOTES#USECLIENT",
-      "placeholder": "$COMMENT#NOTES#USECLIENT"
+      "key": "REMARKS#USECLIENT",
+      "placeholder": "$COMMENT#REMARKS#USECLIENT"
     },
     "useServer": {
       "value": "required, among other reasons, to inform React that if this module is to imported on the server (as it does for WebSocketsServerPage), it needs to be imported as reference",
-      "key": "NOTES#USESERVER",
-      "placeholder": "$COMMENT#NOTES#USESERVER"
+      "key": "REMARKS#USESERVER",
+      "placeholder": "$COMMENT#REMARKS#USESERVER"
     }
   },
   "forComposedVariables": {

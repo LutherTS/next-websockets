@@ -1,4 +1,4 @@
-"use client"; // $COMMENT#NOTES#USESERVER
+"use client"; // $COMMENT#REMARKS#USESERVER
 
 import { useEffect, useRef, useState, useTransition } from "react";
 

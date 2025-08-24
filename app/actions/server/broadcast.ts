@@ -1,4 +1,4 @@
-"use server"; // $COMMENT#NOTES#USECLIENT
+"use server"; // $COMMENT#REMARKS#USECLIENT
 
 import { broadcastFlow } from "@/actions/server/flows/broadcast";
 
