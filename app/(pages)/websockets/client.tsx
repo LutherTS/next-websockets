@@ -8,7 +8,7 @@ import { broadcastAction } from "@/app/actions/server/broadcast";
 
 const MESSAGE = "message";
 
-/** The "inner", Client part of the page. A Client Component, it retrieves the initial messages from its parent Server Component, before storing them in React state. It then create a WebSocket to listen to fresh new data broadcasted from the server, in real-time on the client. */
+/** $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#CLIENTPAGE */
 export default function WebSocketsClientPage({
   initialMessages,
 }: {
@@ -39,14 +39,7 @@ export default function WebSocketsClientPage({
       setMessages(JSON.parse(event.data)); // Now sent directly from the database.
     };
 
-    // const pingInterval = setInterval(() => {
-    //   if (ws.readyState === WebSocket.OPEN) {
-    //     ws.send(`{"event":"ping"}`);
-    //   }
-    // }, 29000);
-
     return () => {
-      // clearInterval(pingInterval);
       if (wsRef.current) {
         wsRef.current.close();
       }
@@ -55,7 +48,7 @@ export default function WebSocketsClientPage({
 
   const [isBroadcastPending, startBroadcastTransition] = useTransition();
 
-  /** The handler that triggers the broadcast. This is where the magic happens. This handler operates both on the client and on the server. Via the `broadcastAction` server action (Server Function), it sends the new message from the client to the server, where `broadcastAction` triggers the broadcast for all WebSocket clients directly from the server, in real-time. */
+  /** $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#BROADCAST */
   const broadcast = (e: React.FormEvent<HTMLFormElement>) => {
     startBroadcastTransition(async () => {
       e.preventDefault();
@@ -65,12 +58,6 @@ export default function WebSocketsClientPage({
       const message = formData.get(MESSAGE) || "";
       if (typeof message !== "string") return;
       if (!message.trim()) return;
-
-      // // the WebSocket way
-      // // Needs OPEN because the WebSocket can't send a message if it isn't still open and operational.
-      // if (wsRef.current?.readyState === WebSocket.OPEN) {
-      //   wsRef.current.send(newMessage);
-      // }
 
       // the Server Function way
       // OPEN needed because without OPEN the message can't be received... on the client. But even without OPEN the message could be sent. However, since the ID of the connection will probably need to be sent in production, it is best to acknowledge that only connected WebSockets should be able to send messages and effectively trigger new messages.

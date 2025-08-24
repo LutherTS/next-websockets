@@ -1,6 +1,6 @@
 import { prisma } from "@/prisma/db";
 
-/** Creates a new message in the Prisma database. */
+/** $COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGE */
 export async function createNewMessage(message: string) {
   await prisma.message.create({
     data: {
@@ -8,3 +8,14 @@ export async function createNewMessage(message: string) {
     },
   });
 }
+
+export async function deleteExtraMessages() {
+  await prisma.$executeRaw`
+  DELETE FROM "Message" 
+  WHERE id NOT IN (
+    SELECT id FROM "Message" 
+    ORDER BY "createdAt" DESC 
+    LIMIT 5
+  )
+`;
+} // Prod limit will be 1000.

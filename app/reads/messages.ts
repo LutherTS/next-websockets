@@ -1,6 +1,6 @@
 import { prisma } from "@/prisma/db";
 
-/** Finds the latest messages from the Prisma database. At this time, transforms them directly in an array of usable strings. */
+/** $COMMENT#JSDOC#READS#DEFS#FINDLATESTMESSAGES */
 export async function findLatestMessages() {
   return (
     await prisma.message.findMany({
@@ -11,5 +11,10 @@ export async function findLatestMessages() {
     })
   )
     .map((e) => e.value)
-    .reverse(); // for now
+    .reverse();
+}
+
+/** $COMMENT#JSDOC#READS#DEFS#COUNTALLMESSAGES */
+export async function countAllMessages() {
+  return await prisma.message.count();
 }

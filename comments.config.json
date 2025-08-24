@@ -44,6 +44,11 @@
           "value": "Finds the latest messages from the Prisma database. At this time, transforms them directly in an array of usable strings.",
           "key": "JSDOC#READS#DEFS#FINDLATESTMESSAGES",
           "placeholder": "$COMMENT#JSDOC#READS#DEFS#FINDLATESTMESSAGES"
+        },
+        "countAllMessages": {
+          "value": "Counts all the messages saved in the database, in order to ascertain its persistence between reboots and deployments.",
+          "key": "JSDOC#READS#DEFS#COUNTALLMESSAGES",
+          "placeholder": "$COMMENT#JSDOC#READS#DEFS#COUNTALLMESSAGES"
         }
       }
     },

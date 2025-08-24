@@ -8,8 +8,6 @@ import { WebSocketServer } from "ws";
 import { webSocketClients } from "./constants/websocket-clients.js";
 import { webSocketEndpoint } from "./constants/agnostic/bases.js";
 
-// import { broadcastFlow } from "./utilities/flows/broadcast.js";
-
 const nextWrapperServer = next({ dev: process.env.NODE_ENV !== "production" });
 const handleRequest = nextWrapperServer.getRequestHandler();
 
@@ -24,15 +22,12 @@ const wss = new WebSocketServer({ noServer: true });
 wss.on("connection", (ws) => {
   webSocketClients.add(ws);
   console.log("New client connected.");
-
-  // !! Now handled via server actions.
-  // ws.on("message", (message) => {
-  //   broadcastFlow(message.toString());
-  // });
+  console.log("webSocketClients:", webSocketClients.size);
 
   ws.on("close", () => {
     webSocketClients.delete(ws);
     console.log("Client disconnected.");
+    console.log("webSocketClients:", webSocketClients.size);
   });
 });
 
