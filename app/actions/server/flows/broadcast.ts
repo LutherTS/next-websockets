@@ -31,10 +31,7 @@ export const broadcastFlow = async (message: string) => {
 
   console.log("webSocketClients:", webSocketClients.size);
   webSocketClients.forEach((client) => {
-    if (
-      client.readyState === WebSocket.OPEN
-      // && message.toString() !== `{"event":"ping"}`
-    ) {
+    if (client.readyState === WebSocket.OPEN) {
       // sends the whole list of the latest messages
       client.send(JSON.stringify(messages));
     }

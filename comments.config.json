@@ -75,7 +75,7 @@
             "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#SERVERPAGE"
           },
           "ClientPage": {
-            "value": "The \"inner\", Client part of the page. A Client Component, it retrieves the initial messages from its parent Server Component, before storing them in React state. It then create a WebSocket to listen to fresh new data broadcasted from the server, in real-time on the client.",
+            "value": "The \"inner\", Client part of the page. A Client Component, it retrieves the initial messages from its parent Server Component, before storing them in React state. It then creates a WebSocket to listen to fresh new data broadcasted from the server, in real-time on the client.",
             "key": "JSDOC#PAGES#WEBSOCKETS#DEFS#CLIENTPAGE",
             "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#CLIENTPAGE"
           },
@@ -86,6 +86,43 @@
           }
         }
       }
+    }
+  },
+  "forComposedVariables": {
+    "requiredAmongReasons": {
+      "value": "required, among other reasons, to inform React that if this module is to imported on the",
+      "key": "FORCOMPOSEDVARIABLES#REQUIREDAMONGREASONS",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#REQUIREDAMONGREASONS"
+    },
+    "parensAsItDoesFor": {
+      "value": "(as it does for",
+      "key": "FORCOMPOSEDVARIABLES#PARENSASITDOESFOR",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PARENSASITDOESFOR"
+    },
+    "needsAsReference": {
+      "value": "it needs to be imported as reference",
+      "key": "FORCOMPOSEDVARIABLES#NEEDSASREFERENCE",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#NEEDSASREFERENCE"
+    },
+    "client": {
+      "value": "client",
+      "key": "FORCOMPOSEDVARIABLES#CLIENT",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#CLIENT"
+    },
+    "wsClientPageParens": {
+      "value": "WebSocketsClientPage),",
+      "key": "FORCOMPOSEDVARIABLES#WSCLIENTPAGEPARENS",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#WSCLIENTPAGEPARENS"
+    },
+    "server": {
+      "value": "server",
+      "key": "FORCOMPOSEDVARIABLES#SERVER",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#SERVER"
+    },
+    "wsServerPageParens": {
+      "value": "WebSocketsServerPage),",
+      "key": "FORCOMPOSEDVARIABLES#WSSERVERPAGEPARENS",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#WSSERVERPAGEPARENS"
     }
   }
 }

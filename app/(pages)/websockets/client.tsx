@@ -1,4 +1,4 @@
-"use client";
+"use client"; // required, among other reasons, to inform React that if this module is to imported on the server (as it does for WebSocketsServerPage), it needs to be imported as reference
 
 import { useEffect, useRef, useState, useTransition } from "react";
 
@@ -32,8 +32,8 @@ export default function WebSocketsClientPage({
     wsRef.current = ws;
 
     ws.onopen = () => setConnectionStatus("connected");
-
     ws.onclose = () => setConnectionStatus("disconnected");
+    // only missing .onerror
 
     ws.onmessage = (event) => {
       setMessages(JSON.parse(event.data)); // Now sent directly from the database.
