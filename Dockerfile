@@ -30,13 +30,13 @@ COPY prisma .
 RUN pnpm install --frozen-lockfile --prod=false
 
 # Generate Prisma Client
-RUN npx prisma generate
+RUN pnpm exec prisma generate
 
 # Copy application code
 COPY . .
 
 # Build application
-RUN npx next build --experimental-build-mode compile
+RUN pnpm exec next build --experimental-build-mode compile
 
 # Remove development dependencies
 RUN pnpm prune --prod
