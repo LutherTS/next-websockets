@@ -20,7 +20,7 @@ export default function WebSocketsClientPage({
   const [connectionStatus, setConnectionStatus] = useState<
     "connected" | "disconnected" | "connecting"
   >("connecting");
-  // (Both messages and connectionStatus are obtained live from the client via the WebSocket, hence the reason for client state.)
+  // (Both `messages` and `connectionStatus` are obtained live from the client via the WebSocket, hence the reason for client state.)
 
   const wsRef = useRef<WebSocket | null>(null);
 

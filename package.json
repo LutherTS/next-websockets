@@ -1,5 +1,7 @@
 {
   "name": "next-websockets",
+  "description": "Getting WebSockets to work with Next.js and server actions, courtesy of Fly.io.",
+  "author": "Luther Tchofo Safo <luther@tchofo-safo-portfolio.me>",
   "scripts": {
     "dev": "node server/index.js",
     "build": "next build --turbopack",
