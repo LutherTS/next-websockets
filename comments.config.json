@@ -35,6 +35,11 @@
           "value": "Creates a new message in the Prisma database.",
           "key": "JSDOC#WRITES#DEFS#CREATENEWMESSAGE",
           "placeholder": "$COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGE"
+        },
+        "deleteExtraMessages": {
+          "value": "Deletes older messages from the database to cap the amount of messages it can effectively store.",
+          "key": "JSDOC#WRITES#DEFS#DELETEEXTRAMESSAGES",
+          "placeholder": "$COMMENT#JSDOC#WRITES#DEFS#DELETEEXTRAMESSAGES"
         }
       }
     },

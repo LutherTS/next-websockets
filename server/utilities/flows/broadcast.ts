@@ -19,7 +19,7 @@ export const broadcastFlow = async (message: string) => {
   const allMessagesCountBefore = await countAllMessages();
   console.log("allMessagesCountBefore:", allMessagesCountBefore);
 
-  // deletes older messages to sustain the database
+  // deletes older messages to sustain the database (considered lightweight enough to run without a condition at this time)
   await deleteExtraMessages();
 
   // counts all messages for logs

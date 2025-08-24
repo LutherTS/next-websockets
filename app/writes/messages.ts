@@ -9,13 +9,14 @@ export async function createNewMessage(message: string) {
   });
 }
 
+/** $COMMENT#JSDOC#WRITES#DEFS#DELETEEXTRAMESSAGES */
 export async function deleteExtraMessages() {
   await prisma.$executeRaw`
   DELETE FROM "Message" 
   WHERE id NOT IN (
     SELECT id FROM "Message" 
     ORDER BY "createdAt" DESC 
-    LIMIT 5
+    LIMIT 1000
   )
 `;
-} // Prod limit will be 1000.
+}
