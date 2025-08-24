@@ -5,4 +5,4 @@ This demo also showcases my first two major packages:
 - `eslint-plugin-use-agnostic`, which highlighted the need to specify the module holding the WebSocket endpoint string to be agnostic, since it is imported on the server (for the WebSocket server) and on the client (for the WebSocket clients)
 - `comment-variables`, which beyond its development benefits stores all of the project's relevant JSDoc observations in a single file
 
-Start sending messages on [next-websockets.fly.dev/](next-websockets.fly.dev/).
+Start sending messages on [next-websockets.fly.dev/](https://next-websockets.fly.dev/).
