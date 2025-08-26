@@ -26,5 +26,5 @@ export const auth = betterAuth({
   verification: {
     modelName: "betterAuthVerification",
   },
-  plugins: [username({})],
+  plugins: [username()],
 });

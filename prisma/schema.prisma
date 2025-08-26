@@ -21,7 +21,7 @@ model Message {
   updatedAt DateTime @default(now()) @updatedAt
 }
 
-// FOR BETTER-AUTH
+// FOR BETTER AUTH
 
 model BetterAuthUser {
   id                 String              @id
