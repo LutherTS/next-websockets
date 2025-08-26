@@ -1,6 +1,7 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { username } from "better-auth/plugins";
+import { nextCookies } from "better-auth/next-js";
 
 import { prisma } from "~/prisma/db";
 
@@ -26,5 +27,5 @@ export const auth = betterAuth({
   verification: {
     modelName: "betterAuthVerification",
   },
-  plugins: [username()],
+  plugins: [username(), nextCookies()],
 });
