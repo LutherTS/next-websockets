@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// FROM APP
+// FOR APP
 
 model Message {
   id String @id @default(uuid())
@@ -18,10 +18,10 @@ model Message {
   value String
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
-// FROM BETTER-AUTH
+// FOR BETTER-AUTH
 
 model BetterAuthUser {
   id                 String              @id
