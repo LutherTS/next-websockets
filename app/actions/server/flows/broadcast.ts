@@ -5,15 +5,19 @@ import { createNewMessage, deleteExtraMessages } from "@/writes/messages";
 import { countAllMessages, findLatestMessages } from "@/reads/messages";
 
 /**
- * The flow that broadcasts the new messages to all WebSocket clients. (Saved as a flow so that it can be used across Server Functions at will, be them standalone in their own files or inline within Server Components.)
- * @param message The current latest message sent from the client.
+ * $COMMENT#JSDOC#UTILS#DEFS#BROADCASTFLOW
+ * @param message $COMMENT#JSDOC#UTILS#PARAMS#MESSAGE
+ * @param displayUsername $COMMENT#JSDOC#UTILS#PARAMS#DISPLAYUSERNAME
  * @returns
  */
-export const broadcastFlow = async (message: string) => {
+export const broadcastFlow = async (
+  message: string,
+  displayUsername: string | undefined,
+) => {
   console.log(`Message received:`, message);
 
   // creates a new message in the database
-  await createNewMessage(message);
+  await createNewMessage(message, displayUsername);
 
   // counts all messages for logs
   const allMessagesCountBefore = await countAllMessages();

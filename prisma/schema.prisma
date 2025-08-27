@@ -17,8 +17,24 @@ model Message {
 
   value String
 
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
+
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
+}
+
+model User {
+  id String @id @default(uuid())
+
+  username String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  messages Message[]
+
+  @@unique([username])
 }
 
 // FOR BETTER AUTH

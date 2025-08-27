@@ -1,12 +1,16 @@
-"use server"; // required, among other reasons, to inform React that if this module is to imported on the client (as it does for WebSocketsClientPage), it needs to be imported as reference
+"use server"; // $COMMENT#REMARKS#USECLIENT
 
 import { broadcastFlow } from "@/actions/server/flows/broadcast";
 
 /**
- * The Server Function that triggers broadcasts directly from the client, by passing the new message to the server.
- * @param message The current latest message sent from the client.
+ * $COMMENT#JSDOC#ACTIONS#DEFS#BROADCASTACTION
+ * @param message $COMMENT#JSDOC#UTILS#PARAMS#MESSAGE
+ * @param displayUsername $COMMENT#JSDOC#UTILS#PARAMS#DISPLAYUSERNAME
  * @returns
  */
-export async function broadcastAction(message: string) {
-  await broadcastFlow(message);
+export async function broadcastAction(
+  message: string,
+  displayUsername: string | undefined,
+) {
+  await broadcastFlow(message, displayUsername);
 }

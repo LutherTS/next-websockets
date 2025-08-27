@@ -14,6 +14,8 @@ const data = Object.freeze({
       params: Object.freeze({
         message:
           "The current latest message sent from the client." /* $COMMENT#JSDOC#UTILS#PARAMS#MESSAGE */,
+        displayUsername:
+          "The username to be displayed sent from the current session. If it exists, this lets the action know which existing user sent the current message. If it doesn't, this lets the action know the current message was sent from a guest (unauthenticated)." /* $COMMENT#JSDOC#UTILS#PARAMS#DISPLAYUSERNAME */,
       }),
       returns: Object.freeze({}),
     }),
