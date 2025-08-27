@@ -37,6 +37,7 @@ export default function WebSocketsClientPage({
 }: {
   initialMessages: {
     value: string;
+    id: string;
     username: string | null;
   }[];
   getExistingUserAction: (displayUsername: string) => Promise<{
@@ -220,12 +221,20 @@ export default function WebSocketsClientPage({
         </div>
 
         <div className="flex-1 space-y-4 overflow-y-auto bg-gray-50 p-6">
-          {messages.map(({ value: message }, index) => (
+          {messages.map(({ value: message, id, username }) => (
             <div
-              key={index}
+              key={id}
               className="rounded-lg border border-gray-100 bg-white p-4 shadow-sm transition-all hover:shadow-md"
             >
-              <p className="font-medium text-gray-800">{message}</p>
+              <p className="font-medium text-gray-800">
+                {message}
+                {username && (
+                  <>
+                    {" "}
+                    <span className="text-gray-500 italic">– {username}</span>
+                  </>
+                )}
+              </p>
             </div>
           ))}
         </div>
@@ -244,7 +253,7 @@ export default function WebSocketsClientPage({
             <button
               type="submit"
               disabled={connectionStatus !== "connected" || isBroadcastPending}
-              className={`rounded-lg px-6 py-3 font-medium transition-all ${
+              className={`rounded-lg border border-transparent px-6 py-3 font-medium transition-all ${
                 connectionStatus === "connected" && !isBroadcastPending
                   ? "bg-blue-500 text-white shadow-sm hover:bg-blue-600 hover:shadow active:bg-blue-700"
                   : "cursor-not-allowed bg-gray-200 text-gray-400"
@@ -277,7 +286,7 @@ export default function WebSocketsClientPage({
                 disabled={
                   connectionStatus !== "connected" || isTestSignInPending
                 }
-                className={`rounded-lg px-6 py-3 font-medium transition-all ${
+                className={`rounded-lg border border-transparent px-6 py-3 font-medium transition-all ${
                   connectionStatus === "connected" && !isTestSignInPending
                     ? "bg-blue-500 text-white shadow-sm hover:bg-blue-600 hover:shadow active:bg-blue-700"
                     : "cursor-not-allowed bg-gray-200 text-gray-400"
@@ -298,7 +307,7 @@ export default function WebSocketsClientPage({
                 disabled={
                   connectionStatus !== "connected" || isTestSignOutPending
                 }
-                className={`grow rounded-lg border border-transparent px-6 py-3 font-medium transition-all ${
+                className={`flex-1 rounded-lg border border-transparent px-6 py-3 font-medium transition-all ${
                   connectionStatus === "connected" && !isTestSignOutPending
                     ? "bg-blue-500 text-white shadow-sm hover:bg-blue-600 hover:shadow active:bg-blue-700"
                     : "cursor-not-allowed bg-gray-200 text-gray-400"

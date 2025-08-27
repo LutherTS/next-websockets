@@ -6,6 +6,7 @@ export async function findLatestMessages() {
     await prisma.message.findMany({
       select: {
         value: true,
+        id: true,
         user: {
           select: {
             username: true,
@@ -18,7 +19,11 @@ export async function findLatestMessages() {
       take: 5,
     })
   )
-    .map((e) => ({ value: e.value, username: e.user ? e.user.username : null }))
+    .map((e) => ({
+      value: e.value,
+      id: e.id,
+      username: e.user ? e.user.username : null,
+    }))
     .reverse();
 }
 
