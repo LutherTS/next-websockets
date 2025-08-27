@@ -1,6 +1,7 @@
 import { headers } from "next/headers";
 
 import { auth } from "~/better-auth/server/auth";
+import { prisma } from "~/prisma/db";
 
 import { findLatestMessages } from "@/reads/messages";
 
@@ -47,12 +48,21 @@ export default async function WebSocketsServerPage() {
   // });
   // console.log("user", user);
 
-  // the idea is that people will signing with their displayUsername
+  // the idea is that people will sign in with their displayUsername
   // consequently, displayUsername will need to be mandatory in the database
   async function testSignInAction(displayUsername: string) {
     "use server";
 
-    const existingUser = displayUsername;
+    const existingUser = await prisma.betterAuthUser.findUnique({
+      select: {
+        username: true,
+      },
+      where: {
+        displayUsername,
+      },
+    });
+
+    return existingUser;
 
     // console.log("Signing in.");
     // try {
@@ -95,7 +105,7 @@ export default async function WebSocketsServerPage() {
   return (
     <WebSocketsClientPage
       initialMessages={initialMessages}
-      // testSignInAction={testSignInAction}
+      testSignInAction={testSignInAction}
       // testSignOutAction={testSignOutAction}
     />
   );

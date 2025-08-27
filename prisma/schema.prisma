@@ -31,13 +31,14 @@ model BetterAuthUser {
   image              String?
   createdAt          DateTime
   updatedAt          DateTime
-  username           String?
-  displayUsername    String? // make it unique if you want people to connect via username
+  username           String // required (and by default unique) so people can sign in via their retrieved username
+  displayUsername    String // required (and unique) so people can sign in via displayUsername
   betterauthsessions BetterAuthSession[]
   betterauthaccounts BetterAuthAccount[]
 
   @@unique([email])
   @@unique([username])
+  @@unique([displayUsername]) // unique (and required) so people can sign in via displayUsername
   @@map("betterAuthUser")
 }
 

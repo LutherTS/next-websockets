@@ -9,17 +9,19 @@ import { webSocketEndpoint } from "~/server/constants/agnostic/bases.js";
 import { broadcastAction } from "@/actions/server/broadcast";
 
 const MESSAGE = "message";
-const USERNAME = "username";
+const DISPLAYUSERNAME = "displayusername";
 const PASSWORD = "password";
 
 /** The "inner", Client part of the page. A Client Component, it retrieves the initial messages from its parent Server Component, before storing them in React state. It then creates a WebSocket to listen to fresh new data broadcasted from the server, in real-time on the client. */
 export default function WebSocketsClientPage({
   initialMessages,
-  // testSignInAction, // new to test better-auth
+  testSignInAction, // new to test better-auth
   // testSignOutAction, // new to test better-auth
 }: {
   initialMessages: string[];
-  // testSignInAction: () => Promise<void>;
+  testSignInAction: (displayUsername: string) => Promise<{
+    username: string;
+  } | null>;
   // testSignOutAction: () => Promise<void>;
 }) {
   // the messages received from the database, on both loading the page via a Server Component and receiving broadcasts from the WebSocket server
@@ -99,20 +101,39 @@ export default function WebSocketsClientPage({
       const form = e.currentTarget;
       const formData = new FormData(form);
 
-      const username = formData.get(USERNAME) || "";
-      if (typeof username !== "string") return;
-      if (!username.trim()) return;
+      const displayUsername = formData.get(DISPLAYUSERNAME) || "";
+      if (typeof displayUsername !== "string") return;
+      if (!displayUsername.trim()) return;
 
       const password = formData.get(PASSWORD) || "";
       if (typeof password !== "string") return;
       if (!password.trim()) return;
 
-      /* next we'll use a server action do decide whether to sign up (if no user) or sign in (if a user exists) */
+      /* next we'll use a server action to decide whether to sign up (if no user) or sign in (if a user exists) */
 
-      await authClient.signIn.username({
-        username /* : "john_doe" */,
-        password /* : "password1234" */,
-      });
+      const testSignInActionBound = testSignInAction.bind(
+        null,
+        displayUsername,
+      );
+      const existingUser = await testSignInActionBound();
+      console.log("existingUser:", existingUser);
+
+      // if (existingUser) {
+      //   const { username } = existingUser;
+
+      //   await authClient.signIn.username({
+      //     username /* : "john_doe" */,
+      //     password /* : "password1234" */,
+      //   });
+      // } else {
+      //   authClient.signUp.email({
+      //     name: displayUsername,
+      //     email: `${displayUsername}@next-websockets.fly.dev/`, // Email is for show. In a complete application, this will actually need to be checked as a real email.
+      //     password,
+      //     username: displayUsername,
+      //     displayUsername,
+      //   });
+      // }
 
       // form.reset(); unnecessary since the form no longer exists once the user is signed in
     });
@@ -222,7 +243,7 @@ export default function WebSocketsClientPage({
           >
             <div className="flex flex-col gap-3 md:flex-row">
               <input
-                name={USERNAME}
+                name={DISPLAYUSERNAME}
                 type="text"
                 className="flex-1 rounded-lg border border-gray-200 px-4 py-3 transition-all focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 placeholder="Type your username..."
