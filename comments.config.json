@@ -63,7 +63,7 @@
     "reads": {
       "defs": {
         "findLatestMessages": {
-          "value": "Finds the latest messages from the Prisma database. At this time, transforms them directly in an array of usable strings.",
+          "value": "Finds the latest messages from the Prisma database. At this time, transforms them directly in an array of objects containing their message and the username of the user who sent it (with `null` instead if no such authenticated user is authenticated).",
           "key": "JSDOC#READS#DEFS#FINDLATESTMESSAGES",
           "placeholder": "$COMMENT#JSDOC#READS#DEFS#FINDLATESTMESSAGES"
         },

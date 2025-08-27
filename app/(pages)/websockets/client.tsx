@@ -35,7 +35,10 @@ export default function WebSocketsClientPage({
   getExistingUserAction, // new to test better-auth
   createNewUserAction,
 }: {
-  initialMessages: string[];
+  initialMessages: {
+    value: string;
+    username: string | null;
+  }[];
   getExistingUserAction: (displayUsername: string) => Promise<{
     username: string;
   } | null>;
@@ -217,7 +220,7 @@ export default function WebSocketsClientPage({
         </div>
 
         <div className="flex-1 space-y-4 overflow-y-auto bg-gray-50 p-6">
-          {messages.map((message, index) => (
+          {messages.map(({ value: message }, index) => (
             <div
               key={index}
               className="rounded-lg border border-gray-100 bg-white p-4 shadow-sm transition-all hover:shadow-md"

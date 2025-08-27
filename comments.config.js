@@ -36,7 +36,7 @@ const data = Object.freeze({
     reads: Object.freeze({
       defs: Object.freeze({
         findLatestMessages:
-          "Finds the latest messages from the Prisma database. At this time, transforms them directly in an array of usable strings." /* $COMMENT#JSDOC#READS#DEFS#FINDLATESTMESSAGES */,
+          "Finds the latest messages from the Prisma database. At this time, transforms them directly in an array of objects containing their message and the username of the user who sent it (with `null` instead if no such authenticated user is authenticated)." /* $COMMENT#JSDOC#READS#DEFS#FINDLATESTMESSAGES */,
         countAllMessages:
           "Counts all the messages saved in the database, in order to ascertain its persistence between reboots and deployments." /* $COMMENT#JSDOC#READS#DEFS#COUNTALLMESSAGES */,
       }),

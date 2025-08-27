@@ -4,13 +4,21 @@ import { prisma } from "~/prisma/db";
 export async function findLatestMessages() {
   return (
     await prisma.message.findMany({
+      select: {
+        value: true,
+        user: {
+          select: {
+            username: true,
+          },
+        },
+      },
       orderBy: {
         createdAt: "desc",
       },
       take: 5,
     })
   )
-    .map((e) => e.value)
+    .map((e) => ({ value: e.value, username: e.user ? e.user.username : null }))
     .reverse();
 }
 
