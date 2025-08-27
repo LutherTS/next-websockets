@@ -1,11 +1,12 @@
 import { headers } from "next/headers";
 
 import { auth } from "~/better-auth/server/auth";
-import { prisma } from "~/prisma/db";
 
 import { findLatestMessages } from "@/reads/messages";
 
 import WebSocketsClientPage from "./client";
+
+import type { APIError } from "better-auth";
 
 /** The "outer", Server part of the page. A Server Component, it accesses the server directly to retrieve the latest messages, instantiating any load of the page with the freshest data directly from the server, before it renders the page. */
 export default async function WebSocketsServerPage() {
@@ -46,24 +47,53 @@ export default async function WebSocketsServerPage() {
   // });
   // console.log("user", user);
 
-  const data = await auth.api.signInEmail({
-    body: {
-      email: "john.doe@example.com", // required
-      password: "password1234", // required
-      // rememberMe: true,
-      // callbackURL: "https://example.com/callback",
-    },
-    // This endpoint requires session cookies.
-    headers: await headers(),
-  });
-  console.log("data", data);
+  async function testSignInAction() {
+    "use server";
+    console.log("Signing in.");
+    try {
+      const data = await auth.api.signInEmail({
+        body: {
+          email: "john.doe@example.com", // required
+          password: "password1234", // required
+          // rememberMe: true,
+          // callbackURL: "https://example.com/callback",
+        },
+        // This endpoint requires session cookies.
+        headers: await headers(),
+        asResponse: true, // and there's the session
+      });
+      console.log("data", data);
+    } catch (error) {
+      const apiError = error as APIError;
+      console.error("error:", apiError);
+      console.log("error.body:", apiError.body);
+    }
+  }
 
-  const session = await auth.api.getSession({
-    headers: await headers(), // you need to pass the headers object.
-  });
-  console.log("session", session); // OK, I get it. You can get the session on the server, but for that the session has to be made on the client, which is where authClient is needed. However, the behavior of authClient can be programmatically made with auth, by returning a response to the client. But that trip to the client is indispensible because it's on the client that the session cookie gets set.
+  async function testSignOutAction() {
+    "use server";
+    console.log("Signing out.");
+    try {
+      const data = await auth.api.signOut({
+        // This endpoint requires session cookies.
+        headers: await headers(),
+        asResponse: true,
+      });
+      console.log("data", data);
+    } catch (error) {
+      const apiError = error as APIError;
+      console.error("error:", apiError);
+      console.log("error.body:", apiError.body);
+    }
+  }
 
-  return <WebSocketsClientPage initialMessages={initialMessages} />;
+  return (
+    <WebSocketsClientPage
+      initialMessages={initialMessages}
+      testSignInAction={testSignInAction}
+      testSignOutAction={testSignOutAction}
+    />
+  );
 }
 
 /* Notes

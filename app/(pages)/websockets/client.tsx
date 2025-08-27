@@ -2,17 +2,25 @@
 
 import { useEffect, useRef, useState, useTransition } from "react";
 
+import { authClient } from "~/better-auth/client/auth";
+
 import { webSocketEndpoint } from "~/server/constants/agnostic/bases.js";
 
 import { broadcastAction } from "@/actions/server/broadcast";
 
 const MESSAGE = "message";
+const USERNAME = "username";
+const PASSWORD = "password";
 
 /** The "inner", Client part of the page. A Client Component, it retrieves the initial messages from its parent Server Component, before storing them in React state. It then creates a WebSocket to listen to fresh new data broadcasted from the server, in real-time on the client. */
 export default function WebSocketsClientPage({
   initialMessages,
+  testSignInAction, // new to test better-auth
+  testSignOutAction, // new to test better-auth
 }: {
   initialMessages: string[];
+  testSignInAction: () => Promise<void>;
+  testSignOutAction: () => Promise<void>;
 }) {
   // the messages received from the database, on both loading the page via a Server Component and receiving broadcasts from the WebSocket server
   const [messages, setMessages] = useState(initialMessages || []);
@@ -21,6 +29,9 @@ export default function WebSocketsClientPage({
     "connected" | "disconnected" | "connecting"
   >("connecting");
   // (Both `messages` and `connectionStatus` are obtained live from the client via the WebSocket, hence the reason for client state.)
+
+  const { data: session } = authClient.useSession();
+  console.log("session (client):", session);
 
   const wsRef = useRef<WebSocket | null>(null);
 
@@ -73,6 +84,33 @@ export default function WebSocketsClientPage({
     });
   };
 
+  const [isTestSignInPending, startTestSignInTransition] = useTransition();
+
+  const testSignIn = (e: React.FormEvent<HTMLFormElement>) => {
+    startTestSignInTransition(async () => {
+      // find by displayUsername
+      // find the actual username through the displayUsername
+      // send the found username to the client
+      // use the found username to authenticate on the client
+      // await testSignInAction();
+      e.preventDefault();
+      await authClient.signIn.username({
+        username: "john_doe",
+        password: "password1234",
+      });
+    });
+  };
+
+  const [isTestSignOutPending, startTestSignOutTransition] = useTransition();
+
+  const testSignOut = (e: React.FormEvent<HTMLFormElement>) => {
+    startTestSignOutTransition(async () => {
+      e.preventDefault();
+      // await testSignOutAction();
+      await authClient.signOut();
+    });
+  };
+
   return (
     <main className="flex min-h-screen items-center justify-center bg-gradient-to-b from-gray-50 to-gray-100">
       <div className="mx-4 flex h-[80vh] w-full max-w-2xl flex-col rounded-xl border border-gray-200 bg-white shadow-lg">
@@ -95,7 +133,12 @@ export default function WebSocketsClientPage({
                     : "bg-yellow-500"
               }`}
             ></div>
-            Status: {connectionStatus}
+            Status: {connectionStatus}{" "}
+            {connectionStatus === "connected"
+              ? session
+                ? `as ${session.user.displayUsername} (authenticated)`
+                : "as guest (unauthenticated)"
+              : null}
           </div>
         </div>
 
@@ -134,6 +177,61 @@ export default function WebSocketsClientPage({
             </button>
           </div>
         </form>
+        {session ? (
+          <form
+            onSubmit={testSignOut}
+            className="rounded-b-xl border-t border-gray-100 bg-white p-6"
+          >
+            <div className="flex flex-col gap-3 md:flex-row">
+              <button
+                type="submit"
+                disabled={
+                  connectionStatus !== "connected" || isTestSignOutPending
+                }
+                className={`grow rounded-lg border border-transparent px-6 py-3 font-medium transition-all ${
+                  connectionStatus === "connected"
+                    ? "bg-blue-500 text-white shadow-sm hover:bg-blue-600 hover:shadow active:bg-blue-700"
+                    : "cursor-not-allowed bg-gray-200 text-gray-400"
+                }`}
+              >
+                Sign out
+              </button>
+            </div>
+          </form>
+        ) : (
+          <form
+            onSubmit={testSignIn}
+            className="rounded-b-xl border-t border-gray-100 bg-white p-6"
+          >
+            <div className="flex flex-col gap-3 md:flex-row">
+              <input
+                name={USERNAME}
+                type="text"
+                className="flex-1 rounded-lg border border-gray-200 px-4 py-3 transition-all focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                placeholder="Type your username..."
+              />
+              <input
+                name={PASSWORD}
+                type="password"
+                className="flex-1 rounded-lg border border-gray-200 px-4 py-3 transition-all focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                placeholder="Type your password..."
+              />
+              <button
+                type="submit"
+                disabled={
+                  connectionStatus !== "connected" || isTestSignInPending
+                }
+                className={`rounded-lg px-6 py-3 font-medium transition-all ${
+                  connectionStatus === "connected"
+                    ? "bg-blue-500 text-white shadow-sm hover:bg-blue-600 hover:shadow active:bg-blue-700"
+                    : "cursor-not-allowed bg-gray-200 text-gray-400"
+                }`}
+              >
+                Sign in
+              </button>
+            </div>
+          </form>
+        )}
       </div>
     </main>
   );

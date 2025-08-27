@@ -32,7 +32,7 @@ model BetterAuthUser {
   createdAt          DateTime
   updatedAt          DateTime
   username           String?
-  displayUsername    String?
+  displayUsername    String? // make it unique if you want people to connect via username
   betterauthsessions BetterAuthSession[]
   betterauthaccounts BetterAuthAccount[]
 
