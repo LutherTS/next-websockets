@@ -21,7 +21,7 @@ export async function createNewMessageWithUserId(
   message: string,
   userId: string,
 ) {
-  return await prisma.message.create({
+  await prisma.message.create({
     data: {
       value: message,
       userId,

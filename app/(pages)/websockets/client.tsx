@@ -7,6 +7,10 @@ import { authClient } from "~/better-auth/client/auth";
 import { webSocketEndpoint } from "~/server/constants/agnostic/bases.js";
 
 import { broadcastAction } from "@/actions/server/broadcast";
+import {
+  MAX_USERNAME_LENGTH,
+  MIN_USERNAME_LENGTH,
+} from "~/better-auth/constants/agnostic/bases";
 
 const MESSAGE = "message";
 const DISPLAYUSERNAME = "displayusername";
@@ -54,7 +58,6 @@ export default function WebSocketsClientPage({
   // (Both `messages` and `connectionStatus` are obtained live from the client via the WebSocket, hence the reason for client state.)
 
   const { data: session } = authClient.useSession();
-  console.log("session (client):", session);
 
   const wsRef = useRef<WebSocket | null>(null);
 
@@ -133,6 +136,15 @@ export default function WebSocketsClientPage({
       if (!validateUsernameSlugFriendly(displayUsername))
         return console.log(`displayUsername should be slug-friendly.`);
 
+      if (displayUsername.length < MIN_USERNAME_LENGTH)
+        return console.log(
+          `displayUsername's length should not be less than ${MIN_USERNAME_LENGTH} character(s).`,
+        );
+      if (displayUsername.length > MAX_USERNAME_LENGTH)
+        return console.log(
+          `displayUsername's length should not be more than ${MAX_USERNAME_LENGTH} character(s).`,
+        );
+
       const password = formData.get(PASSWORD) || "";
       if (typeof password !== "string")
         return console.log(`password is not a string.`);
@@ -165,8 +177,6 @@ export default function WebSocketsClientPage({
           },
           {
             onSuccess: async () => {
-              // plays a server action that creates a new user in the database
-              // and it worked
               const createNewUserActionBound = createNewUserAction.bind(
                 null,
                 displayUsername,
@@ -252,9 +262,17 @@ export default function WebSocketsClientPage({
             />
             <button
               type="submit"
-              disabled={connectionStatus !== "connected" || isBroadcastPending}
+              disabled={
+                connectionStatus !== "connected" ||
+                isBroadcastPending ||
+                isTestSignInPending ||
+                isTestSignOutPending
+              }
               className={`rounded-lg border border-transparent px-6 py-3 font-medium transition-all ${
-                connectionStatus === "connected" && !isBroadcastPending
+                connectionStatus === "connected" &&
+                !isBroadcastPending &&
+                !isTestSignInPending &&
+                !isTestSignOutPending
                   ? "bg-blue-500 text-white shadow-sm hover:bg-blue-600 hover:shadow active:bg-blue-700"
                   : "cursor-not-allowed bg-gray-200 text-gray-400"
               }`}

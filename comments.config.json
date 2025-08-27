@@ -37,7 +37,7 @@
     "writes": {
       "defs": {
         "createNewMessage": {
-          "value": "Creates a new message in the Prisma database.",
+          "value": "Creates a new message in the Prisma database, attributed to no one since published as a guest.",
           "key": "JSDOC#WRITES#DEFS#CREATENEWMESSAGE",
           "placeholder": "$COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGE"
         },

@@ -22,7 +22,7 @@ const data = Object.freeze({
     writes: Object.freeze({
       defs: Object.freeze({
         createNewMessage:
-          "Creates a new message in the Prisma database." /* $COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGE */,
+          "Creates a new message in the Prisma database, attributed to no one since published as a guest." /* $COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGE */,
         createNewMessageWithUserId:
           "Creates a new message in the Prisma database, assigned to the current user who sent the message." /* $COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGEWITHUSERID */,
         deleteExtraMessages:

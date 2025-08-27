@@ -1,9 +1,12 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { username } from "better-auth/plugins";
-import { nextCookies } from "better-auth/next-js";
 
 import { prisma } from "~/prisma/db";
+import {
+  MAX_USERNAME_LENGTH,
+  MIN_USERNAME_LENGTH,
+} from "../constants/agnostic/bases";
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
@@ -27,5 +30,10 @@ export const auth = betterAuth({
   verification: {
     modelName: "betterAuthVerification",
   },
-  plugins: [username(), nextCookies()],
+  plugins: [
+    username({
+      minUsernameLength: MIN_USERNAME_LENGTH,
+      maxUsernameLength: MAX_USERNAME_LENGTH,
+    }),
+  ],
 });
