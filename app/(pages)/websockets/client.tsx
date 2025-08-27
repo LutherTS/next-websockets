@@ -15,12 +15,12 @@ const PASSWORD = "password";
 /** The "inner", Client part of the page. A Client Component, it retrieves the initial messages from its parent Server Component, before storing them in React state. It then creates a WebSocket to listen to fresh new data broadcasted from the server, in real-time on the client. */
 export default function WebSocketsClientPage({
   initialMessages,
-  testSignInAction, // new to test better-auth
-  testSignOutAction, // new to test better-auth
+  // testSignInAction, // new to test better-auth
+  // testSignOutAction, // new to test better-auth
 }: {
   initialMessages: string[];
-  testSignInAction: () => Promise<void>;
-  testSignOutAction: () => Promise<void>;
+  // testSignInAction: () => Promise<void>;
+  // testSignOutAction: () => Promise<void>;
 }) {
   // the messages received from the database, on both loading the page via a Server Component and receiving broadcasts from the WebSocket server
   const [messages, setMessages] = useState(initialMessages || []);
@@ -66,6 +66,7 @@ export default function WebSocketsClientPage({
 
       const form = e.currentTarget;
       const formData = new FormData(form);
+
       const message = formData.get(MESSAGE) || "";
       if (typeof message !== "string") return;
       if (!message.trim()) return;
@@ -94,10 +95,26 @@ export default function WebSocketsClientPage({
       // use the found username to authenticate on the client
       // await testSignInAction();
       e.preventDefault();
+
+      const form = e.currentTarget;
+      const formData = new FormData(form);
+
+      const username = formData.get(USERNAME) || "";
+      if (typeof username !== "string") return;
+      if (!username.trim()) return;
+
+      const password = formData.get(PASSWORD) || "";
+      if (typeof password !== "string") return;
+      if (!password.trim()) return;
+
+      /* next we'll use a server action do decide whether to sign up (if no user) or sign in (if a user exists) */
+
       await authClient.signIn.username({
-        username: "john_doe",
-        password: "password1234",
+        username /* : "john_doe" */,
+        password /* : "password1234" */,
       });
+
+      // form.reset(); unnecessary since the form no longer exists once the user is signed in
     });
   };
 

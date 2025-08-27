@@ -47,27 +47,32 @@ export default async function WebSocketsServerPage() {
   // });
   // console.log("user", user);
 
-  async function testSignInAction() {
+  // the idea is that people will signing with their displayUsername
+  // consequently, displayUsername will need to be mandatory in the database
+  async function testSignInAction(displayUsername: string) {
     "use server";
-    console.log("Signing in.");
-    try {
-      const data = await auth.api.signInEmail({
-        body: {
-          email: "john.doe@example.com", // required
-          password: "password1234", // required
-          // rememberMe: true,
-          // callbackURL: "https://example.com/callback",
-        },
-        // This endpoint requires session cookies.
-        headers: await headers(),
-        asResponse: true, // and there's the session
-      });
-      console.log("data", data);
-    } catch (error) {
-      const apiError = error as APIError;
-      console.error("error:", apiError);
-      console.log("error.body:", apiError.body);
-    }
+
+    const existingUser = displayUsername;
+
+    // console.log("Signing in.");
+    // try {
+    //   const data = await auth.api.signInEmail({
+    //     body: {
+    //       email: "john.doe@example.com", // required
+    //       password: "password1234", // required
+    //       // rememberMe: true,
+    //       // callbackURL: "https://example.com/callback",
+    //     },
+    //     // This endpoint requires session cookies.
+    //     headers: await headers(),
+    //     asResponse: true, // and there's the session
+    //   });
+    //   console.log("data", data);
+    // } catch (error) {
+    //   const apiError = error as APIError;
+    //   console.error("error:", apiError);
+    //   console.log("error.body:", apiError.body);
+    // }
   }
 
   async function testSignOutAction() {
@@ -90,8 +95,8 @@ export default async function WebSocketsServerPage() {
   return (
     <WebSocketsClientPage
       initialMessages={initialMessages}
-      testSignInAction={testSignInAction}
-      testSignOutAction={testSignOutAction}
+      // testSignInAction={testSignInAction}
+      // testSignOutAction={testSignOutAction}
     />
   );
 }
