@@ -15,6 +15,7 @@ export default async function WebSocketsServerPage() {
   async function getExistingUserAction(displayUsername: string) {
     "use server";
 
+    // that's a read: findExistingUserByDisplayUsername
     const existingUser = await prisma.betterAuthUser.findUnique({
       select: {
         username: true,
