@@ -3,15 +3,28 @@ import { prisma } from "~/prisma/db";
 /**
  * $COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGE
  * @param message $COMMENT#JSDOC#UTILS#PARAMS#MESSAGE
- * @param displayUsername $COMMENT#JSDOC#UTILS#PARAMS#DISPLAYUSERNAME
  */
-export async function createNewMessage(
-  message: string,
-  displayUsername: string | undefined,
-) {
+export async function createNewMessage(message: string) {
   await prisma.message.create({
     data: {
       value: message,
+    },
+  });
+}
+
+/**
+ * $COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGEWITHUSERID
+ * @param message $COMMENT#JSDOC#UTILS#PARAMS#MESSAGE
+ * @param userId $COMMENT#JSDOC#WRITES#PARAMS#USERID
+ */
+export async function createNewMessageWithUserId(
+  message: string,
+  userId: string,
+) {
+  return await prisma.message.create({
+    data: {
+      value: message,
+      userId,
     },
   });
 }

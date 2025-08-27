@@ -28,10 +28,23 @@ export default async function WebSocketsServerPage() {
     return existingUser;
   }
 
+  async function createNewUserAction(username: string) {
+    "use server";
+
+    // write: createNewUserByUsername
+    const user = await prisma.user.create({
+      data: {
+        username,
+      },
+    });
+    console.log("user:", user);
+  }
+
   return (
     <WebSocketsClientPage
       initialMessages={initialMessages}
       getExistingUserAction={getExistingUserAction}
+      createNewUserAction={createNewUserAction}
     />
   );
 }

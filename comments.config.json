@@ -41,10 +41,22 @@
           "key": "JSDOC#WRITES#DEFS#CREATENEWMESSAGE",
           "placeholder": "$COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGE"
         },
+        "createNewMessageWithUserId": {
+          "value": "Creates a new message in the Prisma database, assigned to the current user who sent the message.",
+          "key": "JSDOC#WRITES#DEFS#CREATENEWMESSAGEWITHUSERID",
+          "placeholder": "$COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGEWITHUSERID"
+        },
         "deleteExtraMessages": {
           "value": "Deletes older messages from the database to cap the amount of messages it can effectively store.",
           "key": "JSDOC#WRITES#DEFS#DELETEEXTRAMESSAGES",
           "placeholder": "$COMMENT#JSDOC#WRITES#DEFS#DELETEEXTRAMESSAGES"
+        }
+      },
+      "params": {
+        "userId": {
+          "value": "The ID of the current user as found from their unique username.",
+          "key": "JSDOC#WRITES#PARAMS#USERID",
+          "placeholder": "$COMMENT#JSDOC#WRITES#PARAMS#USERID"
         }
       }
     },

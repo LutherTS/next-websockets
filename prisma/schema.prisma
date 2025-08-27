@@ -27,7 +27,7 @@ model Message {
 model User {
   id String @id @default(uuid())
 
-  username String
+  username String // SAME AS BETTERAUTHUSER.DISPLAYNAME
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
@@ -48,7 +48,7 @@ model BetterAuthUser {
   createdAt          DateTime
   updatedAt          DateTime
   username           String // required (and by default unique) so people can sign in via their retrieved username
-  displayUsername    String // required (and unique) so people can sign in via displayUsername
+  displayUsername    String // required (and unique) so people can sign in via displayUsername // SAME AS USER.USERNAME
   betterauthsessions BetterAuthSession[]
   betterauthaccounts BetterAuthAccount[]
 

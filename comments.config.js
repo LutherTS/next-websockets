@@ -23,8 +23,14 @@ const data = Object.freeze({
       defs: Object.freeze({
         createNewMessage:
           "Creates a new message in the Prisma database." /* $COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGE */,
+        createNewMessageWithUserId:
+          "Creates a new message in the Prisma database, assigned to the current user who sent the message." /* $COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGEWITHUSERID */,
         deleteExtraMessages:
           "Deletes older messages from the database to cap the amount of messages it can effectively store." /* $COMMENT#JSDOC#WRITES#DEFS#DELETEEXTRAMESSAGES */,
+      }),
+      params: Object.freeze({
+        userId:
+          "The ID of the current user as found from their unique username." /* $COMMENT#JSDOC#WRITES#PARAMS#USERID */,
       }),
     }),
     reads: Object.freeze({

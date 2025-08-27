@@ -33,11 +33,13 @@ const validateUsernameSlugFriendly = (username: string) =>
 export default function WebSocketsClientPage({
   initialMessages,
   getExistingUserAction, // new to test better-auth
+  createNewUserAction,
 }: {
   initialMessages: string[];
   getExistingUserAction: (displayUsername: string) => Promise<{
     username: string;
   } | null>;
+  createNewUserAction: (username: string) => Promise<void>;
 }) {
   // the messages received from the database, on both loading the page via a Server Component and receiving broadcasts from the WebSocket server
   const [messages, setMessages] = useState(initialMessages || []);
@@ -149,13 +151,26 @@ export default function WebSocketsClientPage({
       } else {
         console.log("Signing up...");
 
-        authClient.signUp.email({
-          name: displayUsername,
-          email: `${displayUsername}@next-websockets.fly.dev`,
-          password,
-          username: displayUsername,
-          displayUsername,
-        });
+        authClient.signUp.email(
+          {
+            name: displayUsername,
+            email: `${displayUsername}@next-websockets.fly.dev`,
+            password,
+            username: displayUsername,
+            displayUsername,
+          },
+          {
+            onSuccess: async () => {
+              // plays a server action that creates a new user in the database
+              // and it worked
+              const createNewUserActionBound = createNewUserAction.bind(
+                null,
+                displayUsername,
+              );
+              await createNewUserActionBound();
+            },
+          },
+        );
       }
     });
   };

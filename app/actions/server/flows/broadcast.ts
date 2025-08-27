@@ -1,6 +1,12 @@
+import { prisma } from "~/prisma/db";
+
 import { webSocketClients } from "~/server/constants/websocket-clients.js";
 
-import { createNewMessage, deleteExtraMessages } from "@/writes/messages";
+import {
+  createNewMessage,
+  createNewMessageWithUserId,
+  deleteExtraMessages,
+} from "@/writes/messages";
 
 import { countAllMessages, findLatestMessages } from "@/reads/messages";
 
@@ -16,8 +22,33 @@ export const broadcastFlow = async (
 ) => {
   console.log(`Message received:`, message);
 
-  // creates a new message in the database
-  await createNewMessage(message, displayUsername);
+  if (!displayUsername)
+    // creates a new message in the database
+    await createNewMessage(message);
+  else {
+    console.log("Finding the user...");
+    // find the user with that displayUsername as username
+    const currentUser = await prisma.user.findUnique({
+      select: {
+        id: true,
+      },
+      where: {
+        username: displayUsername,
+      },
+    });
+    console.log("currentUser:", currentUser);
+
+    if (!currentUser)
+      return console.error(
+        "It should be impossible that the current user on the app could not be found on the User table in the database.",
+      );
+
+    const userId = currentUser.id;
+
+    console.log("Creating the user's message");
+    const userMessage = await createNewMessageWithUserId(message, userId);
+    console.log("userMessage:", userMessage);
+  }
 
   // counts all messages for logs
   const allMessagesCountBefore = await countAllMessages();
