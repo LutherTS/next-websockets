@@ -119,9 +119,6 @@ const data = Object.freeze({
     boundServerActions:
       "but to be fair, the same would need to be done to bound server actions, so the limitation is across both standalone server actions and inline server actions alike" /* $COMMENT#REMARKS#BOUNDSERVERACTIONS */,
   }),
-  // Next, remove forComposedVariables entirely in favor of words, phrases, and prisma. This is due to the new understanding that forComposedVariables can be basely separed in words, phrases and "others", where words and "others" are targeted for composedVariablesExclusives by default, not phrases.
-  // prisma.tables, prisma.fields // Done.
-  // No. We're keeping forComposedVariables. It makes things explicit. And makes it so that perhaps in the near future I can do something like: if a Comment Variable is within `forComposedVariables`, it is automatically ignored.
   forComposedVariables: Object.freeze({
     words: Object.freeze({
       of: "of" /* $COMMENT#FORCOMPOSEDVARIABLES#WORDS#OF */,
@@ -284,7 +281,7 @@ const composedVariablesExclusives = [
   "FORCOMPOSEDVARIABLES#PHRASES#WSCLIENTPAGEPARENS",
   "FORCOMPOSEDVARIABLES#PHRASES#WSSERVERPAGEPARENS",
   "FORCOMPOSEDVARIABLES#PHRASES#NEEDSASREFERENCE",
-  /* "others" (like prima) should probably be composed vvariables exclusives */
+  /* "others" (like prisma) should probably be composed variables exclusives */
   "FORCOMPOSEDVARIABLES#PRISMA#TABLES#MESSAGE",
   "FORCOMPOSEDVARIABLES#PRISMA#TABLES#USER",
   "FORCOMPOSEDVARIABLES#PRISMA#TABLES#USERCOMMA",
