@@ -99,7 +99,7 @@ export default function WebSocketsClientPage({
       // the Server Function way
       // OPEN needed because without OPEN the message can't be received... on the client. But even without OPEN the message could be sent. However, since the ID of the connection will probably need to be sent in production, it is best to acknowledge that only connected WebSockets should be able to send messages and effectively trigger new messages.
       if (wsRef.current?.readyState === WebSocket.OPEN) {
-        // binds the message to the server action to be handled on the server, though this will be done with FormData instead
+        // binds the message to the server action to be handled on the server
         const broadcastActionBound = broadcastAction.bind(
           null,
           message,

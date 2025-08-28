@@ -46,5 +46,5 @@ export default async function WebSocketsServerPage() {
 
 /* Notes
 <WebSocketsClientPage initialMessages />
-Turning this syntax into <WebSocketsClientPage initialMessages={initialMessages} /> via a TypeScript server plugin could be my next project.
+Turning this syntax into <WebSocketsClientPage initialMessages={initialMessages} /> could be my next project. Introducing xJSX (eXtra JSX). 
 */
