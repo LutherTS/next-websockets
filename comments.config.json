@@ -51,10 +51,37 @@
             "value": "The handler that triggers the broadcast. This is where the magic happens. This handler operates both on the client and on the server. Via the `broadcastAction` server action (Server Function), it sends the new message from the client to the server, where `broadcastAction` triggers the broadcast for all WebSocket clients directly from the server, in real-time.",
             "key": "JSDOC#PAGES#WEBSOCKETS#DEFS#BROADCAST",
             "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#BROADCAST"
+          },
+          "getExistingUserAction": {
+            "value": "Gets or doesn't get an existing `User` from the database in order to decide whether to sign in if a `User` exists or sign up otherwise.",
+            "key": "JSDOC#PAGES#WEBSOCKETS#DEFS#GETEXISTINGUSERACTION",
+            "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#GETEXISTINGUSERACTION"
+          },
+          "createNewUserAction": {
+            "value": "Creates the corresponding `User` to the newly-created `BetterAuthUser` on success of its signing up.",
+            "key": "JSDOC#PAGES#WEBSOCKETS#DEFS#CREATENEWUSERACTION",
+            "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#CREATENEWUSERACTION"
           }
         },
-        "params": {},
-        "returns": {}
+        "params": {
+          "displayUsernameA": {
+            "value": "The username to be displayed sent from the current session. Here used to find the `BetterAuthUser` needed to sign in if found or to acknowledge its absence for sign up if nonexistent.",
+            "key": "JSDOC#PAGES#WEBSOCKETS#PARAMS#DISPLAYUSERNAMEA",
+            "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#PARAMS#DISPLAYUSERNAMEA"
+          },
+          "username": {
+            "value": "The unique `username` of the new `User`, made out of the `displayUsername` initially provided to create a `BetterAuthUser` instance at sign up.",
+            "key": "JSDOC#PAGES#WEBSOCKETS#PARAMS#USERNAME",
+            "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#PARAMS#USERNAME"
+          }
+        },
+        "returns": {
+          "getExistingUserAction": {
+            "value": "Either the `username` of the `BetterAuthUser` in an object if found or `null` otherwise.",
+            "key": "JSDOC#PAGES#WEBSOCKETS#RETURNS#GETEXISTINGUSERACTION",
+            "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#RETURNS#GETEXISTINGUSERACTION"
+          }
+        }
       }
     },
     "actions": {
@@ -77,15 +104,54 @@
           "value": "Counts all the messages saved in the database, in order to ascertain its persistence between reboots and deployments.",
           "key": "JSDOC#READS#DEFS#COUNTALLMESSAGES",
           "placeholder": "$COMMENT#JSDOC#READS#DEFS#COUNTALLMESSAGES"
+        },
+        "findExistingUsernameByDisplayUsername": {
+          "value": "Finds an existing `BetterAuthUser` via its unique `displayUsername`, if such a `BetterAuthUser` exists.",
+          "key": "JSDOC#READS#DEFS#FINDEXISTINGUSERNAMEBYDISPLAYUSERNAME",
+          "placeholder": "$COMMENT#JSDOC#READS#DEFS#FINDEXISTINGUSERNAMEBYDISPLAYUSERNAME"
+        },
+        "findUserByUsername": {
+          "value": "Finds the existing `User` via its unique `username`, its existence guaranteed by the fact that `username`s of `User`s and `displayUsername`s of `BetterAuthUser`s are strictly the same and their instances created simultaneously.",
+          "key": "JSDOC#READS#DEFS#FINDUSERBYUSERNAME",
+          "placeholder": "$COMMENT#JSDOC#READS#DEFS#FINDUSERBYUSERNAME"
+        }
+      },
+      "params": {
+        "displayUsernameB": {
+          "value": "The username to be displayed sent from the current session. Here used to find the `User` to be attached to the message being sent.",
+          "key": "JSDOC#READS#PARAMS#DISPLAYUSERNAMEB",
+          "placeholder": "$COMMENT#JSDOC#READS#PARAMS#DISPLAYUSERNAMEB"
+        }
+      },
+      "returns": {
+        "findUserByUsername": {
+          "value": "Either the `id` of the `User` in an object if found or `null` otherwise.",
+          "key": "JSDOC#READS#RETURNS#FINDUSERBYUSERNAME",
+          "placeholder": "$COMMENT#JSDOC#READS#RETURNS#FINDUSERBYUSERNAME"
         }
       }
     },
     "writes": {
       "defs": {
+        "createNewMessage": {
+          "value": "Creates a new `Message` in the Prisma database, attributed to no one since published as a guest.",
+          "key": "JSDOC#WRITES#DEFS#CREATENEWMESSAGE",
+          "placeholder": "$COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGE"
+        },
+        "createNewMessageWithUserId": {
+          "value": "Creates a new `Message` in the Prisma database, assigned to the current user who sent the message.",
+          "key": "JSDOC#WRITES#DEFS#CREATENEWMESSAGEWITHUSERID",
+          "placeholder": "$COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGEWITHUSERID"
+        },
         "deleteExtraMessages": {
           "value": "Deletes older messages from the database to cap the amount of messages it can effectively store.",
           "key": "JSDOC#WRITES#DEFS#DELETEEXTRAMESSAGES",
           "placeholder": "$COMMENT#JSDOC#WRITES#DEFS#DELETEEXTRAMESSAGES"
+        },
+        "createNewUserByUsername": {
+          "value": "Creates a new `User` in the Prisma database, through its provided unique `username`.",
+          "key": "JSDOC#WRITES#DEFS#CREATENEWUSERBYUSERNAME",
+          "placeholder": "$COMMENT#JSDOC#WRITES#DEFS#CREATENEWUSERBYUSERNAME"
         }
       },
       "params": {
@@ -140,6 +206,11 @@
         "value": "server",
         "key": "FORCOMPOSEDVARIABLES#WORDS#SERVER",
         "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#WORDS#SERVER"
+      },
+      "existing": {
+        "value": "existing",
+        "key": "FORCOMPOSEDVARIABLES#WORDS#EXISTING",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#WORDS#EXISTING"
       }
     },
     "phrases": {
@@ -147,6 +218,146 @@
         "value": "Gets or doesn't get an existing",
         "key": "FORCOMPOSEDVARIABLES#PHRASES#GETSORDOESNT",
         "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#GETSORDOESNT"
+      },
+      "fromToDecide": {
+        "value": "from the database in order to decide whether to sign in if a",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#FROMTODECIDE",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#FROMTODECIDE"
+      },
+      "existsOr": {
+        "value": "exists or sign up otherwise.",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#EXISTSOR",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#EXISTSOR"
+      },
+      "createsCorresponding": {
+        "value": "Creates the corresponding",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#CREATESCORRESPONDING",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#CREATESCORRESPONDING"
+      },
+      "toNewlyCreated": {
+        "value": "to the newly-created",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#TONEWLYCREATED",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#TONEWLYCREATED"
+      },
+      "onSuccessSignUp": {
+        "value": "on success of its signing up.",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#ONSUCCESSSIGNUP",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#ONSUCCESSSIGNUP"
+      },
+      "theUsernameToFind": {
+        "value": "The username to be displayed sent from the current session. Here used to find the",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#THEUSERNAMETOFIND",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#THEUSERNAMETOFIND"
+      },
+      "neededToSignInUp": {
+        "value": "needed to sign in if found or to acknowledge its absence for sign up if nonexistent.",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#NEEDEDTOSIGNINUP",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#NEEDEDTOSIGNINUP"
+      },
+      "toBeAttached": {
+        "value": "to be attached to the message being sent.",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#TOBEATTACHED",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#TOBEATTACHED"
+      },
+      "theUnique": {
+        "value": "The unique",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#THEUNIQUE",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#THEUNIQUE"
+      },
+      "oftheNew": {
+        "value": "of the new",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#OFTHENEW",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#OFTHENEW"
+      },
+      "madeOutOf": {
+        "value": "made out of the",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#MADEOUTOF",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#MADEOUTOF"
+      },
+      "initiallyToCreate": {
+        "value": "initially provided to create a",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#INITIALLYTOCREATE",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#INITIALLYTOCREATE"
+      },
+      "instanceSignUp": {
+        "value": "instance at sign up.",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#INSTANCESIGNUP",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#INSTANCESIGNUP"
+      },
+      "eitherThe": {
+        "value": "Either the",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#EITHERTHE",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#EITHERTHE"
+      },
+      "ofThe": {
+        "value": "of the",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#OFTHE",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#OFTHE"
+      },
+      "inObjectOrNull": {
+        "value": "in an object if found or `null` otherwise.",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#INOBJECTORNULL",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#INOBJECTORNULL"
+      },
+      "findsAn": {
+        "value": "Finds an",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#FINDSAN",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#FINDSAN"
+      },
+      "findsThe": {
+        "value": "Finds the",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#FINDSTHE",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#FINDSTHE"
+      },
+      "viaItsUnique": {
+        "value": "via its unique",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#VIAITSUNIQUE",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#VIAITSUNIQUE"
+      },
+      "ifSuchA": {
+        "value": "if such a",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#IFSUCHA",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#IFSUCHA"
+      },
+      "existsPeriod": {
+        "value": "exists.",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#EXISTSPERIOD",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#EXISTSPERIOD"
+      },
+      "itsExistenceGuaranteed": {
+        "value": "its existence guaranteed by the fact that",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#ITSEXISTENCEGUARANTEED",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#ITSEXISTENCEGUARANTEED"
+      },
+      "areSameSimultaneously": {
+        "value": "are strictly the same and their instances created simultaneously.",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#ARESAMESIMULTANEOUSLY",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#ARESAMESIMULTANEOUSLY"
+      },
+      "createsANew": {
+        "value": "Creates a new",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#CREATESANEW",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#CREATESANEW"
+      },
+      "inPrisma": {
+        "value": "in the Prisma database,",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#INPRISMA",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#INPRISMA"
+      },
+      "attributedAsGuest": {
+        "value": "attributed to no one since published as a guest.",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#ATTRIBUTEDASGUEST",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#ATTRIBUTEDASGUEST"
+      },
+      "assignedAsUser": {
+        "value": "assigned to the current user who sent the message.",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#ASSIGNEDASUSER",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#ASSIGNEDASUSER"
+      },
+      "throughUnique": {
+        "value": "through its provided unique",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#THROUGHUNIQUE",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#THROUGHUNIQUE"
       },
       "requiredAmongReasons": {
         "value": "required, among other reasons, to inform React that if this module is to be imported on the",
@@ -173,151 +384,6 @@
         "key": "FORCOMPOSEDVARIABLES#PHRASES#NEEDSASREFERENCE",
         "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#NEEDSASREFERENCE"
       }
-    },
-    "createsNew": {
-      "value": "Creates a new",
-      "key": "FORCOMPOSEDVARIABLES#CREATESNEW",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#CREATESNEW"
-    },
-    "inPrisma": {
-      "value": "in the Prisma database,",
-      "key": "FORCOMPOSEDVARIABLES#INPRISMA",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#INPRISMA"
-    },
-    "attributedAsGuest": {
-      "value": "attributed to no one since published as a guest.",
-      "key": "FORCOMPOSEDVARIABLES#ATTRIBUTEDASGUEST",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#ATTRIBUTEDASGUEST"
-    },
-    "assignedAsUser": {
-      "value": "assigned to the current user who sent the message.",
-      "key": "FORCOMPOSEDVARIABLES#ASSIGNEDASUSER",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#ASSIGNEDASUSER"
-    },
-    "throughUnique": {
-      "value": "through its provided unique",
-      "key": "FORCOMPOSEDVARIABLES#THROUGHUNIQUE",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#THROUGHUNIQUE"
-    },
-    "fromToDecide": {
-      "value": "from the database in order to decide whether to sign in if a",
-      "key": "FORCOMPOSEDVARIABLES#FROMTODECIDE",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#FROMTODECIDE"
-    },
-    "existsOr": {
-      "value": "exists or sign up otherwise.",
-      "key": "FORCOMPOSEDVARIABLES#EXISTSOR",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#EXISTSOR"
-    },
-    "createsCorresponding": {
-      "value": "Creates the corresponding",
-      "key": "FORCOMPOSEDVARIABLES#CREATESCORRESPONDING",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#CREATESCORRESPONDING"
-    },
-    "toNewlyCreated": {
-      "value": "to the newly-created",
-      "key": "FORCOMPOSEDVARIABLES#TONEWLYCREATED",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#TONEWLYCREATED"
-    },
-    "onSuccessSignUp": {
-      "value": "on success of its signing up.",
-      "key": "FORCOMPOSEDVARIABLES#ONSUCCESSSIGNUP",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#ONSUCCESSSIGNUP"
-    },
-    "theUsernameToFind": {
-      "value": "The username to be displayed sent from the current session. Here used to find the",
-      "key": "FORCOMPOSEDVARIABLES#THEUSERNAMETOFIND",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#THEUSERNAMETOFIND"
-    },
-    "neededToSignInUp": {
-      "value": "needed to sign in if found or to acknowledge its absence for sign up if nonexistent.",
-      "key": "FORCOMPOSEDVARIABLES#NEEDEDTOSIGNINUP",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#NEEDEDTOSIGNINUP"
-    },
-    "toBeAttached": {
-      "value": "to be attached to the message being sent.",
-      "key": "FORCOMPOSEDVARIABLES#TOBEATTACHED",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#TOBEATTACHED"
-    },
-    "theUnique": {
-      "value": "The unique",
-      "key": "FORCOMPOSEDVARIABLES#THEUNIQUE",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#THEUNIQUE"
-    },
-    "oftheNew": {
-      "value": "of the new",
-      "key": "FORCOMPOSEDVARIABLES#OFTHENEW",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#OFTHENEW"
-    },
-    "madeOutOf": {
-      "value": "made out of the",
-      "key": "FORCOMPOSEDVARIABLES#MADEOUTOF",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#MADEOUTOF"
-    },
-    "initiallyToCreate": {
-      "value": "initially provided to create a",
-      "key": "FORCOMPOSEDVARIABLES#INITIALLYTOCREATE",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#INITIALLYTOCREATE"
-    },
-    "instanceSignUp": {
-      "value": "instance at sign up.",
-      "key": "FORCOMPOSEDVARIABLES#INSTANCESIGNUP",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#INSTANCESIGNUP"
-    },
-    "eitherThe": {
-      "value": "Either the",
-      "key": "FORCOMPOSEDVARIABLES#EITHERTHE",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#EITHERTHE"
-    },
-    "ofThe": {
-      "value": "of the",
-      "key": "FORCOMPOSEDVARIABLES#OFTHE",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#OFTHE"
-    },
-    "inObjectOrNull": {
-      "value": "in an object if found or `null` otherwise.",
-      "key": "FORCOMPOSEDVARIABLES#INOBJECTORNULL",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#INOBJECTORNULL"
-    },
-    "findsAn": {
-      "value": "Finds an",
-      "key": "FORCOMPOSEDVARIABLES#FINDSAN",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#FINDSAN"
-    },
-    "findsThe": {
-      "value": "Finds the",
-      "key": "FORCOMPOSEDVARIABLES#FINDSTHE",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#FINDSTHE"
-    },
-    "existing": {
-      "value": "existing",
-      "key": "FORCOMPOSEDVARIABLES#EXISTING",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#EXISTING"
-    },
-    "viaItsUnique": {
-      "value": "via its unique",
-      "key": "FORCOMPOSEDVARIABLES#VIAITSUNIQUE",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#VIAITSUNIQUE"
-    },
-    "ifSuchA": {
-      "value": "if such a",
-      "key": "FORCOMPOSEDVARIABLES#IFSUCHA",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#IFSUCHA"
-    },
-    "existsPeriod": {
-      "value": "exists.",
-      "key": "FORCOMPOSEDVARIABLES#EXISTSPERIOD",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#EXISTSPERIOD"
-    },
-    "itsExistenceGuaranteed": {
-      "value": "its existence guaranteed by the fact that",
-      "key": "FORCOMPOSEDVARIABLES#ITSEXISTENCEGUARANTEED",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#ITSEXISTENCEGUARANTEED"
-    },
-    "areSameSimultaneously": {
-      "value": "are strictly the same and their instances created simultaneously.",
-      "key": "FORCOMPOSEDVARIABLES#ARESAMESIMULTANEOUSLY",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#ARESAMESIMULTANEOUSLY"
     },
     "prisma": {
       "tables": {
