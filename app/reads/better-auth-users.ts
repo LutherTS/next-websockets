@@ -1,7 +1,7 @@
 import { prisma } from "~/prisma/db";
 
 /**
- * Finds an existing `BetterAuthUser` via its unique `displayUsername`, if such a `BetterAuthUser` exists.
+ * $COMMENT#JSDOC#READS#DEFS#FINDEXISTINGUSERNAMEBYDISPLAYUSERNAME
  * @param displayUsername $COMMENT#JSDOC#PAGES#WEBSOCKETS#PARAMS#DISPLAYUSERNAMEA
  * @returns $COMMENT#JSDOC#PAGES#WEBSOCKETS#RETURNS#GETEXISTINGUSERACTION
  */

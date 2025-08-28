@@ -106,12 +106,12 @@
           "placeholder": "$COMMENT#JSDOC#READS#DEFS#COUNTALLMESSAGES"
         },
         "findExistingUsernameByDisplayUsername": {
-          "value": "Finds an existing `BetterAuthUser` via its unique `displayUsername` if such a `BetterAuthUser` exists.",
+          "value": "Finds an existing `BetterAuthUser` via its unique `displayUsername`, if such a `BetterAuthUser` exists.",
           "key": "JSDOC#READS#DEFS#FINDEXISTINGUSERNAMEBYDISPLAYUSERNAME",
           "placeholder": "$COMMENT#JSDOC#READS#DEFS#FINDEXISTINGUSERNAMEBYDISPLAYUSERNAME"
         },
         "findUserByUsername": {
-          "value": "Finds the existing `User` via its unique `username`, its existence guaranteed by the fact that `username`s of `Users` and `displayUsername`s of `BetterAuthUsers` are strictly the same and their instances created simultaneously.",
+          "value": "Finds the existing `User` via its unique `username`, its existence guaranteed by the fact that `username`s of `User`s and `displayUsername`s of `BetterAuthUser`s are strictly the same and their instances created simultaneously.",
           "key": "JSDOC#READS#DEFS#FINDUSERBYUSERNAME",
           "placeholder": "$COMMENT#JSDOC#READS#DEFS#FINDUSERBYUSERNAME"
         }
@@ -186,16 +186,19 @@
     }
   },
   "forComposedVariables": {
-    "of": {
-      "value": "of",
-      "key": "FORCOMPOSEDVARIABLES#OF",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#OF"
+    "words": {
+      "of": {
+        "value": "of",
+        "key": "FORCOMPOSEDVARIABLES#WORDS#OF",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#WORDS#OF"
+      },
+      "and": {
+        "value": "and",
+        "key": "FORCOMPOSEDVARIABLES#WORDS#AND",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#WORDS#AND"
+      }
     },
-    "and": {
-      "value": "and",
-      "key": "FORCOMPOSEDVARIABLES#AND",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#AND"
-    },
+    "phrases": {},
     "requiredAmongReasons": {
       "value": "required, among other reasons, to inform React that if this module is to imported on the",
       "key": "FORCOMPOSEDVARIABLES#REQUIREDAMONGREASONS",
@@ -398,7 +401,7 @@
         "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USERCOMMA"
       },
       "users": {
-        "value": "`Users`",
+        "value": "`User`s",
         "key": "FORCOMPOSEDVARIABLES#PRISMA#USERS",
         "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USERS"
       },
@@ -408,7 +411,7 @@
         "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#BETTERAUTHUSER"
       },
       "betterAuthUsers": {
-        "value": "`BetterAuthUsers`",
+        "value": "`BetterAuthUser`s",
         "key": "FORCOMPOSEDVARIABLES#PRISMA#BETTERAUTHUSERS",
         "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#BETTERAUTHUSERS"
       },
