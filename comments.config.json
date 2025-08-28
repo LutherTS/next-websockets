@@ -77,6 +77,13 @@
           "key": "JSDOC#READS#DEFS#COUNTALLMESSAGES",
           "placeholder": "$COMMENT#JSDOC#READS#DEFS#COUNTALLMESSAGES"
         }
+      },
+      "params": {
+        "displayUsernameB": {
+          "value": "The username to be displayed sent from the current session. Here used to find the `User` to be attached to the message being sent.",
+          "key": "JSDOC#READS#PARAMS#DISPLAYUSERNAMEB",
+          "placeholder": "$COMMENT#JSDOC#READS#PARAMS#DISPLAYUSERNAMEB"
+        }
       }
     },
     "actions": {
@@ -106,6 +113,11 @@
             "key": "JSDOC#PAGES#WEBSOCKETS#DEFS#BROADCAST",
             "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#BROADCAST"
           },
+          "getExistingUserAction": {
+            "value": "Gets or doesn't get an existing `User` from the database in order to decide whether to sign in if a `User` exists or sign up otherwise.",
+            "key": "JSDOC#PAGES#WEBSOCKETS#DEFS#GETEXISTINGUSERACTION",
+            "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#GETEXISTINGUSERACTION"
+          },
           "createNewUserAction": {
             "value": "Creates the corresponding `User` to the newly-created `BetterAuthUser` on success of its signing up.",
             "key": "JSDOC#PAGES#WEBSOCKETS#DEFS#CREATENEWUSERACTION",
@@ -113,6 +125,11 @@
           }
         },
         "params": {
+          "displayUsernameA": {
+            "value": "The username to be displayed sent from the current session. Here used to find the `BetterAuthUser` needed to sign in if found or to acknowledge its absence for sign up if nonexistent.",
+            "key": "JSDOC#PAGES#WEBSOCKETS#PARAMS#DISPLAYUSERNAMEA",
+            "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#PARAMS#DISPLAYUSERNAMEA"
+          },
           "username": {
             "value": "The unique `username` of the new `User`, made out of the `displayUsername` initially provided to create a `BetterAuthUser` instance at sign up.",
             "key": "JSDOC#PAGES#WEBSOCKETS#PARAMS#USERNAME",
@@ -205,6 +222,21 @@
       "key": "FORCOMPOSEDVARIABLES#THROUGHUNIQUE",
       "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#THROUGHUNIQUE"
     },
+    "getsOrDoesnt": {
+      "value": "Gets or doesn't get an existing",
+      "key": "FORCOMPOSEDVARIABLES#GETSORDOESNT",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#GETSORDOESNT"
+    },
+    "fromToDecide": {
+      "value": "from the database in order to decide whether to sign in if a",
+      "key": "FORCOMPOSEDVARIABLES#FROMTODECIDE",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#FROMTODECIDE"
+    },
+    "existsOr": {
+      "value": "exists or sign up otherwise.",
+      "key": "FORCOMPOSEDVARIABLES#EXISTSOR",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#EXISTSOR"
+    },
     "createsCorresponding": {
       "value": "Creates the corresponding",
       "key": "FORCOMPOSEDVARIABLES#CREATESCORRESPONDING",
@@ -219,6 +251,21 @@
       "value": "on success of its signing up.",
       "key": "FORCOMPOSEDVARIABLES#ONSUCCESSSIGNUP",
       "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#ONSUCCESSSIGNUP"
+    },
+    "theUsernameToFind": {
+      "value": "The username to be displayed sent from the current session. Here used to find the",
+      "key": "FORCOMPOSEDVARIABLES#THEUSERNAMETOFIND",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#THEUSERNAMETOFIND"
+    },
+    "neededToSignInUp": {
+      "value": "needed to sign in if found or to acknowledge its absence for sign up if nonexistent.",
+      "key": "FORCOMPOSEDVARIABLES#NEEDEDTOSIGNINUP",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#NEEDEDTOSIGNINUP"
+    },
+    "toBeAttached": {
+      "value": "to be attached to the message being sent.",
+      "key": "FORCOMPOSEDVARIABLES#TOBEATTACHED",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#TOBEATTACHED"
     },
     "theUnique": {
       "value": "The unique",

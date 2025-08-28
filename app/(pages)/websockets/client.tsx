@@ -20,9 +20,9 @@ const PASSWORD = "password";
 /** $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#CLIENTPAGE */
 export default function WebSocketsClientPage({
   initialMessages,
-  // passing inline server actions is impractical in that their JSDoc definitions do not carry over and have to be rewritten manually
+  // $COMMENT#REMARKS#INLINESERVERACTIONS
   getExistingUserAction,
-  // but to be fair, the same would need to be done to bound server actions, so the limitation is across both standalone server actions and inline server actions alike
+  // $COMMENT#REMARKS#BOUNDSERVERACTIONS
   createNewUserAction,
 }: {
   initialMessages: {
