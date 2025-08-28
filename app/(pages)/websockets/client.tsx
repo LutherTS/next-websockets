@@ -71,6 +71,15 @@ export default function WebSocketsClientPage({
     };
   }, []);
 
+  const bottomRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const bottom = bottomRef.current;
+    if (!bottom) return;
+
+    bottom.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   const [isBroadcastPending, startBroadcastTransition] = useTransition();
 
   /** $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#BROADCAST */
@@ -218,11 +227,11 @@ export default function WebSocketsClientPage({
           </div>
         </div>
 
-        <div className="flex-1 space-y-4 overflow-y-auto bg-gray-50 p-6">
-          {messages.map(({ value: message, id, username }) => (
+        <div className="flex-1 overflow-y-auto bg-gray-50 px-6 pt-6">
+          {messages.map(({ value: message, id, username }, index) => (
             <div
               key={id}
-              className="rounded-lg border border-gray-100 bg-white p-4 shadow-sm transition-all hover:shadow-md"
+              className={`rounded-lg border border-gray-100 bg-white p-4 shadow-sm transition-all hover:shadow-md ${index + 1 === messages.length ? "mb-6" : "mb-4"}`}
             >
               <p className="font-medium text-gray-800">
                 {message}
@@ -235,6 +244,7 @@ export default function WebSocketsClientPage({
               </p>
             </div>
           ))}
+          <div ref={bottomRef}></div>
         </div>
 
         <form
