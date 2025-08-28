@@ -1,4 +1,4 @@
-"use client"; // $COMMENT#REMARKS#USESERVER
+"use client"; // required, among other reasons, to inform React that if this module is to be imported on the server (as it does for WebSocketsServerPage), it needs to be imported as reference
 
 import { useEffect, useRef, useState, useTransition } from "react";
 
@@ -19,12 +19,12 @@ const MESSAGE = "message";
 const DISPLAYUSERNAME = "displayusername";
 const PASSWORD = "password";
 
-/** $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#CLIENTPAGE */
+/** The "inner", Client part of the page. A Client Component, it retrieves the initial messages from its parent Server Component, before storing them in React state. It then creates a WebSocket to listen to fresh new data broadcasted from the server, in real-time on the client. */
 export default function WebSocketsClientPage({
   initialMessages,
-  // $COMMENT#REMARKS#INLINESERVERACTIONS
+  // passing inline server actions is impractical in that their JSDoc definitions do not carry over and have to be rewritten manually
   getExistingUserAction,
-  // $COMMENT#REMARKS#BOUNDSERVERACTIONS
+  // but to be fair, the same would need to be done to bound server actions, so the limitation is across both standalone server actions and inline server actions alike
   createNewUserAction,
 }: {
   initialMessages: {
@@ -82,7 +82,7 @@ export default function WebSocketsClientPage({
 
   const [isBroadcastPending, startBroadcastTransition] = useTransition();
 
-  /** $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#BROADCAST */
+  /** The handler that triggers the broadcast. This is where the magic happens. This handler operates both on the client and on the server. Via the `broadcastAction` server action (Server Function), it sends the new message from the client to the server, where `broadcastAction` triggers the broadcast for all WebSocket clients directly from the server, in real-time. */
   const broadcast = (e: React.FormEvent<HTMLFormElement>) => {
     startBroadcastTransition(async () => {
       e.preventDefault();
