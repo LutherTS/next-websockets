@@ -198,7 +198,7 @@ export default function WebSocketsClientPage({
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-gradient-to-b from-gray-50 to-gray-100">
-      <div className="mx-4 flex h-[80vh] w-full max-w-2xl flex-col rounded-xl border border-gray-200 bg-white shadow-lg">
+      <div className="mx-4 flex h-[90dvh] w-full max-w-2xl flex-col rounded-xl border border-gray-200 bg-white shadow-lg md:h-[80dvh]">
         <div
           className={`rounded-t-xl px-6 py-3 text-sm font-medium ${
             connectionStatus === "connected"
@@ -251,7 +251,7 @@ export default function WebSocketsClientPage({
           onSubmit={broadcast}
           className="rounded-b-xl border-t border-gray-100 bg-white p-6"
         >
-          <div className="flex gap-3">
+          <div className="flex flex-col gap-3 md:flex-row">
             <input
               name={MESSAGE}
               type="text"
