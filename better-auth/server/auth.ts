@@ -40,4 +40,5 @@ export const auth = betterAuth({
       usernameValidator: validateUsernameSlugFriendly,
     }),
   ],
+  trustedOrigins: ["http://localhost:3000", "https://next-websockets.fly.dev"],
 });

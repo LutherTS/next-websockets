@@ -71,6 +71,15 @@ export default function WebSocketsClientPage({
     };
   }, []);
 
+  const bottomRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const bottom = bottomRef.current;
+    if (!bottom) return;
+
+    bottom.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   const [isBroadcastPending, startBroadcastTransition] = useTransition();
 
   /** $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#BROADCAST */
@@ -189,7 +198,7 @@ export default function WebSocketsClientPage({
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-gradient-to-b from-gray-50 to-gray-100">
-      <div className="mx-4 flex h-[80vh] w-full max-w-2xl flex-col rounded-xl border border-gray-200 bg-white shadow-lg">
+      <div className="mx-4 flex h-[90dvh] w-full max-w-2xl flex-col rounded-xl border border-gray-200 bg-white shadow-lg md:h-[80dvh]">
         <div
           className={`rounded-t-xl px-6 py-3 text-sm font-medium ${
             connectionStatus === "connected"
@@ -218,11 +227,11 @@ export default function WebSocketsClientPage({
           </div>
         </div>
 
-        <div className="flex-1 space-y-4 overflow-y-auto bg-gray-50 p-6">
+        <div className="flex flex-1 flex-col gap-y-4 overflow-y-auto bg-gray-50 px-6 pt-6">
           {messages.map(({ value: message, id, username }) => (
             <div
               key={id}
-              className="rounded-lg border border-gray-100 bg-white p-4 shadow-sm transition-all hover:shadow-md"
+              className={`rounded-lg border border-gray-100 bg-white p-4 shadow-sm transition-all hover:shadow-md`}
             >
               <p className="font-medium text-gray-800">
                 {message}
@@ -235,13 +244,14 @@ export default function WebSocketsClientPage({
               </p>
             </div>
           ))}
+          <div className="pt-2" ref={bottomRef}></div>
         </div>
 
         <form
           onSubmit={broadcast}
           className="rounded-b-xl border-t border-gray-100 bg-white p-6"
         >
-          <div className="flex gap-3">
+          <div className="flex flex-col gap-3 md:flex-row">
             <input
               name={MESSAGE}
               type="text"
