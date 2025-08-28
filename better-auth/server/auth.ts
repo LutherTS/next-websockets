@@ -3,10 +3,12 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import { username } from "better-auth/plugins";
 
 import { prisma } from "~/prisma/db";
+
 import {
   MAX_USERNAME_LENGTH,
   MIN_USERNAME_LENGTH,
 } from "../constants/agnostic/bases";
+import { validateUsernameSlugFriendly } from "../utilities/agnostic/regexes";
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
@@ -34,6 +36,7 @@ export const auth = betterAuth({
     username({
       minUsernameLength: MIN_USERNAME_LENGTH,
       maxUsernameLength: MAX_USERNAME_LENGTH,
+      usernameValidator: validateUsernameSlugFriendly,
     }),
   ],
 });

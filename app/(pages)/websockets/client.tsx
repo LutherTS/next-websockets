@@ -2,9 +2,10 @@
 
 import { useEffect, useRef, useState, useTransition } from "react";
 
-import { authClient } from "~/better-auth/client/auth";
-
 import { webSocketEndpoint } from "~/server/constants/agnostic/bases.js";
+
+import { authClient } from "~/better-auth/client/auth";
+import { validateUsernameSlugFriendly } from "~/better-auth/utilities/agnostic/regexes";
 
 import { broadcastAction } from "@/actions/server/broadcast";
 import {
@@ -16,27 +17,12 @@ const MESSAGE = "message";
 const DISPLAYUSERNAME = "displayusername";
 const PASSWORD = "password";
 
-// to enforce a username to be slug-friendly
-// /^[A-Za-z0-9](?!.*[-_]{2,})[A-Za-z0-9-_]*[A-Za-z0-9]$/
-const startsWithAlphanumerical = "^[A-Za-z0-9]";
-const neitherDoubleHyphensNorDoubleUnderscores = "(?!.*[-_]{2,})";
-const alphanumericalsHyphensOrUnderscoresInTheMiddle = "[A-Za-z0-9-_]*";
-const endsWithAlphanumerical = "[A-Za-z0-9]$";
-
-const usernameRegExp = new RegExp(
-  startsWithAlphanumerical +
-    neitherDoubleHyphensNorDoubleUnderscores +
-    alphanumericalsHyphensOrUnderscoresInTheMiddle +
-    endsWithAlphanumerical,
-);
-
-const validateUsernameSlugFriendly = (username: string) =>
-  usernameRegExp.test(username);
-
 /** $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#CLIENTPAGE */
 export default function WebSocketsClientPage({
   initialMessages,
-  getExistingUserAction, // new to test better-auth
+  // passing inline server actions is impractical in that their JSDoc definitions do not carry over and have to be rewritten manually
+  getExistingUserAction,
+  // but to be fair, the same would need to be done to bound server actions, so the limitation is across both standalone server actions and inline server actions alike
   createNewUserAction,
 }: {
   initialMessages: {

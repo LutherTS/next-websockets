@@ -37,12 +37,12 @@
     "writes": {
       "defs": {
         "createNewMessage": {
-          "value": "Creates a new message in the Prisma database, attributed to no one since published as a guest.",
+          "value": "Creates a new `Message` in the Prisma database, attributed to no one since published as a guest.",
           "key": "JSDOC#WRITES#DEFS#CREATENEWMESSAGE",
           "placeholder": "$COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGE"
         },
         "createNewMessageWithUserId": {
-          "value": "Creates a new message in the Prisma database, assigned to the current user who sent the message.",
+          "value": "Creates a new `Message` in the Prisma database, assigned to the current user who sent the message.",
           "key": "JSDOC#WRITES#DEFS#CREATENEWMESSAGEWITHUSERID",
           "placeholder": "$COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGEWITHUSERID"
         },
@@ -63,7 +63,7 @@
     "reads": {
       "defs": {
         "findLatestMessages": {
-          "value": "Finds the latest messages from the Prisma database. At this time, transforms them directly in an array of objects containing their message and the username of the user who sent it (with `null` instead if no such authenticated user is authenticated).",
+          "value": "Finds the latest messages from the Prisma database. At this time, transforms them directly into an array of objects containing their message, the message's ID, and the username of the user who sent it (with `null` instead if no such user is authenticated). The array is then reversed to display the messages in the correct visual order.",
           "key": "JSDOC#READS#DEFS#FINDLATESTMESSAGES",
           "placeholder": "$COMMENT#JSDOC#READS#DEFS#FINDLATESTMESSAGES"
         },
@@ -115,6 +115,16 @@
       "value": "required, among other reasons, to inform React that if this module is to imported on the server (as it does for WebSocketsServerPage), it needs to be imported as reference",
       "key": "REMARKS#USESERVER",
       "placeholder": "$COMMENT#REMARKS#USESERVER"
+    },
+    "inlineServerActions": {
+      "value": "passing inline server actions is impractical in that their JSDoc definitions do not carry over and have to be rewritten manually",
+      "key": "REMARKS#INLINESERVERACTIONS",
+      "placeholder": "$COMMENT#REMARKS#INLINESERVERACTIONS"
+    },
+    "boundServerActions": {
+      "value": "but to be fair, the same would need to be done to bound server actions, so the limitation is across both standalone server actions and inline server actions alike",
+      "key": "REMARKS#BOUNDSERVERACTIONS",
+      "placeholder": "$COMMENT#REMARKS#BOUNDSERVERACTIONS"
     }
   },
   "forComposedVariables": {
@@ -152,6 +162,58 @@
       "value": "WebSocketsServerPage),",
       "key": "FORCOMPOSEDVARIABLES#WSSERVERPAGEPARENS",
       "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#WSSERVERPAGEPARENS"
+    },
+    "createsNew": {
+      "value": "Creates a new",
+      "key": "FORCOMPOSEDVARIABLES#CREATESNEW",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#CREATESNEW"
+    },
+    "inPrisma": {
+      "value": "in the Prisma database,",
+      "key": "FORCOMPOSEDVARIABLES#INPRISMA",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#INPRISMA"
+    },
+    "attributedAsGuest": {
+      "value": "attributed to no one since published as a guest.",
+      "key": "FORCOMPOSEDVARIABLES#ATTRIBUTEDASGUEST",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#ATTRIBUTEDASGUEST"
+    },
+    "assignedAsUser": {
+      "value": "assigned to the current user who sent the message.",
+      "key": "FORCOMPOSEDVARIABLES#ASSIGNEDASUSER",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#ASSIGNEDASUSER"
+    },
+    "prisma": {
+      "message": {
+        "value": "`Message`",
+        "key": "FORCOMPOSEDVARIABLES#PRISMA#MESSAGE",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#MESSAGE"
+      },
+      "user": {
+        "value": "`User`",
+        "key": "FORCOMPOSEDVARIABLES#PRISMA#USER",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USER"
+      },
+      "betterAuthUser": {
+        "value": "`BetterAuthUser`",
+        "key": "FORCOMPOSEDVARIABLES#PRISMA#BETTERAUTHUSER",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#BETTERAUTHUSER"
+      },
+      "username": {
+        "value": "`username`",
+        "key": "FORCOMPOSEDVARIABLES#PRISMA#USERNAME",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USERNAME"
+      },
+      "displayUsername": {
+        "value": "`displayUsername`",
+        "key": "FORCOMPOSEDVARIABLES#PRISMA#DISPLAYUSERNAME",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#DISPLAYUSERNAME"
+      },
+      "id": {
+        "value": "`id`",
+        "key": "FORCOMPOSEDVARIABLES#PRISMA#ID",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#ID"
+      }
     }
   }
 }

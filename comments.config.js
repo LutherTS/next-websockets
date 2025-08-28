@@ -22,9 +22,9 @@ const data = Object.freeze({
     writes: Object.freeze({
       defs: Object.freeze({
         createNewMessage:
-          "Creates a new message in the Prisma database, attributed to no one since published as a guest." /* $COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGE */,
+          "$COMMENT#FORCOMPOSEDVARIABLES#CREATESNEW $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#MESSAGE $COMMENT#FORCOMPOSEDVARIABLES#INPRISMA $COMMENT#FORCOMPOSEDVARIABLES#ATTRIBUTEDASGUEST" /* $COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGE */,
         createNewMessageWithUserId:
-          "Creates a new message in the Prisma database, assigned to the current user who sent the message." /* $COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGEWITHUSERID */,
+          "$COMMENT#FORCOMPOSEDVARIABLES#CREATESNEW $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#MESSAGE $COMMENT#FORCOMPOSEDVARIABLES#INPRISMA $COMMENT#FORCOMPOSEDVARIABLES#ASSIGNEDASUSER" /* $COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGEWITHUSERID */,
         deleteExtraMessages:
           "Deletes older messages from the database to cap the amount of messages it can effectively store." /* $COMMENT#JSDOC#WRITES#DEFS#DELETEEXTRAMESSAGES */,
       }),
@@ -36,7 +36,7 @@ const data = Object.freeze({
     reads: Object.freeze({
       defs: Object.freeze({
         findLatestMessages:
-          "Finds the latest messages from the Prisma database. At this time, transforms them directly in an array of objects containing their message and the username of the user who sent it (with `null` instead if no such authenticated user is authenticated)." /* $COMMENT#JSDOC#READS#DEFS#FINDLATESTMESSAGES */,
+          "Finds the latest messages from the Prisma database. At this time, transforms them directly into an array of objects containing their message, the message's ID, and the username of the user who sent it (with `null` instead if no such user is authenticated). The array is then reversed to display the messages in the correct visual order." /* $COMMENT#JSDOC#READS#DEFS#FINDLATESTMESSAGES */,
         countAllMessages:
           "Counts all the messages saved in the database, in order to ascertain its persistence between reboots and deployments." /* $COMMENT#JSDOC#READS#DEFS#COUNTALLMESSAGES */,
       }),
@@ -65,8 +65,13 @@ const data = Object.freeze({
       "$COMMENT#FORCOMPOSEDVARIABLES#REQUIREDAMONGREASONS $COMMENT#FORCOMPOSEDVARIABLES#CLIENT $COMMENT#FORCOMPOSEDVARIABLES#PARENSASITDOESFOR $COMMENT#FORCOMPOSEDVARIABLES#WSCLIENTPAGEPARENS $COMMENT#FORCOMPOSEDVARIABLES#NEEDSASREFERENCE" /* $COMMENT#REMARKS#USECLIENT */,
     useServer:
       "$COMMENT#FORCOMPOSEDVARIABLES#REQUIREDAMONGREASONS $COMMENT#FORCOMPOSEDVARIABLES#SERVER $COMMENT#FORCOMPOSEDVARIABLES#PARENSASITDOESFOR $COMMENT#FORCOMPOSEDVARIABLES#WSSERVERPAGEPARENS $COMMENT#FORCOMPOSEDVARIABLES#NEEDSASREFERENCE" /* $COMMENT#REMARKS#USESERVER */,
+    inlineServerActions:
+      "passing inline server actions is impractical in that their JSDoc definitions do not carry over and have to be rewritten manually",
+    boundServerActions:
+      "but to be fair, the same would need to be done to bound server actions, so the limitation is across both standalone server actions and inline server actions alike",
   }),
   forComposedVariables: Object.freeze({
+    // general
     requiredAmongReasons:
       "required, among other reasons, to inform React that if this module is to imported on the" /* $COMMENT#FORCOMPOSEDVARIABLES#REQUIREDAMONGREASONS */,
     parensAsItDoesFor:
@@ -79,6 +84,21 @@ const data = Object.freeze({
     server: "server" /* $COMMENT#FORCOMPOSEDVARIABLES#SERVER */,
     wsServerPageParens:
       "WebSocketsServerPage)," /* $COMMENT#FORCOMPOSEDVARIABLES#WSSERVERPAGEPARENS */,
+    createsNew: "Creates a new" /* $COMMENT#FORCOMPOSEDVARIABLES#CREATESNEW */,
+    inPrisma:
+      "in the Prisma database," /* $COMMENT#FORCOMPOSEDVARIABLES#INPRISMA */,
+    attributedAsGuest:
+      "attributed to no one since published as a guest." /* $COMMENT#FORCOMPOSEDVARIABLES#ATTRIBUTEDASGUEST */,
+    assignedAsUser:
+      "assigned to the current user who sent the message." /* $COMMENT#FORCOMPOSEDVARIABLES#ASSIGNEDASUSER */,
+    prisma: Object.freeze({
+      message: "`Message`" /* $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#MESSAGE */,
+      user: "`User`",
+      betterAuthUser: "`BetterAuthUser`",
+      username: "`username`",
+      displayUsername: "`displayUsername`",
+      id: "`id`",
+    }),
   }),
 });
 
@@ -96,6 +116,10 @@ const composedVariablesExclusives = [
   "FORCOMPOSEDVARIABLES#WSCLIENTPAGEPARENS",
   "FORCOMPOSEDVARIABLES#SERVER",
   "FORCOMPOSEDVARIABLES#WSSERVERPAGEPARENS",
+  "FORCOMPOSEDVARIABLES#CREATESNEW",
+  "FORCOMPOSEDVARIABLES#INPRISMA",
+  "FORCOMPOSEDVARIABLES#ATTRIBUTEDASGUEST",
+  "FORCOMPOSEDVARIABLES#ASSIGNEDASUSER",
 ]; // can be omitted
 
 const config = {
