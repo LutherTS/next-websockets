@@ -227,11 +227,11 @@ export default function WebSocketsClientPage({
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto bg-gray-50 px-6 pt-6">
-          {messages.map(({ value: message, id, username }, index) => (
+        <div className="flex flex-1 flex-col gap-y-4 overflow-y-auto bg-gray-50 px-6 pt-6">
+          {messages.map(({ value: message, id, username }) => (
             <div
               key={id}
-              className={`rounded-lg border border-gray-100 bg-white p-4 shadow-sm transition-all hover:shadow-md ${index + 1 === messages.length ? "mb-6" : "mb-4"}`}
+              className={`rounded-lg border border-gray-100 bg-white p-4 shadow-sm transition-all hover:shadow-md`}
             >
               <p className="font-medium text-gray-800">
                 {message}
@@ -244,7 +244,7 @@ export default function WebSocketsClientPage({
               </p>
             </div>
           ))}
-          <div ref={bottomRef}></div>
+          <div className="pt-2" ref={bottomRef}></div>
         </div>
 
         <form
