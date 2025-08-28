@@ -1,6 +1,8 @@
 const data = Object.freeze({
   jsDoc: Object.freeze({
     consts: Object.freeze({
+      usernameRegExp:
+        "To enforce a username to be slug-friendly: `/^[A-Za-z0-9](?!.*[-_]{2,})[A-Za-z0-9-_]*[A-Za-z0-9]$/`." /* $COMMENT#JSDOC#CONSTS#USERNAMEREGEXP */,
       webSocketClients:
         "The list of all WebSocket clients created in order to broadcast the new messages to all of them from the server." /* $COMMENT#JSDOC#CONSTS#WEBSOCKETCLIENTS */,
       webSocketEndpoint:
@@ -8,16 +10,33 @@ const data = Object.freeze({
     }),
     utils: Object.freeze({
       defs: Object.freeze({
+        validateUsernameSlugFriendly:
+          "Validates that a username is slug-friendly, meaning:" /* $COMMENT#JSDOC#UTILS#DEFS#VALIDATEUSERNAMESLUGFRIENDLY */,
         broadcastFlow:
           "The flow that broadcasts the new messages to all WebSocket clients. (Saved as a flow so that it can be used across Server Functions at will, be them standalone in their own files or inline within Server Components.)" /* $COMMENT#JSDOC#UTILS#DEFS#BROADCASTFLOW */,
       }),
+      details: Object.freeze({
+        startsAlphanumerical:
+          "starts with an alphanumerical," /* $COMMENT#JSDOC#UTILS#DETAILS#STARTSALPHANUMERICAL */,
+        neitherDoubleHyphensUnderscores:
+          "has neither double hyphens nor double underscores," /* $COMMENT#JSDOC#UTILS#DETAILS#NEITHERDOUBLEHYPHENSUNDERSCORES */,
+        hyphensUnderscoresMiddle:
+          "its hyphens and underscores are only in the middle," /* $COMMENT#JSDOC#UTILS#DETAILS#HYPHENSUNDERSCORESMIDDLE */,
+        endssAlphanumerical:
+          "ends with an alphanumerical." /* $COMMENT#JSDOC#UTILS#DETAILS#ENDSSALPHANUMERICAL */,
+      }),
       params: Object.freeze({
+        username:
+          "The user provided username to be tested." /* $COMMENT#JSDOC#UTILS#PARAMS#USERNAME */,
         message:
           "The current latest message sent from the client." /* $COMMENT#JSDOC#UTILS#PARAMS#MESSAGE */,
         displayUsername:
           "The username to be displayed sent from the current session. If it exists, this lets the action know which existing user sent the current message. If it doesn't, this lets the action know the current message was sent from a guest (unauthenticated)." /* $COMMENT#JSDOC#UTILS#PARAMS#DISPLAYUSERNAME */,
       }),
-      returns: Object.freeze({}),
+      returns: Object.freeze({
+        validateUsernameSlugFriendly:
+          "`true` if the test passes, `false` if it doesn't." /* $COMMENT#JSDOC#UTILS#RETURNS#VALIDATEUSERNAMESLUGFRIENDLY */,
+      }),
     }),
     pages: Object.freeze({
       WebSockets: Object.freeze({
