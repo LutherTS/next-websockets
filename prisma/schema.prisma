@@ -103,5 +103,8 @@ model BetterAuthVerification {
   @@map("betterAuthVerification")
 }
 
-// rm ./prisma/dev.db
-// pnpm prisma db push
+// pnpm prisma migrate reset
+// - rm ./prisma/dev.db
+// - pnpm prisma db push
+
+// pnpm prisma migrate dev --name your_migration_name

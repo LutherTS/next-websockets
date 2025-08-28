@@ -8,6 +8,7 @@ import {
   MAX_USERNAME_LENGTH,
   MIN_USERNAME_LENGTH,
 } from "../constants/agnostic/bases";
+
 import { validateUsernameSlugFriendly } from "../utilities/agnostic/regexes";
 
 export const auth = betterAuth({
