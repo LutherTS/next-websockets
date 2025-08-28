@@ -19,6 +19,34 @@ const data = Object.freeze({
       }),
       returns: Object.freeze({}),
     }),
+    pages: Object.freeze({
+      WebSockets: Object.freeze({
+        defs: Object.freeze({
+          ServerPage:
+            'The "outer", Server part of the page. A Server Component, it accesses the server directly to retrieve the latest messages, instantiating any load of the page with the freshest data directly from the server, before it renders the page.' /* $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#SERVERPAGE */,
+          ClientPage:
+            'The "inner", Client part of the page. A Client Component, it retrieves the initial messages from its parent Server Component, before storing them in React state. It then creates a WebSocket to listen to fresh new data broadcasted from the server, in real-time on the client.' /* $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#CLIENTPAGE */,
+          broadcast:
+            "The handler that triggers the broadcast. This is where the magic happens. This handler operates both on the client and on the server. Via the `broadcastAction` server action (Server Function), it sends the new message from the client to the server, where `broadcastAction` triggers the broadcast for all WebSocket clients directly from the server, in real-time." /* $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#BROADCAST */,
+          getExistingUserAction:
+            "$COMMENT#FORCOMPOSEDVARIABLES#GETSORDOESNT $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USER $COMMENT#FORCOMPOSEDVARIABLES#FROMTODECIDE $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USER $COMMENT#FORCOMPOSEDVARIABLES#EXISTSOR" /* $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#GETEXISTINGUSERACTION */,
+          createNewUserAction:
+            "$COMMENT#FORCOMPOSEDVARIABLES#CREATESCORRESPONDING $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USER $COMMENT#FORCOMPOSEDVARIABLES#TONEWLYCREATED $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#BETTERAUTHUSER $COMMENT#FORCOMPOSEDVARIABLES#ONSUCCESSSIGNUP" /* $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#CREATENEWUSERACTION */,
+        }),
+        params: Object.freeze({
+          displayUsernameA:
+            "$COMMENT#FORCOMPOSEDVARIABLES#THEUSERNAMETOFIND $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#BETTERAUTHUSER $COMMENT#FORCOMPOSEDVARIABLES#NEEDEDTOSIGNINUP" /* $COMMENT#JSDOC#PAGES#WEBSOCKETS#PARAMS#DISPLAYUSERNAMEA */,
+          username:
+            "$COMMENT#FORCOMPOSEDVARIABLES#THEUNIQUE $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USERNAME $COMMENT#FORCOMPOSEDVARIABLES#OFTHENEW $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USERCOMMA $COMMENT#FORCOMPOSEDVARIABLES#MADEOUTOF $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#DISPLAYUSERNAME $COMMENT#FORCOMPOSEDVARIABLES#INITIALLYTOCREATE $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#BETTERAUTHUSER $COMMENT#FORCOMPOSEDVARIABLES#INSTANCESIGNUP" /* $COMMENT#JSDOC#PAGES#WEBSOCKETS#PARAMS#USERNAME */,
+        }),
+      }),
+    }),
+    actions: Object.freeze({
+      defs: Object.freeze({
+        broadcastAction:
+          "The Server Function that triggers broadcasts directly from the client, by passing the new message to the server." /* $COMMENT#JSDOC#ACTIONS#DEFS#BROADCASTACTION */,
+      }),
+    }),
     writes: Object.freeze({
       defs: Object.freeze({
         createNewMessage:
@@ -45,34 +73,6 @@ const data = Object.freeze({
       params: Object.freeze({
         displayUsernameB:
           "$COMMENT#FORCOMPOSEDVARIABLES#THEUSERNAMETOFIND $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USER $COMMENT#FORCOMPOSEDVARIABLES#TOBEATTACHED" /* $COMMENT#JSDOC#READS#PARAMS#DISPLAYUSERNAMEB */,
-      }),
-    }),
-    actions: Object.freeze({
-      defs: Object.freeze({
-        broadcastAction:
-          "The Server Function that triggers broadcasts directly from the client, by passing the new message to the server." /* $COMMENT#JSDOC#ACTIONS#DEFS#BROADCASTACTION */,
-      }),
-    }),
-    pages: Object.freeze({
-      WebSockets: Object.freeze({
-        defs: Object.freeze({
-          ServerPage:
-            'The "outer", Server part of the page. A Server Component, it accesses the server directly to retrieve the latest messages, instantiating any load of the page with the freshest data directly from the server, before it renders the page.' /* $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#SERVERPAGE */,
-          ClientPage:
-            'The "inner", Client part of the page. A Client Component, it retrieves the initial messages from its parent Server Component, before storing them in React state. It then creates a WebSocket to listen to fresh new data broadcasted from the server, in real-time on the client.' /* $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#CLIENTPAGE */,
-          broadcast:
-            "The handler that triggers the broadcast. This is where the magic happens. This handler operates both on the client and on the server. Via the `broadcastAction` server action (Server Function), it sends the new message from the client to the server, where `broadcastAction` triggers the broadcast for all WebSocket clients directly from the server, in real-time." /* $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#BROADCAST */,
-          getExistingUserAction:
-            "$COMMENT#FORCOMPOSEDVARIABLES#GETSORDOESNT $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USER $COMMENT#FORCOMPOSEDVARIABLES#FROMTODECIDE $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USER $COMMENT#FORCOMPOSEDVARIABLES#EXISTSOR" /* $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#GETEXISTINGUSERACTION */,
-          createNewUserAction:
-            "$COMMENT#FORCOMPOSEDVARIABLES#CREATESCORRESPONDING $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USER $COMMENT#FORCOMPOSEDVARIABLES#TONEWLYCREATED $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#BETTERAUTHUSER $COMMENT#FORCOMPOSEDVARIABLES#ONSUCCESSSIGNUP" /* $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#CREATENEWUSERACTION */,
-        }),
-        params: Object.freeze({
-          displayUsernameA:
-            "$COMMENT#FORCOMPOSEDVARIABLES#THEUSERNAMETOFIND $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#BETTERAUTHUSER $COMMENT#FORCOMPOSEDVARIABLES#NEEDEDTOSIGNINUP" /* $COMMENT#JSDOC#PAGES#WEBSOCKETS#PARAMS#DISPLAYUSERNAMEA */,
-          username:
-            "$COMMENT#FORCOMPOSEDVARIABLES#THEUNIQUE $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USERNAME $COMMENT#FORCOMPOSEDVARIABLES#OFTHENEW $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USERCOMMA $COMMENT#FORCOMPOSEDVARIABLES#MADEOUTOF $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#DISPLAYUSERNAME $COMMENT#FORCOMPOSEDVARIABLES#INITIALLYTOCREATE $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#BETTERAUTHUSER $COMMENT#FORCOMPOSEDVARIABLES#INSTANCESIGNUP" /* $COMMENT#JSDOC#PAGES#WEBSOCKETS#PARAMS#USERNAME */,
-        }),
       }),
     }),
   }),

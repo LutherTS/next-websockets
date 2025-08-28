@@ -34,6 +34,58 @@
       },
       "returns": {}
     },
+    "pages": {
+      "WebSockets": {
+        "defs": {
+          "ServerPage": {
+            "value": "The \"outer\", Server part of the page. A Server Component, it accesses the server directly to retrieve the latest messages, instantiating any load of the page with the freshest data directly from the server, before it renders the page.",
+            "key": "JSDOC#PAGES#WEBSOCKETS#DEFS#SERVERPAGE",
+            "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#SERVERPAGE"
+          },
+          "ClientPage": {
+            "value": "The \"inner\", Client part of the page. A Client Component, it retrieves the initial messages from its parent Server Component, before storing them in React state. It then creates a WebSocket to listen to fresh new data broadcasted from the server, in real-time on the client.",
+            "key": "JSDOC#PAGES#WEBSOCKETS#DEFS#CLIENTPAGE",
+            "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#CLIENTPAGE"
+          },
+          "broadcast": {
+            "value": "The handler that triggers the broadcast. This is where the magic happens. This handler operates both on the client and on the server. Via the `broadcastAction` server action (Server Function), it sends the new message from the client to the server, where `broadcastAction` triggers the broadcast for all WebSocket clients directly from the server, in real-time.",
+            "key": "JSDOC#PAGES#WEBSOCKETS#DEFS#BROADCAST",
+            "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#BROADCAST"
+          },
+          "getExistingUserAction": {
+            "value": "Gets or doesn't get an existing `User` from the database in order to decide whether to sign in if a `User` exists or sign up otherwise.",
+            "key": "JSDOC#PAGES#WEBSOCKETS#DEFS#GETEXISTINGUSERACTION",
+            "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#GETEXISTINGUSERACTION"
+          },
+          "createNewUserAction": {
+            "value": "Creates the corresponding `User` to the newly-created `BetterAuthUser` on success of its signing up.",
+            "key": "JSDOC#PAGES#WEBSOCKETS#DEFS#CREATENEWUSERACTION",
+            "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#CREATENEWUSERACTION"
+          }
+        },
+        "params": {
+          "displayUsernameA": {
+            "value": "The username to be displayed sent from the current session. Here used to find the `BetterAuthUser` needed to sign in if found or to acknowledge its absence for sign up if nonexistent.",
+            "key": "JSDOC#PAGES#WEBSOCKETS#PARAMS#DISPLAYUSERNAMEA",
+            "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#PARAMS#DISPLAYUSERNAMEA"
+          },
+          "username": {
+            "value": "The unique `username` of the new `User`, made out of the `displayUsername` initially provided to create a `BetterAuthUser` instance at sign up.",
+            "key": "JSDOC#PAGES#WEBSOCKETS#PARAMS#USERNAME",
+            "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#PARAMS#USERNAME"
+          }
+        }
+      }
+    },
+    "actions": {
+      "defs": {
+        "broadcastAction": {
+          "value": "The Server Function that triggers broadcasts directly from the client, by passing the new message to the server.",
+          "key": "JSDOC#ACTIONS#DEFS#BROADCASTACTION",
+          "placeholder": "$COMMENT#JSDOC#ACTIONS#DEFS#BROADCASTACTION"
+        }
+      }
+    },
     "writes": {
       "defs": {
         "createNewMessage": {
@@ -83,58 +135,6 @@
           "value": "The username to be displayed sent from the current session. Here used to find the `User` to be attached to the message being sent.",
           "key": "JSDOC#READS#PARAMS#DISPLAYUSERNAMEB",
           "placeholder": "$COMMENT#JSDOC#READS#PARAMS#DISPLAYUSERNAMEB"
-        }
-      }
-    },
-    "actions": {
-      "defs": {
-        "broadcastAction": {
-          "value": "The Server Function that triggers broadcasts directly from the client, by passing the new message to the server.",
-          "key": "JSDOC#ACTIONS#DEFS#BROADCASTACTION",
-          "placeholder": "$COMMENT#JSDOC#ACTIONS#DEFS#BROADCASTACTION"
-        }
-      }
-    },
-    "pages": {
-      "WebSockets": {
-        "defs": {
-          "ServerPage": {
-            "value": "The \"outer\", Server part of the page. A Server Component, it accesses the server directly to retrieve the latest messages, instantiating any load of the page with the freshest data directly from the server, before it renders the page.",
-            "key": "JSDOC#PAGES#WEBSOCKETS#DEFS#SERVERPAGE",
-            "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#SERVERPAGE"
-          },
-          "ClientPage": {
-            "value": "The \"inner\", Client part of the page. A Client Component, it retrieves the initial messages from its parent Server Component, before storing them in React state. It then creates a WebSocket to listen to fresh new data broadcasted from the server, in real-time on the client.",
-            "key": "JSDOC#PAGES#WEBSOCKETS#DEFS#CLIENTPAGE",
-            "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#CLIENTPAGE"
-          },
-          "broadcast": {
-            "value": "The handler that triggers the broadcast. This is where the magic happens. This handler operates both on the client and on the server. Via the `broadcastAction` server action (Server Function), it sends the new message from the client to the server, where `broadcastAction` triggers the broadcast for all WebSocket clients directly from the server, in real-time.",
-            "key": "JSDOC#PAGES#WEBSOCKETS#DEFS#BROADCAST",
-            "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#BROADCAST"
-          },
-          "getExistingUserAction": {
-            "value": "Gets or doesn't get an existing `User` from the database in order to decide whether to sign in if a `User` exists or sign up otherwise.",
-            "key": "JSDOC#PAGES#WEBSOCKETS#DEFS#GETEXISTINGUSERACTION",
-            "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#GETEXISTINGUSERACTION"
-          },
-          "createNewUserAction": {
-            "value": "Creates the corresponding `User` to the newly-created `BetterAuthUser` on success of its signing up.",
-            "key": "JSDOC#PAGES#WEBSOCKETS#DEFS#CREATENEWUSERACTION",
-            "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#CREATENEWUSERACTION"
-          }
-        },
-        "params": {
-          "displayUsernameA": {
-            "value": "The username to be displayed sent from the current session. Here used to find the `BetterAuthUser` needed to sign in if found or to acknowledge its absence for sign up if nonexistent.",
-            "key": "JSDOC#PAGES#WEBSOCKETS#PARAMS#DISPLAYUSERNAMEA",
-            "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#PARAMS#DISPLAYUSERNAMEA"
-          },
-          "username": {
-            "value": "The unique `username` of the new `User`, made out of the `displayUsername` initially provided to create a `BetterAuthUser` instance at sign up.",
-            "key": "JSDOC#PAGES#WEBSOCKETS#PARAMS#USERNAME",
-            "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#PARAMS#USERNAME"
-          }
         }
       }
     }
