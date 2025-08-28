@@ -17,7 +17,7 @@ export default async function WebSocketsServerPage() {
   /**
    * $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#GETEXISTINGUSERACTION
    * @param displayUsername $COMMENT#JSDOC#PAGES#WEBSOCKETS#PARAMS#DISPLAYUSERNAMEA
-   * @returns Either the `username` of the `BetterAuthUser` in an object if found or `null` otherwise.
+   * @returns $COMMENT#JSDOC#PAGES#WEBSOCKETS#RETURNS#GETEXISTINGUSERACTION
    */
   async function getExistingUserAction(displayUsername: string) {
     "use server";

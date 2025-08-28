@@ -74,6 +74,13 @@
             "key": "JSDOC#PAGES#WEBSOCKETS#PARAMS#USERNAME",
             "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#PARAMS#USERNAME"
           }
+        },
+        "returns": {
+          "getExistingUserAction": {
+            "value": "Either the `username` of the `BetterAuthUser` in an object if found or `null` otherwise.",
+            "key": "JSDOC#PAGES#WEBSOCKETS#RETURNS#GETEXISTINGUSERACTION",
+            "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#RETURNS#GETEXISTINGUSERACTION"
+          }
         }
       }
     },
@@ -83,6 +90,44 @@
           "value": "The Server Function that triggers broadcasts directly from the client, by passing the new message to the server.",
           "key": "JSDOC#ACTIONS#DEFS#BROADCASTACTION",
           "placeholder": "$COMMENT#JSDOC#ACTIONS#DEFS#BROADCASTACTION"
+        }
+      }
+    },
+    "reads": {
+      "defs": {
+        "findLatestMessages": {
+          "value": "Finds the latest messages from the Prisma database. At this time, transforms them directly into an array of objects containing their message, the message's ID, and the username of the user who sent it (with `null` instead if no such user is authenticated). The array is then reversed to display the messages in the correct visual order.",
+          "key": "JSDOC#READS#DEFS#FINDLATESTMESSAGES",
+          "placeholder": "$COMMENT#JSDOC#READS#DEFS#FINDLATESTMESSAGES"
+        },
+        "countAllMessages": {
+          "value": "Counts all the messages saved in the database, in order to ascertain its persistence between reboots and deployments.",
+          "key": "JSDOC#READS#DEFS#COUNTALLMESSAGES",
+          "placeholder": "$COMMENT#JSDOC#READS#DEFS#COUNTALLMESSAGES"
+        },
+        "findExistingUsernameByDisplayUsername": {
+          "value": "Finds an existing `BetterAuthUser` via its unique `displayUsername` if such a `BetterAuthUser` exists.",
+          "key": "JSDOC#READS#DEFS#FINDEXISTINGUSERNAMEBYDISPLAYUSERNAME",
+          "placeholder": "$COMMENT#JSDOC#READS#DEFS#FINDEXISTINGUSERNAMEBYDISPLAYUSERNAME"
+        },
+        "findUserByUsername": {
+          "value": "Finds the existing `User` via its unique `username`, its existence guaranteed by the fact that `username`s of `Users` and `displayUsername`s of `BetterAuthUsers` are strictly the same and their instances created simultaneously.",
+          "key": "JSDOC#READS#DEFS#FINDUSERBYUSERNAME",
+          "placeholder": "$COMMENT#JSDOC#READS#DEFS#FINDUSERBYUSERNAME"
+        }
+      },
+      "params": {
+        "displayUsernameB": {
+          "value": "The username to be displayed sent from the current session. Here used to find the `User` to be attached to the message being sent.",
+          "key": "JSDOC#READS#PARAMS#DISPLAYUSERNAMEB",
+          "placeholder": "$COMMENT#JSDOC#READS#PARAMS#DISPLAYUSERNAMEB"
+        }
+      },
+      "returns": {
+        "findUserByUsername": {
+          "value": "Either the `id` of the `User` in an object if found or `null` otherwise.",
+          "key": "JSDOC#READS#RETURNS#FINDUSERBYUSERNAME",
+          "placeholder": "$COMMENT#JSDOC#READS#RETURNS#FINDUSERBYUSERNAME"
         }
       }
     },
@@ -116,27 +161,6 @@
           "placeholder": "$COMMENT#JSDOC#WRITES#PARAMS#USERID"
         }
       }
-    },
-    "reads": {
-      "defs": {
-        "findLatestMessages": {
-          "value": "Finds the latest messages from the Prisma database. At this time, transforms them directly into an array of objects containing their message, the message's ID, and the username of the user who sent it (with `null` instead if no such user is authenticated). The array is then reversed to display the messages in the correct visual order.",
-          "key": "JSDOC#READS#DEFS#FINDLATESTMESSAGES",
-          "placeholder": "$COMMENT#JSDOC#READS#DEFS#FINDLATESTMESSAGES"
-        },
-        "countAllMessages": {
-          "value": "Counts all the messages saved in the database, in order to ascertain its persistence between reboots and deployments.",
-          "key": "JSDOC#READS#DEFS#COUNTALLMESSAGES",
-          "placeholder": "$COMMENT#JSDOC#READS#DEFS#COUNTALLMESSAGES"
-        }
-      },
-      "params": {
-        "displayUsernameB": {
-          "value": "The username to be displayed sent from the current session. Here used to find the `User` to be attached to the message being sent.",
-          "key": "JSDOC#READS#PARAMS#DISPLAYUSERNAMEB",
-          "placeholder": "$COMMENT#JSDOC#READS#PARAMS#DISPLAYUSERNAMEB"
-        }
-      }
     }
   },
   "remarks": {
@@ -162,6 +186,16 @@
     }
   },
   "forComposedVariables": {
+    "of": {
+      "value": "of",
+      "key": "FORCOMPOSEDVARIABLES#OF",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#OF"
+    },
+    "and": {
+      "value": "and",
+      "key": "FORCOMPOSEDVARIABLES#AND",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#AND"
+    },
     "requiredAmongReasons": {
       "value": "required, among other reasons, to inform React that if this module is to imported on the",
       "key": "FORCOMPOSEDVARIABLES#REQUIREDAMONGREASONS",
@@ -292,6 +326,61 @@
       "key": "FORCOMPOSEDVARIABLES#INSTANCESIGNUP",
       "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#INSTANCESIGNUP"
     },
+    "eitherThe": {
+      "value": "Either the",
+      "key": "FORCOMPOSEDVARIABLES#EITHERTHE",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#EITHERTHE"
+    },
+    "ofThe": {
+      "value": "of the",
+      "key": "FORCOMPOSEDVARIABLES#OFTHE",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#OFTHE"
+    },
+    "inObjectOrNull": {
+      "value": "in an object if found or `null` otherwise.",
+      "key": "FORCOMPOSEDVARIABLES#INOBJECTORNULL",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#INOBJECTORNULL"
+    },
+    "findsAn": {
+      "value": "Finds an",
+      "key": "FORCOMPOSEDVARIABLES#FINDSAN",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#FINDSAN"
+    },
+    "findsThe": {
+      "value": "Finds the",
+      "key": "FORCOMPOSEDVARIABLES#FINDSTHE",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#FINDSTHE"
+    },
+    "existing": {
+      "value": "existing",
+      "key": "FORCOMPOSEDVARIABLES#EXISTING",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#EXISTING"
+    },
+    "viaItsUnique": {
+      "value": "via its unique",
+      "key": "FORCOMPOSEDVARIABLES#VIAITSUNIQUE",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#VIAITSUNIQUE"
+    },
+    "ifSuchA": {
+      "value": "if such a",
+      "key": "FORCOMPOSEDVARIABLES#IFSUCHA",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#IFSUCHA"
+    },
+    "existsPeriod": {
+      "value": "exists.",
+      "key": "FORCOMPOSEDVARIABLES#EXISTSPERIOD",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#EXISTSPERIOD"
+    },
+    "itsExistenceGuaranteed": {
+      "value": "its existence guaranteed by the fact that",
+      "key": "FORCOMPOSEDVARIABLES#ITSEXISTENCEGUARANTEED",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#ITSEXISTENCEGUARANTEED"
+    },
+    "areSameSimultaneously": {
+      "value": "are strictly the same and their instances created simultaneously.",
+      "key": "FORCOMPOSEDVARIABLES#ARESAMESIMULTANEOUSLY",
+      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#ARESAMESIMULTANEOUSLY"
+    },
     "prisma": {
       "message": {
         "value": "`Message`",
@@ -328,6 +417,11 @@
         "key": "FORCOMPOSEDVARIABLES#PRISMA#USERNAME",
         "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USERNAME"
       },
+      "usernames": {
+        "value": "`username`s",
+        "key": "FORCOMPOSEDVARIABLES#PRISMA#USERNAMES",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USERNAMES"
+      },
       "usernameComma": {
         "value": "`username`,",
         "key": "FORCOMPOSEDVARIABLES#PRISMA#USERNAMECOMMA",
@@ -342,6 +436,11 @@
         "value": "`displayUsername`",
         "key": "FORCOMPOSEDVARIABLES#PRISMA#DISPLAYUSERNAME",
         "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#DISPLAYUSERNAME"
+      },
+      "displayUsernames": {
+        "value": "`displayUsername`s",
+        "key": "FORCOMPOSEDVARIABLES#PRISMA#DISPLAYUSERNAMES",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#DISPLAYUSERNAMES"
       },
       "displayUsernameComma": {
         "value": "`displayUsername`,",

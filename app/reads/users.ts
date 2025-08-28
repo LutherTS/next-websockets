@@ -2,8 +2,8 @@ import { prisma } from "~/prisma/db";
 
 /**
  * Finds the existing `User` via its unique `username`, its existence guaranteed by the fact that `username`s of `User`s and `displayUsername`s of `BetterAuthUser`s are strictly the same and their instances created simultaneously.
- * @param displayUsername The username to be displayed sent from the current session. Here used to find the `User` to be attached to the message being sent.
- * @returns Either the `id` of the `User` in an object if found or `null` otherwise.
+ * @param displayUsername $COMMENT#JSDOC#READS#PARAMS#DISPLAYUSERNAMEB
+ * @returns $COMMENT#JSDOC#READS#RETURNS#FINDUSERBYUSERNAME
  */
 export async function findUserByUsername(displayUsername: string) {
   return await prisma.user.findUnique({
