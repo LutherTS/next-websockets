@@ -1,14 +1,47 @@
 import { findLatestMessages } from "@/reads/messages";
+import { findExistingUsernameByDisplayUsername } from "@/reads/better-auth-users";
+
+import { createNewUserByUsername } from "@/writes/users";
 
 import WebSocketsClientPage from "./client";
 
-/** The "outer", Server part of the page. A Server Component, it accesses the server directly to retrieve the latest messages, instantiating any load of the page with the freshest data directly from the server, before it renders the page. */
+/** $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#SERVERPAGE */
 export default async function WebSocketsServerPage() {
-  // gets the latest messages from the database
+  /* reads */
+
   const initialMessages = await findLatestMessages();
   console.log("initialMessages are:", initialMessages);
 
-  return <WebSocketsClientPage initialMessages={initialMessages} />;
+  /* writes */
+
+  /**
+   * $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#GETEXISTINGUSERACTION
+   * @param displayUsername $COMMENT#JSDOC#PAGES#WEBSOCKETS#PARAMS#DISPLAYUSERNAMEA
+   * @returns $COMMENT#JSDOC#PAGES#WEBSOCKETS#RETURNS#GETEXISTINGUSERACTION
+   */
+  async function getExistingUserAction(displayUsername: string) {
+    "use server";
+
+    return await findExistingUsernameByDisplayUsername(displayUsername);
+  }
+
+  /**
+   * $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#CREATENEWUSERACTION
+   * @param username $COMMENT#JSDOC#PAGES#WEBSOCKETS#PARAMS#USERNAME
+   */
+  async function createNewUserAction(username: string) {
+    "use server";
+
+    await createNewUserByUsername(username);
+  }
+
+  return (
+    <WebSocketsClientPage
+      initialMessages={initialMessages}
+      getExistingUserAction={getExistingUserAction}
+      createNewUserAction={createNewUserAction}
+    />
+  );
 }
 
 /* Notes

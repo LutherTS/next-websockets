@@ -10,14 +10,101 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Message {
-  id        String   @id @default(uuid())
+// FOR APP
 
-  value     String
+model Message {
+  id String @id @default(uuid())
+
+  value String
+
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
-// rm ./prisma/dev.db
-// pnpm prisma db push
+model User {
+  id String @id @default(uuid())
+
+  username String // SAME AS BETTERAUTHUSER.DISPLAYNAME
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  messages Message[]
+
+  @@unique([username])
+}
+
+// FOR BETTER AUTH
+
+model BetterAuthUser {
+  id                 String              @id
+  name               String
+  email              String
+  emailVerified      Boolean
+  image              String?
+  createdAt          DateTime
+  updatedAt          DateTime
+  username           String // required (and by default unique) so people can sign in via their retrieved username
+  displayUsername    String // required (and unique) so people can sign in via displayUsername // SAME AS USER.USERNAME
+  betterauthsessions BetterAuthSession[]
+  betterauthaccounts BetterAuthAccount[]
+
+  @@unique([email])
+  @@unique([username])
+  @@unique([displayUsername]) // unique (and required) so people can sign in via displayUsername
+  @@map("betterAuthUser")
+}
+
+model BetterAuthSession {
+  id             String         @id
+  expiresAt      DateTime
+  token          String
+  createdAt      DateTime
+  updatedAt      DateTime
+  ipAddress      String?
+  userAgent      String?
+  userId         String
+  betterauthuser BetterAuthUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@map("betterAuthSession")
+}
+
+model BetterAuthAccount {
+  id                    String         @id
+  accountId             String
+  providerId            String
+  userId                String
+  betterauthuser        BetterAuthUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime
+  updatedAt             DateTime
+
+  @@map("betterAuthAccount")
+}
+
+model BetterAuthVerification {
+  id         String    @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime?
+  updatedAt  DateTime?
+
+  @@map("betterAuthVerification")
+}
+
+// pnpm prisma migrate reset
+// - rm ./prisma/dev.db
+// - pnpm prisma db push
+
+// pnpm prisma migrate dev --name your_migration_name
