@@ -196,6 +196,16 @@
         "value": "and",
         "key": "FORCOMPOSEDVARIABLES#WORDS#AND",
         "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#WORDS#AND"
+      },
+      "client": {
+        "value": "client",
+        "key": "FORCOMPOSEDVARIABLES#WORDS#CLIENT",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#WORDS#CLIENT"
+      },
+      "server": {
+        "value": "server",
+        "key": "FORCOMPOSEDVARIABLES#WORDS#SERVER",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#WORDS#SERVER"
       }
     },
     "phrases": {},
@@ -214,20 +224,10 @@
       "key": "FORCOMPOSEDVARIABLES#NEEDSASREFERENCE",
       "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#NEEDSASREFERENCE"
     },
-    "client": {
-      "value": "client",
-      "key": "FORCOMPOSEDVARIABLES#CLIENT",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#CLIENT"
-    },
     "wsClientPageParens": {
       "value": "WebSocketsClientPage),",
       "key": "FORCOMPOSEDVARIABLES#WSCLIENTPAGEPARENS",
       "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#WSCLIENTPAGEPARENS"
-    },
-    "server": {
-      "value": "server",
-      "key": "FORCOMPOSEDVARIABLES#SERVER",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#SERVER"
     },
     "wsServerPageParens": {
       "value": "WebSocketsServerPage),",
