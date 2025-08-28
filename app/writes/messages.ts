@@ -2,7 +2,7 @@ import { prisma } from "~/prisma/db";
 
 /**
  * $COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGE
- * @param message $COMMENT#JSDOC#UTILS#PARAMS#MESSAGE
+ * @param message $COMMENT#JSDOC#ACTIONS#PARAMS#MESSAGE
  */
 export async function createNewMessage(message: string) {
   await prisma.message.create({
@@ -14,7 +14,7 @@ export async function createNewMessage(message: string) {
 
 /**
  * $COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGEWITHUSERID
- * @param message $COMMENT#JSDOC#UTILS#PARAMS#MESSAGE
+ * @param message $COMMENT#JSDOC#ACTIONS#PARAMS#MESSAGE
  * @param userId $COMMENT#JSDOC#WRITES#PARAMS#USERID
  */
 export async function createNewMessageWithUserId(

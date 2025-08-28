@@ -23,11 +23,6 @@
           "value": "Validates that a username is slug-friendly, meaning:",
           "key": "JSDOC#UTILS#DEFS#VALIDATEUSERNAMESLUGFRIENDLY",
           "placeholder": "$COMMENT#JSDOC#UTILS#DEFS#VALIDATEUSERNAMESLUGFRIENDLY"
-        },
-        "broadcastFlow": {
-          "value": "The flow that broadcasts the new messages to all WebSocket clients. (Saved as a flow so that it can be used across Server Functions at will, be them standalone in their own files or inline within Server Components.)",
-          "key": "JSDOC#UTILS#DEFS#BROADCASTFLOW",
-          "placeholder": "$COMMENT#JSDOC#UTILS#DEFS#BROADCASTFLOW"
         }
       },
       "details": {
@@ -57,16 +52,6 @@
           "value": "The user provided username to be tested.",
           "key": "JSDOC#UTILS#PARAMS#USERNAME",
           "placeholder": "$COMMENT#JSDOC#UTILS#PARAMS#USERNAME"
-        },
-        "message": {
-          "value": "The current latest message sent from the client.",
-          "key": "JSDOC#UTILS#PARAMS#MESSAGE",
-          "placeholder": "$COMMENT#JSDOC#UTILS#PARAMS#MESSAGE"
-        },
-        "displayUsername": {
-          "value": "The username to be displayed sent from the current session. If it exists, this lets the action know which existing user sent the current message. If it doesn't, this lets the action know the current message was sent from a guest (unauthenticated).",
-          "key": "JSDOC#UTILS#PARAMS#DISPLAYUSERNAME",
-          "placeholder": "$COMMENT#JSDOC#UTILS#PARAMS#DISPLAYUSERNAME"
         }
       },
       "returns": {
@@ -130,9 +115,26 @@
     "actions": {
       "defs": {
         "broadcastAction": {
-          "value": "The Server Function that triggers broadcasts directly from the client, by passing the new message to the server.",
+          "value": "The Server Function that triggers broadcasts directly from the client, by passing the new message to the server, and the username of its sender if authenticated.",
           "key": "JSDOC#ACTIONS#DEFS#BROADCASTACTION",
           "placeholder": "$COMMENT#JSDOC#ACTIONS#DEFS#BROADCASTACTION"
+        },
+        "broadcastFlow": {
+          "value": "The flow that broadcasts the new messages to all WebSocket clients. (Saved as a flow so that it can be used across Server Functions at will, be them standalone in their own files or inline within Server Components.)",
+          "key": "JSDOC#ACTIONS#DEFS#BROADCASTFLOW",
+          "placeholder": "$COMMENT#JSDOC#ACTIONS#DEFS#BROADCASTFLOW"
+        }
+      },
+      "params": {
+        "message": {
+          "value": "The current latest message sent from the client.",
+          "key": "JSDOC#ACTIONS#PARAMS#MESSAGE",
+          "placeholder": "$COMMENT#JSDOC#ACTIONS#PARAMS#MESSAGE"
+        },
+        "displayUsername": {
+          "value": "The username to be displayed sent from the current session. If it exists, this lets the action know which existing user sent the current message. If it doesn't, this lets the action know the current message was sent from a guest (unauthenticated).",
+          "key": "JSDOC#ACTIONS#PARAMS#DISPLAYUSERNAME",
+          "placeholder": "$COMMENT#JSDOC#ACTIONS#PARAMS#DISPLAYUSERNAME"
         }
       }
     },

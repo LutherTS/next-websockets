@@ -4,8 +4,8 @@ import { broadcastFlow } from "@/actions/server/flows/broadcast";
 
 /**
  * $COMMENT#JSDOC#ACTIONS#DEFS#BROADCASTACTION
- * @param message $COMMENT#JSDOC#UTILS#PARAMS#MESSAGE
- * @param displayUsername $COMMENT#JSDOC#UTILS#PARAMS#DISPLAYUSERNAME
+ * @param message $COMMENT#JSDOC#ACTIONS#PARAMS#MESSAGE
+ * @param displayUsername $COMMENT#JSDOC#ACTIONS#PARAMS#DISPLAYUSERNAME
  * @returns
  */
 export async function broadcastAction(

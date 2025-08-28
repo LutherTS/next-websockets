@@ -10,9 +10,9 @@ import { countAllMessages, findLatestMessages } from "@/reads/messages";
 import { findUserByUsername } from "@/reads/users";
 
 /**
- * $COMMENT#JSDOC#UTILS#DEFS#BROADCASTFLOW
- * @param message $COMMENT#JSDOC#UTILS#PARAMS#MESSAGE
- * @param displayUsername $COMMENT#JSDOC#UTILS#PARAMS#DISPLAYUSERNAME
+ * $COMMENT#JSDOC#ACTIONS#DEFS#BROADCASTFLOW
+ * @param message $COMMENT#JSDOC#ACTIONS#PARAMS#MESSAGE
+ * @param displayUsername $COMMENT#JSDOC#ACTIONS#PARAMS#DISPLAYUSERNAME
  * @returns
  */
 export const broadcastFlow = async (

@@ -12,8 +12,6 @@ const data = Object.freeze({
       defs: Object.freeze({
         validateUsernameSlugFriendly:
           "Validates that a username is slug-friendly, meaning:" /* $COMMENT#JSDOC#UTILS#DEFS#VALIDATEUSERNAMESLUGFRIENDLY */,
-        broadcastFlow:
-          "The flow that broadcasts the new messages to all WebSocket clients. (Saved as a flow so that it can be used across Server Functions at will, be them standalone in their own files or inline within Server Components.)" /* $COMMENT#JSDOC#UTILS#DEFS#BROADCASTFLOW */,
       }),
       details: Object.freeze({
         startsAlphanumerical:
@@ -28,10 +26,6 @@ const data = Object.freeze({
       params: Object.freeze({
         username:
           "The user provided username to be tested." /* $COMMENT#JSDOC#UTILS#PARAMS#USERNAME */,
-        message:
-          "The current latest message sent from the client." /* $COMMENT#JSDOC#UTILS#PARAMS#MESSAGE */,
-        displayUsername:
-          "The username to be displayed sent from the current session. If it exists, this lets the action know which existing user sent the current message. If it doesn't, this lets the action know the current message was sent from a guest (unauthenticated)." /* $COMMENT#JSDOC#UTILS#PARAMS#DISPLAYUSERNAME */,
       }),
       returns: Object.freeze({
         validateUsernameSlugFriendly:
@@ -67,7 +61,15 @@ const data = Object.freeze({
     actions: Object.freeze({
       defs: Object.freeze({
         broadcastAction:
-          "The Server Function that triggers broadcasts directly from the client, by passing the new message to the server." /* $COMMENT#JSDOC#ACTIONS#DEFS#BROADCASTACTION */,
+          "The Server Function that triggers broadcasts directly from the client, by passing the new message to the server, and the username of its sender if authenticated." /* $COMMENT#JSDOC#ACTIONS#DEFS#BROADCASTACTION */,
+        broadcastFlow:
+          "The flow that broadcasts the new messages to all WebSocket clients. (Saved as a flow so that it can be used across Server Functions at will, be them standalone in their own files or inline within Server Components.)" /* $COMMENT#JSDOC#ACTIONS#DEFS#BROADCASTFLOW */,
+      }),
+      params: Object.freeze({
+        message:
+          "The current latest message sent from the client." /* $COMMENT#JSDOC#ACTIONS#PARAMS#MESSAGE */,
+        displayUsername:
+          "The username to be displayed sent from the current session. If it exists, this lets the action know which existing user sent the current message. If it doesn't, this lets the action know the current message was sent from a guest (unauthenticated)." /* $COMMENT#JSDOC#ACTIONS#PARAMS#DISPLAYUSERNAME */,
       }),
     }),
     reads: Object.freeze({
