@@ -27,6 +27,8 @@ const data = Object.freeze({
           "$COMMENT#FORCOMPOSEDVARIABLES#CREATESNEW $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#MESSAGE $COMMENT#FORCOMPOSEDVARIABLES#INPRISMA $COMMENT#FORCOMPOSEDVARIABLES#ASSIGNEDASUSER" /* $COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGEWITHUSERID */,
         deleteExtraMessages:
           "Deletes older messages from the database to cap the amount of messages it can effectively store." /* $COMMENT#JSDOC#WRITES#DEFS#DELETEEXTRAMESSAGES */,
+        createNewUserByUsername:
+          "$COMMENT#FORCOMPOSEDVARIABLES#CREATESNEW $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USER $COMMENT#FORCOMPOSEDVARIABLES#INPRISMA $COMMENT#FORCOMPOSEDVARIABLES#THROUGHUNIQUE $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USERNAMEPERIOD" /* $COMMENT#JSDOC#WRITES#DEFS#CREATENEWUSERBYUSERNAME */,
       }),
       params: Object.freeze({
         userId:
@@ -56,6 +58,12 @@ const data = Object.freeze({
             'The "inner", Client part of the page. A Client Component, it retrieves the initial messages from its parent Server Component, before storing them in React state. It then creates a WebSocket to listen to fresh new data broadcasted from the server, in real-time on the client.' /* $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#CLIENTPAGE */,
           broadcast:
             "The handler that triggers the broadcast. This is where the magic happens. This handler operates both on the client and on the server. Via the `broadcastAction` server action (Server Function), it sends the new message from the client to the server, where `broadcastAction` triggers the broadcast for all WebSocket clients directly from the server, in real-time." /* $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#BROADCAST */,
+          createNewUserAction:
+            "$COMMENT#FORCOMPOSEDVARIABLES#CREATESCORRESPONDING $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USER $COMMENT#FORCOMPOSEDVARIABLES#TONEWLYCREATED $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#BETTERAUTHUSER $COMMENT#FORCOMPOSEDVARIABLES#ONSUCCESSSIGNUP" /* $COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#CREATENEWUSERACTION */,
+        }),
+        params: Object.freeze({
+          username:
+            "$COMMENT#FORCOMPOSEDVARIABLES#THEUNIQUE $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USERNAME $COMMENT#FORCOMPOSEDVARIABLES#OFTHENEW $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USERCOMMA $COMMENT#FORCOMPOSEDVARIABLES#MADEOUTOF $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#DISPLAYUSERNAME $COMMENT#FORCOMPOSEDVARIABLES#INITIALLYTOCREATE $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#BETTERAUTHUSER $COMMENT#FORCOMPOSEDVARIABLES#INSTANCESIGNUP" /* $COMMENT#JSDOC#PAGES#WEBSOCKETS#PARAMS#USERNAME */,
         }),
       }),
     }),
@@ -66,9 +74,9 @@ const data = Object.freeze({
     useServer:
       "$COMMENT#FORCOMPOSEDVARIABLES#REQUIREDAMONGREASONS $COMMENT#FORCOMPOSEDVARIABLES#SERVER $COMMENT#FORCOMPOSEDVARIABLES#PARENSASITDOESFOR $COMMENT#FORCOMPOSEDVARIABLES#WSSERVERPAGEPARENS $COMMENT#FORCOMPOSEDVARIABLES#NEEDSASREFERENCE" /* $COMMENT#REMARKS#USESERVER */,
     inlineServerActions:
-      "passing inline server actions is impractical in that their JSDoc definitions do not carry over and have to be rewritten manually",
+      "passing inline server actions is impractical in that their JSDoc definitions do not carry over and have to be rewritten manually" /* $COMMENT#REMARKS#INLINESERVERACTIONS */,
     boundServerActions:
-      "but to be fair, the same would need to be done to bound server actions, so the limitation is across both standalone server actions and inline server actions alike",
+      "but to be fair, the same would need to be done to bound server actions, so the limitation is across both standalone server actions and inline server actions alike" /* $COMMENT#REMARKS#BOUNDSERVERACTIONS */,
   }),
   forComposedVariables: Object.freeze({
     // general
@@ -91,13 +99,41 @@ const data = Object.freeze({
       "attributed to no one since published as a guest." /* $COMMENT#FORCOMPOSEDVARIABLES#ATTRIBUTEDASGUEST */,
     assignedAsUser:
       "assigned to the current user who sent the message." /* $COMMENT#FORCOMPOSEDVARIABLES#ASSIGNEDASUSER */,
+    throughUnique:
+      "through its provided unique" /* $COMMENT#FORCOMPOSEDVARIABLES#THROUGHUNIQUE */,
+    createsCorresponding:
+      "Creates the corresponding" /* $COMMENT#FORCOMPOSEDVARIABLES#CREATESCORRESPONDING */,
+    toNewlyCreated:
+      "to the newly-created" /* $COMMENT#FORCOMPOSEDVARIABLES#TONEWLYCREATED */,
+    onSuccessSignUp:
+      "on success of its signing up." /* $COMMENT#FORCOMPOSEDVARIABLES#ONSUCCESSSIGNUP */,
+    theUnique: "The unique" /* $COMMENT#FORCOMPOSEDVARIABLES#THEUNIQUE */,
+    oftheNew: "of the new" /* $COMMENT#FORCOMPOSEDVARIABLES#OFTHENEW */,
+    madeOutOf: "made out of the" /* $COMMENT#FORCOMPOSEDVARIABLES#MADEOUTOF */,
+    initiallyToCreate:
+      "initially provided to create a" /* $COMMENT#FORCOMPOSEDVARIABLES#INITIALLYTOCREATE */,
+    instanceSignUp:
+      "instance at sign up." /* $COMMENT#FORCOMPOSEDVARIABLES#INSTANCESIGNUP */,
     prisma: Object.freeze({
       message: "`Message`" /* $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#MESSAGE */,
-      user: "`User`",
-      betterAuthUser: "`BetterAuthUser`",
-      username: "`username`",
-      displayUsername: "`displayUsername`",
-      id: "`id`",
+      user: "`User`" /* $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USER */,
+      userComma: "`User`," /* $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USERCOMMA */,
+      users: "`Users`" /* $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USERS */,
+      betterAuthUser:
+        "`BetterAuthUser`" /* $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#BETTERAUTHUSER */,
+      betterAuthUsers:
+        "`BetterAuthUsers`" /* $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#BETTERAUTHUSERS */,
+      username:
+        "`username`" /* $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USERNAME */,
+      usernameComma:
+        "`username`," /* $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USERNAMECOMMA */,
+      usernamePeriod:
+        "`username`." /* $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USERNAMEPERIOD */,
+      displayUsername:
+        "`displayUsername`" /* $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#DISPLAYUSERNAME */,
+      displayUsernameComma:
+        "`displayUsername`," /* $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#DISPLAYUSERNAMECOMMA */,
+      id: "`id`" /* $COMMENT#FORCOMPOSEDVARIABLES#PRISMA#ID */,
     }),
   }),
 });
@@ -120,7 +156,28 @@ const composedVariablesExclusives = [
   "FORCOMPOSEDVARIABLES#INPRISMA",
   "FORCOMPOSEDVARIABLES#ATTRIBUTEDASGUEST",
   "FORCOMPOSEDVARIABLES#ASSIGNEDASUSER",
-]; // can be omitted
+  "FORCOMPOSEDVARIABLES#THROUGHUNIQUE",
+  "FORCOMPOSEDVARIABLES#CREATESCORRESPONDING",
+  "FORCOMPOSEDVARIABLES#TONEWLYCREATED",
+  "FORCOMPOSEDVARIABLES#ONSUCCESSSIGNUP",
+  "FORCOMPOSEDVARIABLES#THEUNIQUE",
+  "FORCOMPOSEDVARIABLES#OFTHENEW",
+  "FORCOMPOSEDVARIABLES#MADEOUTOF",
+  "FORCOMPOSEDVARIABLES#INITIALLYTOCREATE",
+  "FORCOMPOSEDVARIABLES#INSTANCESIGNUP",
+  "FORCOMPOSEDVARIABLES#PRISMA#MESSAGE",
+  "FORCOMPOSEDVARIABLES#PRISMA#USER",
+  "FORCOMPOSEDVARIABLES#PRISMA#USERCOMMA",
+  "FORCOMPOSEDVARIABLES#PRISMA#USERS",
+  "FORCOMPOSEDVARIABLES#PRISMA#BETTERAUTHUSER",
+  "FORCOMPOSEDVARIABLES#PRISMA#BETTERAUTHUSERS",
+  "FORCOMPOSEDVARIABLES#PRISMA#USERNAME",
+  "FORCOMPOSEDVARIABLES#PRISMA#USERNAMECOMMA",
+  "FORCOMPOSEDVARIABLES#PRISMA#USERNAMEPERIOD",
+  "FORCOMPOSEDVARIABLES#PRISMA#DISPLAYUSERNAME",
+  "FORCOMPOSEDVARIABLES#PRISMA#DISPLAYUSERNAMECOMMA",
+  "FORCOMPOSEDVARIABLES#PRISMA#ID",
+];
 
 const config = {
   data,
