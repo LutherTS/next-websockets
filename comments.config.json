@@ -51,37 +51,10 @@
             "value": "The handler that triggers the broadcast. This is where the magic happens. This handler operates both on the client and on the server. Via the `broadcastAction` server action (Server Function), it sends the new message from the client to the server, where `broadcastAction` triggers the broadcast for all WebSocket clients directly from the server, in real-time.",
             "key": "JSDOC#PAGES#WEBSOCKETS#DEFS#BROADCAST",
             "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#BROADCAST"
-          },
-          "getExistingUserAction": {
-            "value": "Gets or doesn't get an existing `User` from the database in order to decide whether to sign in if a `User` exists or sign up otherwise.",
-            "key": "JSDOC#PAGES#WEBSOCKETS#DEFS#GETEXISTINGUSERACTION",
-            "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#GETEXISTINGUSERACTION"
-          },
-          "createNewUserAction": {
-            "value": "Creates the corresponding `User` to the newly-created `BetterAuthUser` on success of its signing up.",
-            "key": "JSDOC#PAGES#WEBSOCKETS#DEFS#CREATENEWUSERACTION",
-            "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#DEFS#CREATENEWUSERACTION"
           }
         },
-        "params": {
-          "displayUsernameA": {
-            "value": "The username to be displayed sent from the current session. Here used to find the `BetterAuthUser` needed to sign in if found or to acknowledge its absence for sign up if nonexistent.",
-            "key": "JSDOC#PAGES#WEBSOCKETS#PARAMS#DISPLAYUSERNAMEA",
-            "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#PARAMS#DISPLAYUSERNAMEA"
-          },
-          "username": {
-            "value": "The unique `username` of the new `User`, made out of the `displayUsername` initially provided to create a `BetterAuthUser` instance at sign up.",
-            "key": "JSDOC#PAGES#WEBSOCKETS#PARAMS#USERNAME",
-            "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#PARAMS#USERNAME"
-          }
-        },
-        "returns": {
-          "getExistingUserAction": {
-            "value": "Either the `username` of the `BetterAuthUser` in an object if found or `null` otherwise.",
-            "key": "JSDOC#PAGES#WEBSOCKETS#RETURNS#GETEXISTINGUSERACTION",
-            "placeholder": "$COMMENT#JSDOC#PAGES#WEBSOCKETS#RETURNS#GETEXISTINGUSERACTION"
-          }
-        }
+        "params": {},
+        "returns": {}
       }
     },
     "actions": {
@@ -104,54 +77,15 @@
           "value": "Counts all the messages saved in the database, in order to ascertain its persistence between reboots and deployments.",
           "key": "JSDOC#READS#DEFS#COUNTALLMESSAGES",
           "placeholder": "$COMMENT#JSDOC#READS#DEFS#COUNTALLMESSAGES"
-        },
-        "findExistingUsernameByDisplayUsername": {
-          "value": "Finds an existing `BetterAuthUser` via its unique `displayUsername`, if such a `BetterAuthUser` exists.",
-          "key": "JSDOC#READS#DEFS#FINDEXISTINGUSERNAMEBYDISPLAYUSERNAME",
-          "placeholder": "$COMMENT#JSDOC#READS#DEFS#FINDEXISTINGUSERNAMEBYDISPLAYUSERNAME"
-        },
-        "findUserByUsername": {
-          "value": "Finds the existing `User` via its unique `username`, its existence guaranteed by the fact that `username`s of `User`s and `displayUsername`s of `BetterAuthUser`s are strictly the same and their instances created simultaneously.",
-          "key": "JSDOC#READS#DEFS#FINDUSERBYUSERNAME",
-          "placeholder": "$COMMENT#JSDOC#READS#DEFS#FINDUSERBYUSERNAME"
-        }
-      },
-      "params": {
-        "displayUsernameB": {
-          "value": "The username to be displayed sent from the current session. Here used to find the `User` to be attached to the message being sent.",
-          "key": "JSDOC#READS#PARAMS#DISPLAYUSERNAMEB",
-          "placeholder": "$COMMENT#JSDOC#READS#PARAMS#DISPLAYUSERNAMEB"
-        }
-      },
-      "returns": {
-        "findUserByUsername": {
-          "value": "Either the `id` of the `User` in an object if found or `null` otherwise.",
-          "key": "JSDOC#READS#RETURNS#FINDUSERBYUSERNAME",
-          "placeholder": "$COMMENT#JSDOC#READS#RETURNS#FINDUSERBYUSERNAME"
         }
       }
     },
     "writes": {
       "defs": {
-        "createNewMessage": {
-          "value": "Creates a new `Message` in the Prisma database, attributed to no one since published as a guest.",
-          "key": "JSDOC#WRITES#DEFS#CREATENEWMESSAGE",
-          "placeholder": "$COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGE"
-        },
-        "createNewMessageWithUserId": {
-          "value": "Creates a new `Message` in the Prisma database, assigned to the current user who sent the message.",
-          "key": "JSDOC#WRITES#DEFS#CREATENEWMESSAGEWITHUSERID",
-          "placeholder": "$COMMENT#JSDOC#WRITES#DEFS#CREATENEWMESSAGEWITHUSERID"
-        },
         "deleteExtraMessages": {
           "value": "Deletes older messages from the database to cap the amount of messages it can effectively store.",
           "key": "JSDOC#WRITES#DEFS#DELETEEXTRAMESSAGES",
           "placeholder": "$COMMENT#JSDOC#WRITES#DEFS#DELETEEXTRAMESSAGES"
-        },
-        "createNewUserByUsername": {
-          "value": "Creates a new `User` in the Prisma database, through its provided unique `username`.",
-          "key": "JSDOC#WRITES#DEFS#CREATENEWUSERBYUSERNAME",
-          "placeholder": "$COMMENT#JSDOC#WRITES#DEFS#CREATENEWUSERBYUSERNAME"
         }
       },
       "params": {
@@ -165,12 +99,12 @@
   },
   "remarks": {
     "useClient": {
-      "value": "required, among other reasons, to inform React that if this module is to imported on the client (as it does for WebSocketsClientPage), it needs to be imported as reference",
+      "value": "required, among other reasons, to inform React that if this module is to be imported on the client (as it does for WebSocketsClientPage), it needs to be imported as reference",
       "key": "REMARKS#USECLIENT",
       "placeholder": "$COMMENT#REMARKS#USECLIENT"
     },
     "useServer": {
-      "value": "required, among other reasons, to inform React that if this module is to imported on the server (as it does for WebSocketsServerPage), it needs to be imported as reference",
+      "value": "required, among other reasons, to inform React that if this module is to be imported on the server (as it does for WebSocketsServerPage), it needs to be imported as reference",
       "key": "REMARKS#USESERVER",
       "placeholder": "$COMMENT#REMARKS#USESERVER"
     },
@@ -208,31 +142,37 @@
         "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#WORDS#SERVER"
       }
     },
-    "phrases": {},
-    "requiredAmongReasons": {
-      "value": "required, among other reasons, to inform React that if this module is to imported on the",
-      "key": "FORCOMPOSEDVARIABLES#REQUIREDAMONGREASONS",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#REQUIREDAMONGREASONS"
-    },
-    "parensAsItDoesFor": {
-      "value": "(as it does for",
-      "key": "FORCOMPOSEDVARIABLES#PARENSASITDOESFOR",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PARENSASITDOESFOR"
-    },
-    "needsAsReference": {
-      "value": "it needs to be imported as reference",
-      "key": "FORCOMPOSEDVARIABLES#NEEDSASREFERENCE",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#NEEDSASREFERENCE"
-    },
-    "wsClientPageParens": {
-      "value": "WebSocketsClientPage),",
-      "key": "FORCOMPOSEDVARIABLES#WSCLIENTPAGEPARENS",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#WSCLIENTPAGEPARENS"
-    },
-    "wsServerPageParens": {
-      "value": "WebSocketsServerPage),",
-      "key": "FORCOMPOSEDVARIABLES#WSSERVERPAGEPARENS",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#WSSERVERPAGEPARENS"
+    "phrases": {
+      "getsOrDoesnt": {
+        "value": "Gets or doesn't get an existing",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#GETSORDOESNT",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#GETSORDOESNT"
+      },
+      "requiredAmongReasons": {
+        "value": "required, among other reasons, to inform React that if this module is to be imported on the",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#REQUIREDAMONGREASONS",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#REQUIREDAMONGREASONS"
+      },
+      "parensAsItDoesFor": {
+        "value": "(as it does for",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#PARENSASITDOESFOR",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#PARENSASITDOESFOR"
+      },
+      "wsClientPageParens": {
+        "value": "WebSocketsClientPage),",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#WSCLIENTPAGEPARENS",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#WSCLIENTPAGEPARENS"
+      },
+      "wsServerPageParens": {
+        "value": "WebSocketsServerPage),",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#WSSERVERPAGEPARENS",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#WSSERVERPAGEPARENS"
+      },
+      "needsAsReference": {
+        "value": "it needs to be imported as reference",
+        "key": "FORCOMPOSEDVARIABLES#PHRASES#NEEDSASREFERENCE",
+        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PHRASES#NEEDSASREFERENCE"
+      }
     },
     "createsNew": {
       "value": "Creates a new",
@@ -258,11 +198,6 @@
       "value": "through its provided unique",
       "key": "FORCOMPOSEDVARIABLES#THROUGHUNIQUE",
       "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#THROUGHUNIQUE"
-    },
-    "getsOrDoesnt": {
-      "value": "Gets or doesn't get an existing",
-      "key": "FORCOMPOSEDVARIABLES#GETSORDOESNT",
-      "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#GETSORDOESNT"
     },
     "fromToDecide": {
       "value": "from the database in order to decide whether to sign in if a",
@@ -385,75 +320,79 @@
       "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#ARESAMESIMULTANEOUSLY"
     },
     "prisma": {
-      "message": {
-        "value": "`Message`",
-        "key": "FORCOMPOSEDVARIABLES#PRISMA#MESSAGE",
-        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#MESSAGE"
+      "tables": {
+        "message": {
+          "value": "`Message`",
+          "key": "FORCOMPOSEDVARIABLES#PRISMA#TABLES#MESSAGE",
+          "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#TABLES#MESSAGE"
+        },
+        "user": {
+          "value": "`User`",
+          "key": "FORCOMPOSEDVARIABLES#PRISMA#TABLES#USER",
+          "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#TABLES#USER"
+        },
+        "userComma": {
+          "value": "`User`,",
+          "key": "FORCOMPOSEDVARIABLES#PRISMA#TABLES#USERCOMMA",
+          "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#TABLES#USERCOMMA"
+        },
+        "users": {
+          "value": "`User`s",
+          "key": "FORCOMPOSEDVARIABLES#PRISMA#TABLES#USERS",
+          "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#TABLES#USERS"
+        },
+        "betterAuthUser": {
+          "value": "`BetterAuthUser`",
+          "key": "FORCOMPOSEDVARIABLES#PRISMA#TABLES#BETTERAUTHUSER",
+          "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#TABLES#BETTERAUTHUSER"
+        },
+        "betterAuthUsers": {
+          "value": "`BetterAuthUser`s",
+          "key": "FORCOMPOSEDVARIABLES#PRISMA#TABLES#BETTERAUTHUSERS",
+          "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#TABLES#BETTERAUTHUSERS"
+        }
       },
-      "user": {
-        "value": "`User`",
-        "key": "FORCOMPOSEDVARIABLES#PRISMA#USER",
-        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USER"
-      },
-      "userComma": {
-        "value": "`User`,",
-        "key": "FORCOMPOSEDVARIABLES#PRISMA#USERCOMMA",
-        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USERCOMMA"
-      },
-      "users": {
-        "value": "`User`s",
-        "key": "FORCOMPOSEDVARIABLES#PRISMA#USERS",
-        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USERS"
-      },
-      "betterAuthUser": {
-        "value": "`BetterAuthUser`",
-        "key": "FORCOMPOSEDVARIABLES#PRISMA#BETTERAUTHUSER",
-        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#BETTERAUTHUSER"
-      },
-      "betterAuthUsers": {
-        "value": "`BetterAuthUser`s",
-        "key": "FORCOMPOSEDVARIABLES#PRISMA#BETTERAUTHUSERS",
-        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#BETTERAUTHUSERS"
-      },
-      "username": {
-        "value": "`username`",
-        "key": "FORCOMPOSEDVARIABLES#PRISMA#USERNAME",
-        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USERNAME"
-      },
-      "usernames": {
-        "value": "`username`s",
-        "key": "FORCOMPOSEDVARIABLES#PRISMA#USERNAMES",
-        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USERNAMES"
-      },
-      "usernameComma": {
-        "value": "`username`,",
-        "key": "FORCOMPOSEDVARIABLES#PRISMA#USERNAMECOMMA",
-        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USERNAMECOMMA"
-      },
-      "usernamePeriod": {
-        "value": "`username`.",
-        "key": "FORCOMPOSEDVARIABLES#PRISMA#USERNAMEPERIOD",
-        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#USERNAMEPERIOD"
-      },
-      "displayUsername": {
-        "value": "`displayUsername`",
-        "key": "FORCOMPOSEDVARIABLES#PRISMA#DISPLAYUSERNAME",
-        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#DISPLAYUSERNAME"
-      },
-      "displayUsernames": {
-        "value": "`displayUsername`s",
-        "key": "FORCOMPOSEDVARIABLES#PRISMA#DISPLAYUSERNAMES",
-        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#DISPLAYUSERNAMES"
-      },
-      "displayUsernameComma": {
-        "value": "`displayUsername`,",
-        "key": "FORCOMPOSEDVARIABLES#PRISMA#DISPLAYUSERNAMECOMMA",
-        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#DISPLAYUSERNAMECOMMA"
-      },
-      "id": {
-        "value": "`id`",
-        "key": "FORCOMPOSEDVARIABLES#PRISMA#ID",
-        "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#ID"
+      "fields": {
+        "username": {
+          "value": "`username`",
+          "key": "FORCOMPOSEDVARIABLES#PRISMA#FIELDS#USERNAME",
+          "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#FIELDS#USERNAME"
+        },
+        "usernames": {
+          "value": "`username`s",
+          "key": "FORCOMPOSEDVARIABLES#PRISMA#FIELDS#USERNAMES",
+          "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#FIELDS#USERNAMES"
+        },
+        "usernameComma": {
+          "value": "`username`,",
+          "key": "FORCOMPOSEDVARIABLES#PRISMA#FIELDS#USERNAMECOMMA",
+          "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#FIELDS#USERNAMECOMMA"
+        },
+        "usernamePeriod": {
+          "value": "`username`.",
+          "key": "FORCOMPOSEDVARIABLES#PRISMA#FIELDS#USERNAMEPERIOD",
+          "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#FIELDS#USERNAMEPERIOD"
+        },
+        "displayUsername": {
+          "value": "`displayUsername`",
+          "key": "FORCOMPOSEDVARIABLES#PRISMA#FIELDS#DISPLAYUSERNAME",
+          "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#FIELDS#DISPLAYUSERNAME"
+        },
+        "displayUsernames": {
+          "value": "`displayUsername`s",
+          "key": "FORCOMPOSEDVARIABLES#PRISMA#FIELDS#DISPLAYUSERNAMES",
+          "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#FIELDS#DISPLAYUSERNAMES"
+        },
+        "displayUsernameComma": {
+          "value": "`displayUsername`,",
+          "key": "FORCOMPOSEDVARIABLES#PRISMA#FIELDS#DISPLAYUSERNAMECOMMA",
+          "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#FIELDS#DISPLAYUSERNAMECOMMA"
+        },
+        "id": {
+          "value": "`id`",
+          "key": "FORCOMPOSEDVARIABLES#PRISMA#FIELDS#ID",
+          "placeholder": "$COMMENT#FORCOMPOSEDVARIABLES#PRISMA#FIELDS#ID"
+        }
       }
     }
   }
