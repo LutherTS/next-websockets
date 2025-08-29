@@ -41,19 +41,19 @@ export const broadcastFlow = async (
 
   // counts all messages for logs
   const allMessagesCountBefore = await countAllMessages();
-  console.log("allMessagesCountBefore:", allMessagesCountBefore);
+  console.info("allMessagesCountBefore:", allMessagesCountBefore);
 
   // deletes older messages to sustain the database (considered lightweight enough to run without a condition at this time)
   await deleteExtraMessages();
 
   // counts all messages for logs
   const allMessagesCountAfter = await countAllMessages();
-  console.log("allMessagesCountAfter:", allMessagesCountAfter);
+  console.info("allMessagesCountAfter:", allMessagesCountAfter);
 
   // gets the latest messages from the database
   const messages = await findLatestMessages();
 
-  console.log("webSocketClients:", webSocketClients.size);
+  console.info("webSocketClients:", webSocketClients.size);
   webSocketClients.forEach((client) => {
     if (client.readyState === WebSocket.OPEN) {
       // sends the whole list of the latest messages
@@ -61,5 +61,5 @@ export const broadcastFlow = async (
     }
   });
 
-  console.log(`Messages broadcasted:`, messages);
+  console.info(`Messages broadcasted:`, messages);
 };

@@ -10,7 +10,7 @@ export default async function WebSocketsServerPage() {
   /* reads */
 
   const initialMessages = await findLatestMessages();
-  console.log("initialMessages are:", initialMessages);
+  console.info("initialMessages are:", initialMessages);
 
   /* writes */
 

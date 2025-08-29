@@ -22,12 +22,12 @@ const wss = new WebSocketServer({ noServer: true });
 wss.on("connection", (ws) => {
   webSocketClients.add(ws);
   console.log("New client connected.");
-  console.log("webSocketClients:", webSocketClients.size);
+  console.info("webSocketClients:", webSocketClients.size);
 
   ws.on("close", () => {
     webSocketClients.delete(ws);
     console.log("Client disconnected.");
-    console.log("webSocketClients:", webSocketClients.size);
+    console.info("webSocketClients:", webSocketClients.size);
   });
 });
 

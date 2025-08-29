@@ -92,9 +92,9 @@ export default function WebSocketsClientPage({
 
       const message = formData.get(MESSAGE) || "";
       if (typeof message !== "string")
-        return console.log(`message is not a string.`);
+        return console.warn(`message is not a string.`);
       if (!message.trim())
-        return console.log(`message should not be an empty string.`);
+        return console.warn(`message should not be an empty string.`);
 
       // the Server Function way
       // OPEN needed because without OPEN the message can't be received... on the client. But even without OPEN the message could be sent. However, since the ID of the connection will probably need to be sent in production, it is best to acknowledge that only connected WebSockets should be able to send messages and effectively trigger new messages.
@@ -126,27 +126,27 @@ export default function WebSocketsClientPage({
 
       const displayUsername = formData.get(DISPLAYUSERNAME) || "";
       if (typeof displayUsername !== "string")
-        return console.log(`displayUsername is not a string.`);
+        return console.warn(`displayUsername is not a string.`);
       if (!displayUsername.trim())
-        return console.log(`displayUsername should not be an empty string.`);
+        return console.warn(`displayUsername should not be an empty string.`);
 
       if (!validateUsernameSlugFriendly(displayUsername))
-        return console.log(`displayUsername should be slug-friendly.`);
+        return console.warn(`displayUsername should be slug-friendly.`);
 
       if (displayUsername.length < MIN_USERNAME_LENGTH)
-        return console.log(
+        return console.warn(
           `displayUsername's length should not be less than ${MIN_USERNAME_LENGTH} character(s).`,
         );
       if (displayUsername.length > MAX_USERNAME_LENGTH)
-        return console.log(
+        return console.warn(
           `displayUsername's length should not be more than ${MAX_USERNAME_LENGTH} character(s).`,
         );
 
       const password = formData.get(PASSWORD) || "";
       if (typeof password !== "string")
-        return console.log(`password is not a string.`);
+        return console.warn(`password is not a string.`);
       if (!password.trim())
-        return console.log(`password should not be an empty string.`);
+        return console.warn(`password should not be an empty string.`);
 
       const getExistingUserActionBound = getExistingUserAction.bind(
         null,
@@ -254,6 +254,7 @@ export default function WebSocketsClientPage({
           <div className="flex flex-col gap-3 md:flex-row">
             <input
               name={MESSAGE}
+              autoComplete="off"
               type="text"
               className="flex-1 rounded-lg border border-gray-200 px-4 py-3 transition-all focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none"
               placeholder="Type your message..."
@@ -287,12 +288,14 @@ export default function WebSocketsClientPage({
             <div className="flex flex-col gap-3 md:flex-row">
               <input
                 name={DISPLAYUSERNAME}
+                autoComplete="off"
                 type="text"
                 className="flex-1 rounded-lg border border-gray-200 px-4 py-3 transition-all focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 placeholder="Type your username..."
               />
               <input
                 name={PASSWORD}
+                autoComplete="off"
                 type="password"
                 className="flex-1 rounded-lg border border-gray-200 px-4 py-3 transition-all focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 placeholder="Type your password..."
