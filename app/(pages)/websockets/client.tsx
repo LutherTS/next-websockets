@@ -161,6 +161,8 @@ export default function WebSocketsClientPage({
           username: existingUser.username,
           password,
         });
+
+        console.log("Sign in successful.");
       } else {
         console.log("Signing up...");
 
@@ -182,6 +184,8 @@ export default function WebSocketsClientPage({
             },
           },
         );
+
+        console.log("Sign up successful.");
       }
     });
   };
@@ -191,8 +195,11 @@ export default function WebSocketsClientPage({
   const testSignOut = (e: React.FormEvent<HTMLFormElement>) => {
     startTestSignOutTransition(async () => {
       e.preventDefault();
+      console.log("Signing out...");
 
       await authClient.signOut();
+
+      console.log("Sign out successful.");
     });
   };
 
