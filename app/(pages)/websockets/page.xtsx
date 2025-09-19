@@ -10,7 +10,7 @@ export default async function WebSocketsServerPage() {
   /* reads */
 
   const initialMessages = await findLatestMessages();
-  console.log("initialMessages are:", initialMessages);
+  console.info("initialMessages are:", initialMessages);
 
   /* writes */
 
@@ -45,6 +45,16 @@ export default async function WebSocketsServerPage() {
 }
 
 /* Notes
-<WebSocketsClientPage initialMessages />
-Turning this syntax into <WebSocketsClientPage initialMessages={initialMessages} /> could be my next project. Introducing xJSX (eXtra JSX). 
+<WebSocketsClientPage 
+  initialMessages 
+  getExistingUserAction 
+  createNewUserAction 
+/>
+Turning this syntax into ...
+<WebSocketsClientPage 
+  initialMessages={initialMessages}
+  getExistingUserAction={getExistingUserAction}
+  createNewUserAction={createNewUserAction}
+/> 
+... could be my next project. Introducing xJSX (eXtra JSX). 
 */
