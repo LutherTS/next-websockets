@@ -36,11 +36,14 @@ export default async function WebSocketsServerPage() {
   }
 
   return (
-    <WebSocketsClientPage
-      initialMessages={initialMessages}
-      getExistingUserAction={getExistingUserAction}
-      createNewUserAction={createNewUserAction}
-    />
+    <>
+      <div className=""></div>
+      <WebSocketsClientPage
+        initialMessages={initialMessages}
+        getExistingUserAction={getExistingUserAction}
+        createNewUserAction={createNewUserAction}
+      />
+    </>
   );
 }
 
@@ -57,4 +60,5 @@ Turning this syntax into ...
   createNewUserAction={createNewUserAction}
 /> 
 ... could be my next project. Introducing xJSX (eXtra JSX). 
+Done. And it seamlessly merges with HMR.
 */

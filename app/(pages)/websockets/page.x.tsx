@@ -36,14 +36,18 @@ export default async function WebSocketsServerPage() {
   }
 
   return (
-    <WebSocketsClientPage
-      // @ts-ignore: .xtsx
-      initialMessages
-      // @ts-ignore: .xtsx
-      getExistingUserAction
-      // @ts-ignore: .xtsx
-      createNewUserAction
-    />
+    <>
+      {/* @ts-ignore-xjsx */}
+      <div class=""></div>
+      <WebSocketsClientPage
+        // @ts-ignore-xjsx
+        initialMessages
+        // @ts-ignore-xjsx
+        getExistingUserAction
+        // @ts-ignore-xjsx
+        createNewUserAction
+      />
+    </>
   );
 }
 
@@ -60,4 +64,5 @@ Turning this syntax into ...
   createNewUserAction={createNewUserAction}
 /> 
 ... could be my next project. Introducing xJSX (eXtra JSX). 
+Done. And it seamlessly merges with HMR.
 */
