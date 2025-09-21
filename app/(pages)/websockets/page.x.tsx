@@ -36,18 +36,14 @@ export default async function WebSocketsServerPage() {
   }
 
   return (
-    <>
-      {/* @ts-ignore-xjsx */}
-      <div class=""></div>
-      <WebSocketsClientPage
-        // @ts-ignore-xjsx
-        initialMessages
-        // @ts-ignore-xjsx
-        getExistingUserAction
-        // @ts-ignore-xjsx
-        createNewUserAction
-      />
-    </>
+    <WebSocketsClientPage
+      // @ts-ignore-xjsx
+      initialMessages
+      // @ts-ignore-xjsx
+      getExistingUserAction
+      // @ts-ignore-xjsx
+      createNewUserAction
+    />
   );
 }
 

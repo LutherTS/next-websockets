@@ -36,14 +36,11 @@ export default async function WebSocketsServerPage() {
   }
 
   return (
-    <>
-      <div className=""></div>
-      <WebSocketsClientPage
-        initialMessages={initialMessages}
-        getExistingUserAction={getExistingUserAction}
-        createNewUserAction={createNewUserAction}
-      />
-    </>
+    <WebSocketsClientPage
+      initialMessages={initialMessages}
+      getExistingUserAction={getExistingUserAction}
+      createNewUserAction={createNewUserAction}
+    />
   );
 }
 
