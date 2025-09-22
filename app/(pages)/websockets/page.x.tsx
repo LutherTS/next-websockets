@@ -5,6 +5,10 @@ import { createNewUserByUsername } from "@/writes/users";
 
 import WebSocketsClientPage from "./client";
 
+export const forXjsxClient = {};
+
+// forXjsxPage
+
 /** The "outer", Server part of the page. A Server Component, it accesses the server directly to retrieve the latest messages, instantiating any load of the page with the freshest data directly from the server, before it renders the page. */
 export default async function WebSocketsServerPage() {
   /* reads */
