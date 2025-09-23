@@ -15,10 +15,6 @@ import { validateUsernameSlugFriendly } from "~/better-auth/utilities/agnostic/r
 
 import { broadcastAction } from "@/actions/server/broadcast";
 
-export const forXjsxPage = {};
-
-// forXjsxClient
-
 const MESSAGE = "message";
 const DISPLAYUSERNAME = "displayusername";
 const PASSWORD = "password";
