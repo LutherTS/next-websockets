@@ -2,6 +2,14 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { username } from "better-auth/plugins";
 
+/* START */
+
+// just to showcase that it is possible to import the resolved config data, entirely typed with autocompletion and literals, straight from the .mjs file, in an even easier fashion in TypeScript than in JavaScript
+import { resolvedConfigData } from "../../comments.config.mjs";
+resolvedConfigData.jsDoc.actions.defs.broadcastFlow.value;
+
+/* END */
+
 import { prisma } from "~/prisma/db";
 
 import {
