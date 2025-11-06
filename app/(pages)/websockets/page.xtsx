@@ -9,6 +9,7 @@ import WebSocketsClientPage from "./client";
 export default async function WebSocketsServerPage() {
   /* reads */
 
+  // I'd love to try and update this to Next.js 16 with "use cache" so that when using the websocket, instead of modifying data obtained from the client, I refresh this cache here from the server altogether.
   const initialMessages = await findLatestMessages();
   console.info("initialMessages are:", initialMessages);
 
