@@ -1,3 +1,10 @@
+// J'aimerais aussi vraiment essayer de faire de l'internatonalisation ici, et de mettre en place un système natif à Comment Variables pour ça. Dans les option, tu passes un array de langues (tu en fais ce que tu veux), puis la commande s'assure que toutes les clés qui ne sont pas dans composedVariablesExclusives soit présentes dans des objets dont la clé est data.languageKey. Ou alors un object {language: string, languages: string[]} sous un objet i18n qui a ces clés. La langue actuelle sera tirée des variables d'environnements.
+// Est-ce que je peux me permettre de prendre ce temps pour eslint-plugin-use-agnostic ?
+// Ce qu'on peut aussi faire c'est si il y a une erreur dans la parité des languages, alors tout default à l'objet original data. Et si il n'y en a pas l'objet original data est successfully overriden. Comme ça : data = English data, en = English Data, fr = French data. i18nData...
+// Donc oui je dois y réfléchir, mais avoir une solution native en place... Là je rends le plugin payant, du moins pour sa version i18n. Comment Variables International. Et la clé s'appellera internationalization. 2.0.
+// You've activated i18n. The default key under data is now reserved.
+// Then if you want to cancel the "everything must be translated" mechanism, you just do merge({}, enData, ongoingFrData).
+// The goal is for the same key, `$COMMENT#JSDOC#CONSTS#USERNAMEREGEXP`, to be read different in English than in French, and even reversibly so. All while at consumption, en and fr keys remain both. Which therefore means there will be two distinct sets of resolvedData, the one for the ecosystem and the one for the consumption, but it's even more complicated than that when it comes to the VS Code extension. In config files, use the fullResolvedConfigData, in unignored files, use the resolvedConfigData.
 const data = Object.freeze({
   jsDoc: Object.freeze({
     consts: Object.freeze({
