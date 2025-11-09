@@ -10,9 +10,9 @@ import {
 } from "@/writes/messages";
 
 /**
- * $COMMENT#JSDOC#ACTIONS#DEFS#BROADCASTFLOW
- * @param message $COMMENT#JSDOC#ACTIONS#PARAMS#MESSAGE
- * @param displayUsername $COMMENT#JSDOC#ACTIONS#PARAMS#DISPLAYUSERNAME
+ * The flow that broadcasts the new messages to all WebSocket clients. (Saved as a flow so that it can be used across Server Functions at will, be them standalone in their own files or inline within Server Components.)
+ * @param message The current latest message sent from the client.
+ * @param displayUsername The username to be displayed sent from the current session. If it exists, this lets the action know which existing user sent the current message. If it doesn't, this lets the action know the current message was sent from a guest (unauthenticated).
  * @returns
  */
 export const broadcastFlow = async (

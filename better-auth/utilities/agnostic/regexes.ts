@@ -3,13 +3,13 @@
 import { usernameRegExp } from "~/better-auth/constants/agnostic/regexes";
 
 /**
- * $COMMENT#JSDOC#UTILS#DEFS#VALIDATEUSERNAMESLUGFRIENDLY
- * - $COMMENT#JSDOC#UTILS#DETAILS#STARTSALPHANUMERICAL
- * - $COMMENT#JSDOC#UTILS#DETAILS#NEITHERDOUBLEHYPHENSUNDERSCORES
- * - $COMMENT#JSDOC#UTILS#DETAILS#HYPHENSUNDERSCORESMIDDLE
- * - and $COMMENT#JSDOC#UTILS#DETAILS#ENDSSALPHANUMERICAL
- * @param username $COMMENT#JSDOC#UTILS#PARAMS#USERNAME
- * @returns $COMMENT#JSDOC#UTILS#RETURNS#VALIDATEUSERNAMESLUGFRIENDLY
+ * Validates that a username is slug-friendly, meaning:
+ * - starts with an alphanumerical,
+ * - has neither double hyphens nor double underscores,
+ * - its hyphens and underscores are only in the middle,
+ * - and ends with an alphanumerical.
+ * @param username The user provided username to be tested.
+ * @returns `true` if the test passes, `false` if it doesn't.
  */
 export const validateUsernameSlugFriendly = (username: string) =>
   usernameRegExp.test(username);
